@@ -1,71 +1,91 @@
-import { Breadcrumb, Layout, Menu } from "antd";
-import { Content, Footer, Header } from "antd/es/layout/layout";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { Breadcrumb, Layout, Menu, MenuProps } from "antd";
+const { Header, Content, Footer } = Layout;
 
-const items = new Array(15).fill(null).map((_, index) => ({
-  key: index + 1,
-  label: `nav ${index + 1}`,
-}));
+const items: MenuProps["items"] = [
+  {
+    key: "1",
+    label: "Home",
+  },
+  {
+    key: "5",
+    label: "Product Management",
+  },
+];
 
-/* const items: MenuProps["items"] = [
-    {
-      key: "Dashboard",
-      label: <NavLink to="/admin/dashboard">Dashboard</NavLink>,
-    },
-    {
-      key: "User Management",
-      label: "User Management",
-      children: [
-        {
-          key: "Create Admin",
-          label: <NavLink to="/admin/create-admin">Create Admin</NavLink>,
-        },
-        {
-          key: "Create Faculty",
-          label: <NavLink to="/admin/create-faculty">Create Faculty</NavLink>,
-        },
-        {
-          key: "Create Student",
-          label: <NavLink to="/admin/create-student">Create Student</NavLink>,
-        },
-      ],
-    },
-  ]; */
-
-const MainLayout = () => {
+const LandingPageLayout = () => {
   return (
-    <Layout>
-      <Header style={{ display: "flex", alignItems: "center" }}>
-        <div style={{ color: "white", fontSize: 22, font: "" }}>
-          Welcome to Meeting Room Booking System
-        </div>
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={["2"]}
-          items={items}
-          style={{ flex: 1, minWidth: 0 }}
-        />
-      </Header>
-      <Content style={{ padding: "0 48px" }}>
-        <Breadcrumb style={{ margin: "16px 0" }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-          <Breadcrumb.Item>List</Breadcrumb.Item>
-          <Breadcrumb.Item>App</Breadcrumb.Item>
-        </Breadcrumb>
-        <div
+    <div>
+      <Layout
+        style={{
+          height: "100vh",
+          borderRadius: "8px",
+          background: "linear-gradient(90deg, #2e004f, #000033, #2e004f)",
+          color: "#ffffff",
+        }}
+      >
+        <Header style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              color: "white",
+              height: "4rem",
+              display: "flex",
+              justifyContent: "center",
+              justifyItems: "center",
+            }}
+          >
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <div>
+                <h1 style={{ height: "100" }}>Mechanical Keyboard </h1>
+              </div>
+              <div style={{ color: "white", fontSize: 32 }}>
+                <ShoppingCartOutlined />
+              </div>
+            </div>
+          </div>
+
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["2"]}
+            items={items}
+            style={{ flex: 1, minWidth: 0 }}
+          />
+        </Header>
+
+        <Content style={{ padding: "0 48px" }}>
+          <Breadcrumb
+            style={{
+              margin: "16px 0",
+              justifyContent: "end",
+              alignItems: "end",
+              color: "white",
+            }}
+          >
+            <Breadcrumb.Item>01952487468</Breadcrumb.Item>
+            <Breadcrumb.Item>Login</Breadcrumb.Item>
+          </Breadcrumb>
+
+          <div
+            style={{
+              minHeight: 280,
+              padding: 24,
+            }}
+          ></div>
+        </Content>
+        <Footer
           style={{
-            minHeight: 280,
-            padding: 24,
+            textAlign: "center",
+            borderRadius: "8px",
+            background: "linear-gradient(90deg, #2e004f, #000033, #2e004f)",
+            color: "#ffffff",
           }}
         >
-          Content
-        </div>
-      </Content>
-      <Footer style={{ textAlign: "center" }}>
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
-      </Footer>
-    </Layout>
+          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+        </Footer>
+      </Layout>
+    </div>
   );
 };
 
-export default MainLayout;
+export default LandingPageLayout;
