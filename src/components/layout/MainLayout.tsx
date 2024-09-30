@@ -1,5 +1,6 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, MenuProps } from "antd";
+import FitureItem from "../../pages/LandingPage/FitureItem";
 const { Header, Content, Footer } = Layout;
 
 const items: MenuProps["items"] = [
@@ -20,9 +21,17 @@ const LandingPageLayout = () => {
         style={{
           height: "100vh",
           borderRadius: "8px",
-          background: "linear-gradient(90deg, #2e004f, #000033, #2e004f)",
+          background: "#000033",
           color: "#ffffff",
         }}
+
+        /* style={{
+          height: "100vh",
+          borderRadius: "8px",
+          background:
+            "linear-gradient(50deg, #2e004f, #000033, #2e004f)",
+          color: "#ffffff",
+        }} */
       >
         <Header style={{ display: "flex", alignItems: "center" }}>
           <div
@@ -36,10 +45,7 @@ const LandingPageLayout = () => {
           >
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <div>
-                <h1 style={{ height: "100" }}>Mechanical Keyboard </h1>
-              </div>
-              <div style={{ color: "white", fontSize: 32 }}>
-                <ShoppingCartOutlined />
+                <h1 style={{ height: "100" }}>Meeting Room Booking System </h1>
               </div>
             </div>
           </div>
@@ -57,8 +63,8 @@ const LandingPageLayout = () => {
           <Breadcrumb
             style={{
               margin: "16px 0",
-              justifyContent: "end",
-              alignItems: "end",
+              justifyContent: "right",
+              alignItems: "right",
               color: "white",
             }}
           >
@@ -70,8 +76,12 @@ const LandingPageLayout = () => {
             style={{
               minHeight: 280,
               padding: 24,
+              color: "white",
             }}
-          ></div>
+          >
+            Main Header Content
+            <FitureItem></FitureItem>
+          </div>
         </Content>
         <Footer
           style={{
