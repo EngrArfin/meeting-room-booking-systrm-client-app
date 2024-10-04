@@ -88,16 +88,29 @@ const Hero = () => {
 
       {/* Hero Content */}
       <div style={{ position: "relative", zIndex: 1, padding: "0 20px" }}>
-        <h1 style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>
+        <h1
+          style={{
+            color: "yellow",
+            fontSize: "3rem",
+            marginBottom: "0.5rem",
+            whiteSpace: "nowrap", // Prevents text from wrapping on small screens
+          }}
+        >
           Book Your Ideal Meeting Room with Ease
         </h1>
-        <p style={{ fontSize: "1.5rem", marginBottom: "2rem" }}>
+        <p
+          style={{
+            fontSize: "1.5rem",
+            marginBottom: "2rem",
+            whiteSpace: "nowrap",
+          }}
+        >
           Efficient, hassle-free room booking for all your meeting needs.
         </p>
         <Button
           type="primary"
           size="large"
-          href="/meeting-rooms"
+          href="/booking-rooms"
           style={{ backgroundColor: "#1890ff", borderColor: "#1890ff" }}
         >
           Book Now
@@ -111,7 +124,43 @@ const Hero = () => {
             transform: translateX(0);
           }
           100% {
-            transform: translateX(-100%);
+            transform: translateX(-50%);
+          }
+        }
+
+        @media (max-width: 768px) {
+          div[style*="60vh"] {
+            height: 50vh;
+          }
+
+          h1 {
+            font-size: 2rem;
+          }
+
+          p {
+            font-size: 1.2rem;
+          }
+
+          button {
+            font-size: 1rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          div[style*="60vh"] {
+            height: 40vh;
+          }
+
+          h1 {
+            font-size: 1.5rem;
+          }
+
+          p {
+            font-size: 1rem;
+          }
+
+          button {
+            font-size: 0.9rem;
           }
         }
       `}</style>

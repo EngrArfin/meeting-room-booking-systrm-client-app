@@ -1,11 +1,11 @@
 import { Layout, Menu, MenuProps, Button, Dropdown, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
-import FitureItem from "../../pages/LandingPage/FitureItem";
+/* import FitureItem from "../../pages/LandingPage/FitureItem";
 import Footers from "../../pages/LandingPage/Shared/Footer";
 import UserDropdown from "../../pages/LandingPage/Shared/UserDropdown";
 import logo from "../../assets/icons/logo.png";
-import Hero from "../../pages/LandingPage/Shared/Hero";
+import Hero from "../../pages/LandingPage/Shared/Hero"; */
 
 const { Header, Content } = Layout;
 
@@ -66,35 +66,39 @@ const LandingPageLayout = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+
             background: "#000033",
             color: "#ffffff",
-            padding: "0 20px",
           }}
         >
-          {/* Logo and System Name */}
           <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
+            style={{ color: "white", display: "flex", alignItems: "center" }}
           >
-            <img
-              style={{ height: 30, width: 30, marginRight: 10 }}
-              src={logo}
-              alt="Logo"
-            />
-            <h1 style={{ margin: 0, fontSize: "1.5rem" }}>
-              <a
-                href="/"
-                style={{
-                  color: "#ffffff",
-                  textDecoration: "none",
-                  whiteSpace: "nowrap", // Prevents text wrapping
-                }}
-              >
-                Meeting Room Book
-              </a>
-            </h1>
+            {/* Logo/System Name */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <div>
+                <img
+                  style={{ height: 40, width: 40, marginRight: 10 }}
+                  src={logo}
+                  alt=""
+                />
+              </div>
+              <div>
+                <h1 style={{ marginRight: "1rem" }}>
+                  <a
+                    href="/"
+                    style={{ color: "#ffffff", textDecoration: "none" }}
+                  >
+                    Meeting Room Booking System
+                  </a>
+                </h1>
+              </div>
+            </div>
           </div>
 
           {/* Navigation Menu */}
@@ -105,14 +109,21 @@ const LandingPageLayout = () => {
             items={items}
             style={{
               flex: 1,
-              justifyContent: "center",
+              minWidth: 0,
+
               background: "#000033",
               color: "#ffffff",
             }}
           />
 
           {/* User Icon/Dropdown */}
-          <div>
+          <div
+            style={{
+              borderRadius: "8px",
+              background: "#000033",
+              color: "#ffffff",
+            }}
+          >
             {isAuthenticated ? (
               <Dropdown
                 overlay={isAdmin ? adminMenu : userMenu}
@@ -141,9 +152,11 @@ const LandingPageLayout = () => {
         </Header>
         <hr />
         {/* Hero Section */}
+
+        {/* Content Section */}
         <Content style={{ padding: "0 48px" }}>
           <div style={{ minHeight: 280, padding: 24, color: "white" }}>
-            <Hero />
+            <Hero></Hero>
             <FitureItem />
           </div>
         </Content>
@@ -151,44 +164,6 @@ const LandingPageLayout = () => {
         {/* Footer */}
         <Footers />
       </Layout>
-
-      {/* Responsive Styles */}
-      <style>{`
-        @media (max-width: 768px) {
-          h1 {
-            font-size: 1.2rem;
-          }
-
-          img {
-            height: 30px;
-            width: 30px;
-          }
-
-          .ant-menu-horizontal {
-            display: none; // Hide the navigation menu on mobile devices
-          }
-
-          .ant-layout-header {
-            flex-direction: column;
-            padding: 0 10px;
-          }
-
-          .ant-avatar {
-            margin-left: 0.5rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .ant-btn {
-            font-size: 0.8rem;
-            padding: 0.5rem 1rem;
-          }
-
-          .ant-avatar {
-            margin-left: 0.25rem;
-          }
-        }
-      `}</style>
     </div>
   );
 };

@@ -5,8 +5,8 @@ import {
   InstagramOutlined,
   GithubOutlined,
 } from "@ant-design/icons";
-/* import logo from "../../assets/icons/logo.jpg";
- */
+import logo from "../../../assets/icons/logo.png";
+
 const { Footer } = Layout;
 const { Text, Title } = Typography;
 
@@ -19,28 +19,39 @@ const Footers = () => {
           borderRadius: "8px",
           background: "#000033",
           color: "#ffffff",
-          /* background:
-          margin: 10,
-            "linear-gradient(70deg, #2e004f, #00bfae, #2e004f, #00bfae)",
-          color: "#ffffff", */
         }}
       >
         <div style={{ maxWidth: "1600px", margin: "0 auto" }}>
           <Row gutter={[16, 16]}>
-            {/* Column 1: Logo or Company Info */}
             <Col xs={28} sm={12} md={8}>
-              <div style={{ display: "flex" }}>
-                {/* <div>
-                  <img style={{ height: 60, width: 90 }} src={logo} alt="" />
-                </div> */}
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
                 <div>
-                  <Title level={2} style={{ color: "#fff" }}>
-                    Meeting Room Booking System
+                  <img
+                    style={{
+                      height: "1.5rem",
+                      width: "1.5rem",
+                      marginRight: 10,
+                    }}
+                    src={logo}
+                    alt=""
+                  />
+                </div>
+                <div>
+                  <Title
+                    level={2}
+                    style={{ color: "#fff", fontSize: "1.5rem" }}
+                  >
+                    Meeting Room Book
                   </Title>
                 </div>
               </div>
 
-              <Text style={{ color: "#d9d9d9" }}>
+              <Text style={{ color: "#d9d9d9", fontSize: "0.9rem" }}>
                 The Meeting Room Booking System is the professionals meeting
                 room booking plartform. every business man can Join our
                 plartform to find the perfect meeting room service for your
@@ -50,24 +61,41 @@ const Footers = () => {
 
             {/* Column 2: Quick Links */}
             <Col xs={24} sm={12} md={8}>
-              <Title level={4} style={{ color: "#fff" }}>
+              <Title level={4} style={{ color: "#fff", fontSize: "1.1rem" }}>
                 Quick Links
               </Title>
               <Space direction="vertical" size="middle">
-                <Text style={{ color: "#d9d9d9" }}>Home</Text>
-                <Text style={{ color: "#d9d9d9" }}>Best Room</Text>
-                <Text style={{ color: "#d9d9d9" }}>Service</Text>
-                <Text style={{ color: "#d9d9d9" }}>About Us</Text>
-                <Text style={{ color: "#d9d9d9" }}>Contact</Text>
+                <Text style={{ color: "#d9d9d9", fontSize: "0.9rem" }}>
+                  About Us
+                </Text>
+                <Text style={{ color: "#d9d9d9", fontSize: "0.9rem" }}>
+                  Privacy Policy
+                </Text>
+                <Text style={{ color: "#d9d9d9", fontSize: "0.9rem" }}>
+                  Terms of Service
+                </Text>
+
+                <Text style={{ color: "#d9d9d9", fontSize: "0.9rem" }}>
+                  Contact
+                </Text>
               </Space>
             </Col>
 
             {/* Column 3: Social Media Links */}
             <Col xs={24} sm={12} md={8}>
-              <Title level={4} style={{ color: "#fff" }}>
+              <Title level={4} style={{ color: "#fff", fontSize: "1.1rem" }}>
                 Follow Us
               </Title>
-              <Space size="large">
+              <div>
+                <p style={{ fontSize: "0.9rem" }}>
+                  Email : arfin.cse.green.edu.bd@gmail.com{" "}
+                </p>
+                <p style={{ fontSize: "0.9rem" }}>Phone number : 01981397907</p>
+                <p style={{ fontSize: "0.9rem" }}>
+                  Office address : Shawrapara, Mirpur-10, Dhaka-1206
+                </p>
+              </div>
+              <Space size="large" style={{ margin: 10 }}>
                 <a
                   href="https://facebook.com"
                   target="_blank"
@@ -121,6 +149,7 @@ const Footers = () => {
                   color: "#d9d9d9",
                   textAlign: "center",
                   display: "block",
+                  fontSize: "0.8rem",
                 }}
               >
                 Ant Design ©{new Date().getFullYear()} Created by Meeting Room
