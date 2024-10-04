@@ -15,7 +15,9 @@ import photo12 from "../../assets/images/card12.jpg";
 const FitureItem = () => {
   return (
     <div>
-      <Divider style={{ borderColor: "#7cb305" }}>Product Fiture</Divider>
+      <Divider style={{ borderColor: "#7cb305", color: "yellow" }}>
+        Product Fiture
+      </Divider>
       <Row gutter={[16, 16]} justify="center">
         <Col xs={24} sm={12} md={8} lg={6}>
           <Card>

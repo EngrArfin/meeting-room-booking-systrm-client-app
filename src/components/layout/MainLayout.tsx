@@ -1,7 +1,13 @@
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, MenuProps } from "antd";
+import { Layout, Menu, MenuProps, Button, Dropdown, Avatar } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { useState } from "react";
 import FitureItem from "../../pages/LandingPage/FitureItem";
-const { Header, Content, Footer } = Layout;
+import Footers from "../../pages/LandingPage/Shared/Footer";
+import UserDropdown from "../../pages/LandingPage/Shared/UserDropdown";
+import logo from "../../assets/icons/logo.png";
+import Hero from "../../pages/LandingPage/Shared/Hero";
+
+const { Header, Content } = Layout;
 
 const items: MenuProps["items"] = [
   {
@@ -9,90 +15,155 @@ const items: MenuProps["items"] = [
     label: "Home",
   },
   {
+    key: "2",
+    label: "Meeting Rooms",
+  },
+  {
+    key: "3",
+    label: "About Us",
+  },
+  {
+    key: "4",
+    label: "Contact Us",
+  },
+  {
     key: "5",
-    label: "Product Management",
+    label: "Login/Register",
   },
 ];
 
+// Dropdown menu for authenticated users
+const userMenu = (
+  <Menu>
+    <Menu.Item key="1">My Bookings</Menu.Item>
+    <Menu.Item key="2">Logout</Menu.Item>
+  </Menu>
+);
+
+// Dropdown menu for admins
+const adminMenu = (
+  <Menu>
+    <Menu.Item key="1">Dashboard</Menu.Item>
+    <Menu.Item key="2">Logout</Menu.Item>
+  </Menu>
+);
+
 const LandingPageLayout = () => {
+  const [isAuthenticated /* setIsAuthenticated */] = useState(false); // Change this based on actual authentication logic
+  const [isAdmin /* setIsAdmin */] = useState(false); // Set this if the user is an admin
+
   return (
-    <div>
+    <div className="mx-auto">
       <Layout
         style={{
-          height: "100vh",
           borderRadius: "8px",
           background: "#000033",
           color: "#ffffff",
         }}
-
-        /* style={{
-          height: "100vh",
-          borderRadius: "8px",
-          background:
-            "linear-gradient(50deg, #2e004f, #000033, #2e004f)",
-          color: "#ffffff",
-        }} */
       >
-        <Header style={{ display: "flex", alignItems: "center" }}>
+        <Header
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+
+            background: "#000033",
+            color: "#ffffff",
+          }}
+        >
           <div
-            style={{
-              color: "white",
-              height: "4rem",
-              display: "flex",
-              justifyContent: "center",
-              justifyItems: "center",
-            }}
+            style={{ color: "white", display: "flex", alignItems: "center" }}
           >
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            {/* Logo/System Name */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <div>
-                <h1 style={{ height: "100" }}>Meeting Room Booking System </h1>
+                <img
+                  style={{ height: 40, width: 40, marginRight: 10 }}
+                  src={logo}
+                  alt=""
+                />
+              </div>
+              <div>
+                <h1 style={{ marginRight: "1rem" }}>
+                  <a
+                    href="/"
+                    style={{ color: "#ffffff", textDecoration: "none" }}
+                  >
+                    Meeting Room Booking System
+                  </a>
+                </h1>
               </div>
             </div>
           </div>
 
+          {/* Navigation Menu */}
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["2"]}
+            defaultSelectedKeys={["1"]}
             items={items}
-            style={{ flex: 1, minWidth: 0 }}
-          />
-        </Header>
-
-        <Content style={{ padding: "0 48px" }}>
-          <Breadcrumb
             style={{
-              margin: "16px 0",
-              justifyContent: "right",
-              alignItems: "right",
-              color: "white",
-            }}
-          >
-            <Breadcrumb.Item>01952487468</Breadcrumb.Item>
-            <Breadcrumb.Item>Login</Breadcrumb.Item>
-          </Breadcrumb>
+              flex: 1,
+              minWidth: 0,
 
+              background: "#000033",
+              color: "#ffffff",
+            }}
+          />
+
+          {/* User Icon/Dropdown */}
           <div
             style={{
-              minHeight: 280,
-              padding: 24,
-              color: "white",
+              borderRadius: "8px",
+              background: "#000033",
+              color: "#ffffff",
             }}
           >
-            Main Header Content
-            <FitureItem></FitureItem>
+            {isAuthenticated ? (
+              <Dropdown
+                overlay={isAdmin ? adminMenu : userMenu}
+                trigger={["click"]}
+              >
+                <Avatar
+                  style={{ backgroundColor: "#87d068" }}
+                  icon={<UserOutlined />}
+                />
+              </Dropdown>
+            ) : (
+              <div>
+                <Button
+                  type="primary"
+                  href="/login"
+                  style={{ marginLeft: "1rem" }}
+                >
+                  Login/Register
+                </Button>
+                <Button href="/login">
+                  <UserDropdown />
+                </Button>
+              </div>
+            )}
+          </div>
+        </Header>
+        <hr />
+        {/* Hero Section */}
+
+        {/* Content Section */}
+        <Content style={{ padding: "0 48px" }}>
+          <div style={{ minHeight: 280, padding: 24, color: "white" }}>
+            <Hero></Hero>
+
+            <FitureItem />
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: "center",
-            borderRadius: "8px",
-            background: "linear-gradient(90deg, #2e004f, #000033, #2e004f)",
-            color: "#ffffff",
-          }}
-        >
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
-        </Footer>
+
+        {/* Footer */}
+        <Footers />
       </Layout>
     </div>
   );
