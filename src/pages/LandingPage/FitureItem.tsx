@@ -18,7 +18,7 @@ const FitureItem = () => {
       {/* <Divider style={{ borderColor: "#7cb305", color: "yellow" }}>
         Product Fiture
       </Divider> */}
-      <Typography.Text
+      <Typography.Title
         style={{
           color: "yellow",
           fontStyle: "italic",
@@ -29,7 +29,7 @@ const FitureItem = () => {
         }}
       >
         Service Room Fiture
-      </Typography.Text>
+      </Typography.Title>
       <Row gutter={[16, 16]} justify="center">
         <Col xs={24} sm={12} md={8} lg={6}>
           <Card>

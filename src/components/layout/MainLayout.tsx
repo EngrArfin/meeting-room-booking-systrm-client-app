@@ -8,6 +8,7 @@ import logo from "../../assets/icons/logo.png";
 import Hero from "../../pages/LandingPage/Shared/Hero";
 import MeetingRoom from "../../pages/LandingPage/MeetingRoom";
 import ServiceAdvertisement from "../../pages/LandingPage/Shared/ServiceAdvertisement";
+import WhyChooseUs from "../../pages/LandingPage/Shared/WhyChooseUs";
 
 const { Header, Content } = Layout;
 
@@ -148,6 +149,8 @@ const LandingPageLayout = () => {
             <Hero />
             <ServiceAdvertisement />
             <FitureItem />
+            <WhyChooseUs />
+
             <MeetingRoom />
           </div>
         </Content>

@@ -10,7 +10,7 @@ const ServiceAdvertisement = () => {
             transform: translateX(100%);
           }
           100% {
-            transform: translateX(-5%);
+            transform: translateX(-100%);
           }
         }
 
@@ -26,7 +26,7 @@ const ServiceAdvertisement = () => {
       `}</style>
 
       {/* Service Advertisement Header */}
-      <Typography.Text
+      <Typography.Title
         style={{
           color: "yellow",
           fontStyle: "italic",
@@ -38,7 +38,7 @@ const ServiceAdvertisement = () => {
         }}
       >
         Service Advertisement!
-      </Typography.Text>
+      </Typography.Title>
 
       {/* Scrolling Cards */}
       <div className="scrolling-cards">

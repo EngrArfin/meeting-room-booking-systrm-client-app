@@ -14,7 +14,7 @@ import room8 from "../../assets/images/room8.jpg";
 const MeetingRoom = () => {
   return (
     <div>
-      <Typography.Text
+      <Typography.Title
         style={{
           color: "yellow",
           fontStyle: "italic",
@@ -25,7 +25,7 @@ const MeetingRoom = () => {
         }}
       >
         Meeting Room
-      </Typography.Text>
+      </Typography.Title>
       <div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <div style={{ margin: 10 }}>

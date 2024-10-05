@@ -126,6 +126,7 @@ const Hero = () => {
           100% {
             transform: translateX(-50%);
           }
+          
         }
 
         @media (max-width: 768px) {
@@ -152,11 +153,11 @@ const Hero = () => {
           }
 
           h1 {
-            font-size: 1.5rem;
+            font-size: 1rem;
           }
 
           p {
-            font-size: 1rem;
+            font-size: 0.8rem;
           }
 
           button {
