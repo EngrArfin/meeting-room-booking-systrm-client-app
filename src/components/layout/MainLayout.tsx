@@ -7,6 +7,7 @@ import UserDropdown from "../../pages/LandingPage/Shared/UserDropdown";
 import logo from "../../assets/icons/logo.png";
 import Hero from "../../pages/LandingPage/Shared/Hero";
 import MeetingRoom from "../../pages/LandingPage/MeetingRoom";
+import ServiceAdvertisement from "../../pages/LandingPage/Shared/ServiceAdvertisement";
 
 const { Header, Content } = Layout;
 
@@ -145,8 +146,9 @@ const LandingPageLayout = () => {
         <Content style={{ padding: "0 48px" }}>
           <div style={{ minHeight: 280, padding: 24, color: "white" }}>
             <Hero />
+            <ServiceAdvertisement />
             <FitureItem />
-            <MeetingRoom></MeetingRoom>
+            <MeetingRoom />
           </div>
         </Content>
 

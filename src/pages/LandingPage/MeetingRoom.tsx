@@ -1,4 +1,4 @@
-import { Button, Card, Col, Typography } from "antd";
+import { Button, Card, Typography } from "antd";
 
 const { Meta } = Card;
 
