@@ -82,11 +82,11 @@ const LandingPageLayout = () => {
               }}
             >
               <div>
-                <img
+                {/* <img
                   style={{ height: 40, width: 40, marginRight: 10 }}
                   src={logo}
                   alt=""
-                />
+                /> */}
               </div>
               <div>
                 <h1 style={{ marginRight: "1rem" }}>
@@ -143,9 +143,9 @@ const LandingPageLayout = () => {
                 >
                   Login/Register
                 </Button>
-                <Button href="/login">
+                {/* <Button href="/login">
                   <UserDropdown />
-                </Button>
+                </Button> */}
               </div>
             )}
           </div>
@@ -156,13 +156,13 @@ const LandingPageLayout = () => {
         {/* Content Section */}
         <Content style={{ padding: "0 48px" }}>
           <div style={{ minHeight: 280, padding: 24, color: "white" }}>
-            <Hero></Hero>
-            <FitureItem />
+            {/*  <Hero></Hero>
+            <FitureItem /> */}
           </div>
         </Content>
 
         {/* Footer */}
-        <Footers />
+        {/* <Footers /> */}
       </Layout>
     </div>
   );

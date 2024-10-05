@@ -10,6 +10,9 @@ import MeetingRoom from "../../pages/LandingPage/MeetingRoom";
 import ServiceAdvertisement from "../../pages/LandingPage/Shared/ServiceAdvertisement";
 import WhyChooseUs from "../../pages/LandingPage/Shared/WhyChooseUs";
 import HowItWorks from "../../pages/LandingPage/Shared/HowItWorks";
+import Testimonials from "../../pages/LandingPage/Shared/Testimonials";
+import About from "../../pages/LandingPage/About";
+import Contract from "../../pages/LandingPage/Contract";
 
 const { Header, Content } = Layout;
 
@@ -148,11 +151,14 @@ const LandingPageLayout = () => {
         <Content style={{ padding: "0 48px" }}>
           <div style={{ minHeight: 280, padding: 24, color: "white" }}>
             <Hero />
+            <About></About>
+            <Contract></Contract>
             <ServiceAdvertisement />
             <FitureItem />
             <WhyChooseUs />
             <MeetingRoom />
             <HowItWorks />
+            <Testimonials />
           </div>
         </Content>
 

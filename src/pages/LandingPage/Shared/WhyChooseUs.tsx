@@ -62,11 +62,11 @@ const WhyChooseUs = () => {
                 style={{ fontSize: "40px", color: "#4caf50" }}
               />
               <Typography.Title level={4}>
-                Seamless Booking Experience
+                100% Money Back Garenty
               </Typography.Title>
               <Typography.Paragraph>
-                Enjoy a hassle-free booking process with a user-friendly
-                interface.
+                We will provide you 100% Money Back Garenty with friendly
+                behave. it's out policy
               </Typography.Paragraph>
             </Card>
           </Col>
