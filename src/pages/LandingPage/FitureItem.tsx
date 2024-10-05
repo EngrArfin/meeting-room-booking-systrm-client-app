@@ -1,4 +1,4 @@
-import { Card, Divider, Row, Col } from "antd";
+import { Card, Row, Col, Typography } from "antd";
 import photo1 from "../../assets/images/card1.jpg";
 import photo2 from "../../assets/images/card2.jpg";
 import photo3 from "../../assets/images/card3.jpg";
@@ -15,9 +15,21 @@ import photo12 from "../../assets/images/card12.jpg";
 const FitureItem = () => {
   return (
     <div>
-      <Divider style={{ borderColor: "#7cb305", color: "yellow" }}>
+      {/* <Divider style={{ borderColor: "#7cb305", color: "yellow" }}>
         Product Fiture
-      </Divider>
+      </Divider> */}
+      <Typography.Text
+        style={{
+          color: "yellow",
+          fontStyle: "italic",
+          fontSize: "24px",
+          paddingLeft: "10px",
+          marginTop: "10px",
+          margin: "20px",
+        }}
+      >
+        Service Room Fiture
+      </Typography.Text>
       <Row gutter={[16, 16]} justify="center">
         <Col xs={24} sm={12} md={8} lg={6}>
           <Card>
