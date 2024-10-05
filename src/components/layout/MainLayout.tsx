@@ -13,29 +13,30 @@ import HowItWorks from "../../pages/LandingPage/Shared/HowItWorks";
 import Testimonials from "../../pages/LandingPage/Shared/Testimonials";
 import About from "../../pages/LandingPage/About";
 import Contract from "../../pages/LandingPage/Contract";
+import { NavLink } from "react-router-dom";
 
 const { Header, Content } = Layout;
 
 const items: MenuProps["items"] = [
   {
-    key: "1",
-    label: "Home",
+    key: "Home",
+    label: <NavLink to="/">Home</NavLink>,
   },
   {
-    key: "2",
-    label: "Meeting Rooms",
+    key: "Meeting Rooms",
+    label: <NavLink to="/meeting-room">Meeting Rooms</NavLink>,
   },
   {
-    key: "3",
-    label: "About Us",
+    key: "About",
+    label: <NavLink to="/about">About</NavLink>,
   },
   {
-    key: "4",
-    label: "Contact Us",
+    key: "Contract",
+    label: <NavLink to="/contract">Contract</NavLink>,
   },
   {
-    key: "5",
-    label: "Login/Register",
+    key: "Login",
+    label: <NavLink to="/login">Login</NavLink>,
   },
 ];
 

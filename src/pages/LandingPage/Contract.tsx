@@ -3,10 +3,10 @@ import { Form, Input, Button, Row, Col, Typography } from "antd";
 import contractBacground from "../../assets/images/sider2.jpg";
 
 const Contract = () => {
-  const onFinish = (values) => {
+  /*  const onFinish = (values) => {
     console.log("Form Submitted: ", values);
     // Handle form submission (e.g., send to backend or email)
-  };
+  }; */
 
   return (
     <div
@@ -49,7 +49,7 @@ const Contract = () => {
         <Form
           name="contact-form"
           layout="vertical"
-          onFinish={onFinish}
+          /* onFinish={onFinish} */
           style={{ marginTop: "30px" }}
         >
           <Row gutter={16}>
