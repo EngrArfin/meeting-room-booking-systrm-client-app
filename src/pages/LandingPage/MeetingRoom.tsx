@@ -1,4 +1,4 @@
-import { Button, Card, Typography } from "antd";
+import { Button, Card, Typography, Row, Col } from "antd";
 
 const { Meta } = Card;
 
@@ -12,8 +12,24 @@ import room7 from "../../assets/images/room7.jpg";
 import room8 from "../../assets/images/room8.jpg";
 
 const MeetingRoom = () => {
+  const roomData = [
+    { title: "Business Premium Room", img: room1 },
+    { title: "Business Premium Room", img: room2 },
+    { title: "Business Premium Room", img: room3 },
+    { title: "Business Premium Room", img: room4 },
+    { title: "Business Premium Room", img: room5 },
+    { title: "Business Premium Room", img: room6 },
+    { title: "Business Premium Room", img: room7 },
+    { title: "Business Premium Room", img: room8 },
+  ];
+
   return (
-    <div>
+    <div
+      style={{
+        background: "#000033",
+        color: "#ffffff",
+      }}
+    >
       <Typography.Title
         style={{
           color: "yellow",
@@ -26,21 +42,27 @@ const MeetingRoom = () => {
       >
         Meeting Room
       </Typography.Title>
-      <div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ margin: 10 }}>
+      <Row gutter={[16, 16]} justify="center">
+        {roomData.map((room, index) => (
+          <Col
+            xs={24} // 100% width on extra small screens
+            sm={12} // 50% width on small screens
+            md={8} // 33.33% width on medium screens
+            lg={6} // 25% width on large screens
+            key={index}
+          >
             <Card
               hoverable
-              style={{ width: 260 }}
+              style={{ width: "100%" }} // Ensure the card uses full width of the column
               cover={
                 <img
-                  style={{ height: 190, width: "100%" }}
                   alt="example"
-                  src={room1}
+                  src={room.img}
+                  style={{ height: 190, width: "100%" }}
                 />
               }
             >
-              <Meta title="Business Primim Room" description="" />
+              <Meta title={room.title} description="" />
               <p style={{ marginTop: 5 }}>Capacity: 20</p>
               <p style={{ marginTop: 5 }}>Price: 10,000 TK (1-Slot)</p>
               <Button
@@ -49,225 +71,16 @@ const MeetingRoom = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   background: "yellow",
-                  marginLeft: 50,
                   marginTop: 10,
+                  marginLeft: 70,
                 }}
               >
                 See Details
               </Button>
             </Card>
-          </div>
-          <div style={{ margin: 10 }}>
-            <Card
-              hoverable
-              style={{ width: 260 }}
-              cover={
-                <img
-                  style={{ height: 190, width: "100%" }}
-                  alt="example"
-                  src={room2}
-                />
-              }
-            >
-              <Meta title="Business Primim Room" description="" />
-              <p style={{ marginTop: 5 }}>Capacity: 20</p>
-              <p style={{ marginTop: 5 }}>Price: 10,000 TK (1-Slot)</p>
-              <Button
-                style={{
-                  border: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  background: "yellow",
-                  marginLeft: 50,
-                  marginTop: 10,
-                }}
-              >
-                See Details
-              </Button>
-            </Card>
-          </div>
-
-          <div style={{ margin: 10 }}>
-            <Card
-              hoverable
-              style={{ width: 260 }}
-              cover={
-                <img
-                  style={{ height: 190, width: "100%" }}
-                  alt="example"
-                  src={room3}
-                />
-              }
-            >
-              <Meta title="Business Primim Room" description="" />
-              <p style={{ marginTop: 5 }}>Capacity: 20</p>
-              <p style={{ marginTop: 5 }}>Price: 10,000 TK (1-Slot)</p>
-              <Button
-                style={{
-                  border: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  background: "yellow",
-                  marginLeft: 50,
-                  marginTop: 10,
-                }}
-              >
-                See Details
-              </Button>
-            </Card>
-          </div>
-
-          <div style={{ margin: 10 }}>
-            <Card
-              hoverable
-              style={{ width: 260 }}
-              cover={
-                <img
-                  style={{ height: 190, width: "100%" }}
-                  alt="example"
-                  src={room4}
-                />
-              }
-            >
-              <Meta title="Business Primim Room" description="" />
-              <p style={{ marginTop: 5 }}>Capacity: 20</p>
-              <p style={{ marginTop: 5 }}>Price: 10,000 TK (1-Slot)</p>
-              <Button
-                style={{
-                  border: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  background: "yellow",
-                  marginLeft: 50,
-                  marginTop: 10,
-                }}
-              >
-                See Details
-              </Button>
-            </Card>
-          </div>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ margin: 10 }}>
-            <Card
-              hoverable
-              style={{ width: 260 }}
-              cover={
-                <img
-                  style={{ height: 190, width: "100%" }}
-                  alt="example"
-                  src={room5}
-                />
-              }
-            >
-              <Meta title="Business Primim Room" description="" />
-              <p style={{ marginTop: 5 }}>Capacity: 20</p>
-              <p style={{ marginTop: 5 }}>Price: 10,000 TK (1-Slot)</p>
-              <Button
-                style={{
-                  border: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  background: "yellow",
-                  marginLeft: 50,
-                  marginTop: 10,
-                }}
-              >
-                See Details
-              </Button>
-            </Card>
-          </div>
-          <div style={{ margin: 10 }}>
-            <Card
-              hoverable
-              style={{ width: 260 }}
-              cover={
-                <img
-                  style={{ height: 190, width: "100%" }}
-                  alt="example"
-                  src={room6}
-                />
-              }
-            >
-              <Meta title="Business Primim Room" description="" />
-              <p style={{ marginTop: 5 }}>Capacity: 20</p>
-              <p style={{ marginTop: 5 }}>Price: 10,000 TK (1-Slot)</p>
-              <Button
-                style={{
-                  border: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  background: "yellow",
-                  marginLeft: 50,
-                  marginTop: 10,
-                }}
-              >
-                See Details
-              </Button>
-            </Card>
-          </div>
-
-          <div style={{ margin: 10 }}>
-            <Card
-              hoverable
-              style={{ width: 260 }}
-              cover={
-                <img
-                  style={{ height: 190, width: "100%" }}
-                  alt="example"
-                  src={room7}
-                />
-              }
-            >
-              <Meta title="Business Primim Room" description="" />
-              <p style={{ marginTop: 5 }}>Capacity: 20</p>
-              <p style={{ marginTop: 5 }}>Price: 10,000 TK (1-Slot)</p>
-              <Button
-                style={{
-                  border: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  background: "yellow",
-                  marginLeft: 50,
-                  marginTop: 10,
-                }}
-              >
-                See Details
-              </Button>
-            </Card>
-          </div>
-
-          <div style={{ margin: 10 }}>
-            <Card
-              hoverable
-              style={{ width: 260 }}
-              cover={
-                <img
-                  style={{ height: 190, width: "100%" }}
-                  alt="example"
-                  src={room8}
-                />
-              }
-            >
-              <Meta title="Business Primim Room" description="" />
-              <p style={{ marginTop: 5 }}>Capacity: 20</p>
-              <p style={{ marginTop: 5 }}>Price: 10,000 TK (1-Slot)</p>
-              <Button
-                style={{
-                  border: 2,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  background: "yellow",
-                  marginLeft: 50,
-                  marginTop: 10,
-                }}
-              >
-                See Details
-              </Button>
-            </Card>
-          </div>
-        </div>
-      </div>
+          </Col>
+        ))}
+      </Row>
     </div>
   );
 };

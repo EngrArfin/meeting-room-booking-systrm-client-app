@@ -4,6 +4,7 @@ import img2 from "../../../assets/images/header2.jpg";
 import img3 from "../../../assets/images/header3.jpg";
 import img4 from "../../../assets/images/header4.jpg";
 import img5 from "../../../assets/images/header5.jpg";
+import { NavLink } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -107,14 +108,16 @@ const Hero = () => {
         >
           Efficient, hassle-free room booking for all your meeting needs.
         </p>
-        <Button
-          type="primary"
-          size="large"
-          href="/booking-rooms"
-          style={{ backgroundColor: "#1890ff", borderColor: "#1890ff" }}
-        >
-          Book Now
-        </Button>
+        <NavLink to="/meeting-room">
+          <Button
+            type="primary"
+            size="large"
+            href="/booking-rooms"
+            style={{ backgroundColor: "#1890ff", borderColor: "#1890ff" }}
+          >
+            Book Now
+          </Button>
+        </NavLink>
       </div>
 
       {/* Inline Keyframes for Animation */}
