@@ -5,6 +5,19 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
   endpoints: (builder) => ({
+    getRooms: builder.query({
+      query: () => ({
+        url: "/rooms",
+        method: "GET",
+      }),
+    }),
+    getBookings: builder.query({
+      query: () => ({
+        url: "/bookings",
+        method: "GET",
+      }),
+    }),
+
     signup: builder.mutation({
       query: (userData) => ({
         url: "/auth/signup",
@@ -22,7 +35,9 @@ export const baseApi = createApi({
   }),
 });
 
-export const { useSignupMutation, useLoginMutation } = baseApi;
-
-/* baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
- */
+export const {
+  useGetRoomsQuery,
+  useGetBookingsQuery,
+  useSignupMutation,
+  useLoginMutation,
+} = baseApi;

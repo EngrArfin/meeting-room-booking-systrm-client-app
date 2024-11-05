@@ -6,12 +6,12 @@ import Footers from "../../pages/LandingPage/Shared/Footer";
 import UserDropdown from "../../pages/LandingPage/Shared/UserDropdown";
 import logo from "../../assets/icons/logo.png";
 import Hero from "../../pages/LandingPage/Shared/Hero";
-import MeetingRoom from "../../pages/LandingPage/MeetingRoom";
 import ServiceAdvertisement from "../../pages/LandingPage/Shared/ServiceAdvertisement";
 import WhyChooseUs from "../../pages/LandingPage/Shared/WhyChooseUs";
 import HowItWorks from "../../pages/LandingPage/Shared/HowItWorks";
 import Testimonials from "../../pages/LandingPage/Shared/Testimonials";
 import { NavLink } from "react-router-dom";
+import RoomData from "../../pages/LandingPage/Room/RoomData";
 
 const { Header, Content } = Layout;
 
@@ -136,7 +136,7 @@ const LandingPageLayout = () => {
                   href="/login"
                   style={{ marginLeft: "1rem" }}
                 >
-                  Login/Register
+                  Login
                 </Button>
                 <Button href="/login">
                   <UserDropdown />
@@ -153,7 +153,8 @@ const LandingPageLayout = () => {
             <ServiceAdvertisement />
             <FitureItem />
             <WhyChooseUs />
-            <MeetingRoom />
+            <RoomData />
+
             <HowItWorks />
             <Testimonials />
           </div>

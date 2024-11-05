@@ -1,0 +1,50 @@
+[
+  {
+    "image": "https://i.ibb.co/1zHDB9Y/room1.jpg",
+    "roomName": "Meeting Room A",
+    "capacity": 12,
+    "pricePerSlot": 880
+  },
+  {
+    "image": "https://i.ibb.co/Y0MVYns/room2.jpg",
+    "roomName": "Meeting Room B",
+    "capacity": 8,
+    "pricePerSlot": 660
+  },
+  {
+    "image": "https://i.ibb.co/XsnKS4k/room3.jpg",
+    "roomName": "Conference Room C",
+    "capacity": 20,
+    "pricePerSlot": 1320
+  },
+  {
+    "image": "https://i.ibb.co/HXDvSYC/room4.jpg",
+    "roomName": "Team Collaboration Room D",
+    "capacity": 15,
+    "pricePerSlot": 1100
+  },
+  {
+    "image": "https://i.ibb.co/GT2BLDG/room5.jpg",
+    "roomName": "Executive Board Room E",
+    "capacity": 10,
+    "pricePerSlot": 1650
+  },
+  {
+    "image": "https://i.ibb.co/mCWkTBq/room6.jpg",
+    "roomName": "Small Meeting Room F",
+    "capacity": 18,
+    "pricePerSlot": 900
+  },
+  {
+    "image": "https://i.ibb.co/7F1qrWq/room7.jpg",
+    "roomName": "Consultation Room G",
+    "capacity": 14,
+    "pricePerSlot": 750
+  },
+  {
+    "image": "https://i.ibb.co/Z9KbMfT/room8.jpg",
+    "roomName": "Executive Suite H",
+    "capacity": 16,
+    "pricePerSlot": 1200
+  }
+]

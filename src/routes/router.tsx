@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import MeetingRoom from "../pages/LandingPage/MeetingRoom";
 import About from "../pages/LandingPage/About";
 import Contract from "../pages/LandingPage/Contract";
 import Login from "../pages/LandingPage/Login";
 import Signup from "../pages/LandingPage/Signup";
 import UserDashboard from "../pages/UserPage/UserDashboard";
 import Payment from "../pages/UserPage/Payment";
+import RoomData from "../pages/LandingPage/Room/RoomData";
+import RoomDetails from "../pages/LandingPage/RoomDetails/RoomDetails";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
 
   {
     path: "/meeting-room",
-    element: <MeetingRoom></MeetingRoom>,
+    element: <RoomData />,
+  },
+  {
+    path: "/room-details",
+    element: <RoomDetails />,
   },
   {
     path: "/about",
