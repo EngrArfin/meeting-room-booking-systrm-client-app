@@ -4,18 +4,20 @@ const { Header, Content } = Layout;
 const { Text } = Typography;
 
 const UserDashboard: React.FC = () => {
-  const orderData = [
+  const bookingData = [
     {
-      orderId: "ORD123456",
+      bookingId: "BOOK123456",
       date: "2024-09-15",
-      status: "Shipped",
+      status: "Confirmed",
       total: "$120.00",
+      room: "Conference Room A",
     },
     {
-      orderId: "ORD123457",
+      bookingId: "BOOK123457",
       date: "2024-09-12",
-      status: "Delivered",
+      status: "Completed",
       total: "$89.99",
+      room: "Meeting Room 1",
     },
   ];
 
@@ -52,16 +54,17 @@ const UserDashboard: React.FC = () => {
             </Col>
 
             <Col span={16}>
-              <Card title="Order History" bordered={false}>
+              <Card title="Booking History" bordered={false}>
                 <List
                   itemLayout="horizontal"
-                  dataSource={orderData}
+                  dataSource={bookingData}
                   renderItem={(item) => (
                     <List.Item>
                       <List.Item.Meta
-                        title={`Order ID: ${item.orderId}`}
+                        title={`Booking ID: ${item.bookingId}`}
                         description={`Date: ${item.date}`}
                       />
+                      <div>Room: {item.room}</div>
                       <div>Status: {item.status}</div>
                       <div>Total: {item.total}</div>
                     </List.Item>

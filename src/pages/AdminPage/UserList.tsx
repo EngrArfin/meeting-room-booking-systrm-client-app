@@ -13,7 +13,7 @@ interface DataType {
 const UserList = () => {
   const [initLoading, setInitLoading] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<DataType[]>([]);
+  const [, setData] = useState<DataType[]>([]);
   const [list, setList] = useState<DataType[]>([]);
 
   useEffect(() => {

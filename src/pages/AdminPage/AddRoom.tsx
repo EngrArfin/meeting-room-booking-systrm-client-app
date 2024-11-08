@@ -86,9 +86,9 @@ const AddRoomBooking: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Category */}
+      {/* Room Category */}
       <Form.Item
-        label="Category"
+        label="Room Category"
         name="category"
         rules={[{ required: true, message: "Please select a room category" }]}
       >
@@ -136,7 +136,7 @@ const AddRoomBooking: React.FC = () => {
           maxCount={1}
           beforeUpload={() => false}
         >
-          <Button icon={<UploadOutlined />}>Upload Image</Button>
+          <Button icon={<UploadOutlined />}>Upload Room Image</Button>
         </Upload>
       </Form.Item>
 

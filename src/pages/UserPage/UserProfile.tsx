@@ -8,6 +8,7 @@ type UserInfo = {
   lastName: string;
   email: string;
   telephone: string;
+  company?: string;
   fax?: string;
 };
 
@@ -18,6 +19,7 @@ const UserProfile: React.FC = () => {
     lastName: "Arfin",
     email: "arfin.cse.green.edu.bd@gmail.com",
     telephone: "01952487468",
+    company: "Tech Solutions",
     fax: "",
   });
 
@@ -97,6 +99,12 @@ const UserProfile: React.FC = () => {
 
           <Row gutter={16}>
             <Col span={12}>
+              <Form.Item label="Company" name="company">
+                <Input placeholder="Enter your company (if applicable)" />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
               <Form.Item label="Fax" name="fax">
                 <Input placeholder="Enter your fax number (if any)" />
               </Form.Item>
@@ -105,7 +113,7 @@ const UserProfile: React.FC = () => {
 
           <Form.Item style={{ textAlign: "center" }}>
             <Button type="primary" htmlType="submit">
-              Continue
+              Save Changes
             </Button>
           </Form.Item>
         </Form>

@@ -14,24 +14,24 @@ import {
 const { Title } = Typography;
 const { Option } = Select;
 
-interface AddressFormValues {
+interface BookingFormValues {
   firstName: string;
   lastName: string;
-  company?: string;
-  address1: string;
-  address2?: string;
-  city: string;
-  postCode: string;
-  country: string;
-  region: string;
-  defaultAddress: boolean;
+  email: string;
+  phone: string;
+  room: string;
+  bookingDate: string;
+  startTime: string;
+  endTime: string;
+  attendees: number;
+  defaultBooking: boolean;
 }
 
-const UserAddress: React.FC = () => {
-  const [defaultAddress, setDefaultAddress] = useState(false);
+const RoomBooking: React.FC = () => {
+  const [defaultBooking, setDefaultBooking] = useState(false);
 
-  // Handle form submission with specific type
-  const handleFinish = (values: AddressFormValues) => {
+  // Handle form submission
+  const handleFinish = (values: BookingFormValues) => {
     console.log("Form values: ", values);
     // Handle form submission logic, e.g., sending data to backend
   };
@@ -40,11 +40,11 @@ const UserAddress: React.FC = () => {
     <div style={{ padding: "50px", maxWidth: "900px", margin: "0 auto" }}>
       <Card>
         <Title level={2} style={{ textAlign: "center" }}>
-          Add New Address
+          Book a Meeting Room
         </Title>
 
         <p style={{ textAlign: "center" }}>
-          Please enter the required details to add a new address.
+          Please fill in the details below to book a meeting room.
         </p>
 
         <Form layout="vertical" onFinish={handleFinish}>
@@ -76,8 +76,29 @@ const UserAddress: React.FC = () => {
 
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item label="Company" name="company">
-                <Input placeholder="Company" />
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  { required: true, message: "Please input your email!" },
+                ]}
+              >
+                <Input placeholder="Email" />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                label="Phone"
+                name="phone"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your phone number!",
+                  },
+                ]}
+              >
+                <Input placeholder="Phone" />
               </Form.Item>
             </Col>
           </Row>
@@ -85,87 +106,80 @@ const UserAddress: React.FC = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                label="Address 1"
-                name="address1"
-                rules={[
-                  { required: true, message: "Please input your address!" },
-                ]}
+                label="Room"
+                name="room"
+                rules={[{ required: true, message: "Please select a room!" }]}
               >
-                <Input placeholder="Address 1" />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item label="Address 2" name="address2">
-                <Input placeholder="Address 2 (Optional)" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                label="City"
-                name="city"
-                rules={[{ required: true, message: "Please input your city!" }]}
-              >
-                <Input placeholder="City" />
-              </Form.Item>
-            </Col>
-
-            <Col span={12}>
-              <Form.Item
-                label="Post Code"
-                name="postCode"
-                rules={[
-                  { required: true, message: "Please input your post code!" },
-                ]}
-              >
-                <Input placeholder="Post Code" />
-              </Form.Item>
-            </Col>
-          </Row>
-
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                label="Country"
-                name="country"
-                rules={[
-                  { required: true, message: "Please select your country!" },
-                ]}
-              >
-                <Select placeholder="Select your country">
-                  <Option value="Bangladesh">Bangladesh</Option>
-                  {/* Add other country options here */}
+                <Select placeholder="Select a room">
+                  <Option value="Conference Room A">Conference Room A</Option>
+                  <Option value="Meeting Room B">Meeting Room B</Option>
+                  <Option value="Boardroom C">Boardroom C</Option>
                 </Select>
               </Form.Item>
             </Col>
 
             <Col span={12}>
               <Form.Item
-                label="Region / State"
-                name="region"
-                rules={[
-                  { required: true, message: "Please select your region!" },
-                ]}
+                label="Booking Date"
+                name="bookingDate"
+                rules={[{ required: true, message: "Please select a date!" }]}
               >
-                <Select placeholder="--- Please Select ---">
-                  <Option value="Dhaka">Dhaka</Option>
-                  <Option value="Chittagong">Chittagong</Option>
-                </Select>
+                <Input type="date" />
               </Form.Item>
             </Col>
           </Row>
 
           <Row gutter={16}>
             <Col span={12}>
-              <Form.Item name="defaultAddress" valuePropName="checked">
+              <Form.Item
+                label="Start Time"
+                name="startTime"
+                rules={[
+                  { required: true, message: "Please select a start time!" },
+                ]}
+              >
+                <Input type="time" />
+              </Form.Item>
+            </Col>
+
+            <Col span={12}>
+              <Form.Item
+                label="End Time"
+                name="endTime"
+                rules={[
+                  { required: true, message: "Please select an end time!" },
+                ]}
+              >
+                <Input type="time" />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                label="Number of Attendees"
+                name="attendees"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input the number of attendees!",
+                  },
+                ]}
+              >
+                <Input placeholder="Attendees" type="number" />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item name="defaultBooking" valuePropName="checked">
                 <Checkbox
-                  checked={defaultAddress}
-                  onChange={() => setDefaultAddress(!defaultAddress)}
+                  checked={defaultBooking}
+                  onChange={() => setDefaultBooking(!defaultBooking)}
                 >
-                  Default Address
+                  Save as Default Booking
                 </Checkbox>
               </Form.Item>
             </Col>
@@ -173,7 +187,7 @@ const UserAddress: React.FC = () => {
 
           <Form.Item style={{ textAlign: "center" }}>
             <Button type="primary" htmlType="submit">
-              Continue
+              Book Room
             </Button>
           </Form.Item>
         </Form>
@@ -182,4 +196,4 @@ const UserAddress: React.FC = () => {
   );
 };
 
-export default UserAddress;
+export default RoomBooking;

@@ -19,15 +19,16 @@ const AddRoomAdmin: React.FC = () => {
   const [form] = Form.useForm();
 
   // On form submit success
-  const onFinish = () => {
-    console.log("Received values from form: ");
-    message.success("Room added successfully!");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onFinish = (values: any) => {
+    console.log("Received values from form: ", values);
+    message.success("Meeting room added successfully!");
     form.resetFields(); // Reset form fields after submission
   };
 
   // On form submit failure
-  const onFinishFailed = () => {
-    console.error("Failed:");
+  const onFinishFailed = (errorInfo: any) => {
+    console.error("Failed:", errorInfo);
     message.error("Failed to add room. Please check your input.");
   };
 
@@ -84,7 +85,7 @@ const AddRoomAdmin: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Category */}
+      {/* Room Category */}
       <Form.Item
         label="Room Category"
         name="category"
@@ -97,22 +98,35 @@ const AddRoomAdmin: React.FC = () => {
         </Select>
       </Form.Item>
 
-      {/* Booking Date */}
+      {/* Available Booking Date */}
       <Form.Item
         label="Available Booking Date"
         name="availableDate"
-        rules={[{ required: true, message: "Please select a booking date" }]}
+        rules={[
+          {
+            required: true,
+            message: "Please select an available booking date",
+          },
+        ]}
       >
-        <DatePicker style={{ width: "100%" }} placeholder="Select a date" />
+        <DatePicker
+          style={{ width: "100%" }}
+          placeholder="Select available date"
+        />
       </Form.Item>
 
-      {/* Booking Time */}
+      {/* Available Time Slot */}
       <Form.Item
         label="Available Time Slot"
         name="availableTime"
-        rules={[{ required: true, message: "Please select a time slot" }]}
+        rules={[
+          { required: true, message: "Please select an available time slot" },
+        ]}
       >
-        <TimePicker style={{ width: "100%" }} placeholder="Select time slot" />
+        <TimePicker
+          style={{ width: "100%" }}
+          placeholder="Select available time slot"
+        />
       </Form.Item>
 
       {/* Room Image */}
@@ -126,7 +140,7 @@ const AddRoomAdmin: React.FC = () => {
           name="roomImage"
           listType="picture"
           maxCount={1}
-          beforeUpload={() => false}
+          beforeUpload={() => false} // Prevent auto-uploading the file
         >
           <Button icon={<UploadOutlined />}>Upload Room Image</Button>
         </Upload>

@@ -37,7 +37,7 @@ const MeetingRoomCard: React.FC<{ room: IRoom }> = ({ room }) => {
             cover={
               <img
                 alt="Room"
-                src={room.image}
+                src={room.image[0]} // Accessing the first image in the array
                 style={{
                   height: "190px",
                   width: "100%",

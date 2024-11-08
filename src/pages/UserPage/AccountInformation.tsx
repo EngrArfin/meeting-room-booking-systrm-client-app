@@ -7,7 +7,8 @@ type UserInfo = {
   firstName: string;
   lastName: string;
   email: string;
-  telephone: string;
+  phone: string;
+  company: string;
   fax?: string;
 };
 
@@ -17,13 +18,14 @@ const AccountInformation: React.FC = () => {
     firstName: "Md Samsel",
     lastName: "Arfin",
     email: "arfin.cse.green.edu.bd@gmail.com",
-    telephone: "01952487468",
+    phone: "01952487468",
+    company: "Tech Solutions Ltd.",
     fax: "",
   });
 
   // Handle form submission
   const handleFinish = (values: UserInfo) => {
-    console.log("Form values: ", values);
+    console.log("Updated Information: ", values);
     setUserInfo(values);
   };
 
@@ -84,18 +86,36 @@ const AccountInformation: React.FC = () => {
 
             <Col span={12}>
               <Form.Item
-                label="Telephone"
-                name="telephone"
+                label="Phone Number"
+                name="phone"
                 rules={[
-                  { required: true, message: "Please input your telephone!" },
+                  {
+                    required: true,
+                    message: "Please input your phone number!",
+                  },
                 ]}
               >
-                <Input placeholder="Enter your telephone number" />
+                <Input placeholder="Enter your phone number" />
               </Form.Item>
             </Col>
           </Row>
 
           <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                label="Company"
+                name="company"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your company name!",
+                  },
+                ]}
+              >
+                <Input placeholder="Enter your company name" />
+              </Form.Item>
+            </Col>
+
             <Col span={12}>
               <Form.Item label="Fax" name="fax">
                 <Input placeholder="Enter your fax number (if any)" />

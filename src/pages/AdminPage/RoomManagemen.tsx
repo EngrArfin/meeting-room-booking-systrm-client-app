@@ -1,33 +1,34 @@
 import { Card, Col, Row, Table, Tag } from "antd";
 import { Footer } from "antd/es/layout/layout";
 
-const RoomManagemen = () => {
-  // Sample data for product management table
-  const productColumns = [
+const RoomManagement = () => {
+  // Sample data for room management table
+  const roomColumns = [
     {
-      title: "Product",
+      title: "Room Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Brand",
-      dataIndex: "brand",
-      key: "brand",
+      title: "Capacity",
+      dataIndex: "capacity",
+      key: "capacity",
     },
     {
-      title: "Stock",
-      dataIndex: "stock",
-      key: "stock",
-      render: (stock: number) => (
-        <Tag color={stock > 0 ? "green" : "red"}>
-          {stock > 0 ? "In Stock" : "Out of Stock"}
+      title: "Availability",
+      dataIndex: "availability",
+      key: "availability",
+      render: (availability: boolean) => (
+        <Tag color={availability ? "green" : "red"}>
+          {availability ? "Available" : "Booked"}
         </Tag>
       ),
     },
     {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
+      title: "Price per Hour",
+      dataIndex: "pricePerHour",
+      key: "pricePerHour",
+      render: (price: string) => `$${price}`,
     },
     {
       title: "Action",
@@ -41,37 +42,46 @@ const RoomManagemen = () => {
     },
   ];
 
-  const productData = [
+  const roomData = [
     {
       key: "1",
-      name: "Custom Mechanical Keyboard",
-      brand: "Keychron",
-      stock: 12,
-      price: "$120",
+      name: "Conference Room A",
+      capacity: 20,
+      availability: true,
+      pricePerHour: "50",
     },
     {
       key: "2",
-      name: "RGB Mechanical Keyboard",
-      brand: "Corsair",
-      stock: 0,
-      price: "$150",
+      name: "Meeting Room B",
+      capacity: 10,
+      availability: false,
+      pricePerHour: "40",
+    },
+    {
+      key: "3",
+      name: "Board Room C",
+      capacity: 8,
+      availability: true,
+      pricePerHour: "60",
     },
   ];
+
   return (
     <div>
       <Row gutter={16} style={{ marginTop: "20px" }}>
         <Col span={24}>
-          <Card title="Product Management" bordered={false}>
-            <Table columns={productColumns} dataSource={productData} />
+          <Card title="Room Management" bordered={false}>
+            <Table columns={roomColumns} dataSource={roomData} />
           </Card>
         </Col>
       </Row>
       {/* Footer */}
       <Footer style={{ textAlign: "center" }}>
-        Mechanical Keyboard Admin Dashboard ©2024 Created by Samsel Arfin
+        Meeting Room Booking System Admin Dashboard ©2024 Created by Samsel
+        Arfin
       </Footer>
     </div>
   );
 };
 
-export default RoomManagemen;
+export default RoomManagement;

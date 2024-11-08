@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React, { useState } from "react";
 import {
   Layout,
   Row,
@@ -8,6 +9,7 @@ import {
   DatePicker,
   Table,
   List,
+  Button,
 } from "antd";
 import { Line } from "@ant-design/plots";
 import moment from "moment";
@@ -15,6 +17,9 @@ import moment from "moment";
 const { Header, Content } = Layout;
 
 const Report = () => {
+  // State for selected date
+  const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(null);
+
   // Mock data for meeting room bookings and usage
   const summaryData = {
     totalRooms: 50,
@@ -97,12 +102,25 @@ const Report = () => {
       key: "revenue",
       render: (text: any) => `$${text}`,
     },
+    {
+      title: "Action",
+      key: "action",
+      render: (_: any, record: any) => (
+        <Button type="primary" onClick={() => handleRoomBooking(record)}>
+          Book Room
+        </Button>
+      ),
+    },
   ];
 
   const availabilityColumns = [
     { title: "Room Name", dataIndex: "roomName", key: "roomName" },
     { title: "Availability", dataIndex: "availability", key: "availability" },
   ];
+
+  const handleRoomBooking = (room: any) => {
+    alert(`Booking process started for ${room.roomName}`);
+  };
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -111,7 +129,11 @@ const Report = () => {
       </Header>
       <Content style={{ margin: "24px" }}>
         {/* Date Picker */}
-        <DatePicker style={{ marginBottom: "16px" }} />
+        <DatePicker
+          style={{ marginBottom: "16px" }}
+          onChange={(date) => setSelectedDate(date)}
+          value={selectedDate}
+        />
 
         {/* Summary Cards */}
         <Row gutter={16}>
