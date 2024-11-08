@@ -113,7 +113,11 @@ const Hero = () => {
             type="primary"
             size="large"
             href="/booking-rooms"
-            style={{ backgroundColor: "#1890ff", borderColor: "#1890ff" }}
+            style={{
+              backgroundColor: "yellow",
+              borderColor: "yellow",
+              color: "black",
+            }}
           >
             Book Now
           </Button>
@@ -129,7 +133,6 @@ const Hero = () => {
           100% {
             transform: translateX(-50%);
           }
-          
         }
 
         @media (max-width: 768px) {

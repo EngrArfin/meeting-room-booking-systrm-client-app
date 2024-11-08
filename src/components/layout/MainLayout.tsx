@@ -22,7 +22,7 @@ const items = [
     label: <NavLink to="/meeting-room">Meeting Rooms</NavLink>,
   },
   { key: "About", label: <NavLink to="/about">About</NavLink> },
-  { key: "Contact", label: <NavLink to="/contact">Contact</NavLink> },
+  { key: "Contact", label: <NavLink to="/contract">Contact</NavLink> },
 ];
 
 const MainLayout = () => {
@@ -94,14 +94,42 @@ const MainLayout = () => {
           {user ? (
             <>
               <span>
-                {user?.user?.name} Welcome, {user?.user?.role}
+                <span>
+                  <Button
+                    type="primary"
+                    style={{
+                      backgroundColor: "yellow",
+                      borderColor: "yellow",
+                      color: "black",
+                    }}
+                  >
+                    <NavLink to="/user">User Prodile</NavLink>
+                  </Button>
+                </span>
+                {user?.user?.role}
               </span>
 
               <span> {user?.email}</span>
-              <button onClick={handleLogout}>Logout</button>
+              <button
+                style={{
+                  backgroundColor: "yellow",
+                  borderColor: "yellow",
+                  color: "black",
+                }}
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </>
           ) : (
-            <Button type="primary">
+            <Button
+              type="primary"
+              style={{
+                backgroundColor: "yellow",
+                borderColor: "yellow",
+                color: "black",
+              }}
+            >
               <NavLink to="/login">Login</NavLink>
             </Button>
           )}
