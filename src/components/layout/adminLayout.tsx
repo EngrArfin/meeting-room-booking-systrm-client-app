@@ -1,5 +1,6 @@
-import { Divider, Layout, Menu, MenuProps } from "antd";
-import { NavLink, Outlet } from "react-router-dom";
+import React from "react";
+import { Divider, Layout, Menu, MenuProps, Button } from "antd";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   AppstoreAddOutlined,
   BarChartOutlined,
@@ -8,6 +9,8 @@ import {
   ProductOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { useAppDispatch } from "../../redux/hooks"; // Import your custom dispatch hook
+import { logout } from "../../redux/features/authSlice"; // Import the logout action
 
 const { Header, Content, Sider } = Layout;
 
@@ -51,6 +54,14 @@ const items: MenuProps["items"] = [
 ];
 
 const AdminLayout = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch logout action
+    navigate("/login"); // Redirect to login page
+  };
+
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider
@@ -82,6 +93,24 @@ const AdminLayout = () => {
           items={items}
           style={{ marginTop: "64px" }} // Adjust for the fixed header height
         />
+        {/* Add Logout Button Below Menu */}
+        <div
+          style={{
+            padding: "10px",
+            position: "absolute",
+            bottom: "20px",
+            width: "100%",
+          }}
+        >
+          <Button
+            type="primary"
+            danger
+            onClick={handleLogout}
+            style={{ width: "100%" }}
+          >
+            Logout
+          </Button>
+        </div>
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
         {" "}
@@ -99,6 +128,7 @@ const AdminLayout = () => {
               height: "64px",
               display: "flex",
               alignItems: "center",
+              justifyContent: "space-between", // To space out elements
             }}
           >
             <h1 style={{ margin: 0 }}>Admin </h1>

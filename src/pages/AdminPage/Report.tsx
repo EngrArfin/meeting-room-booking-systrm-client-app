@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Layout,
   Row,
@@ -67,12 +67,12 @@ const Report = () => {
 
   const reviews = [
     {
-      author: "John Doe",
+      author: "Arfin Mia",
       content: "Great room, perfect for team meetings.",
       date: "2024-10-01",
     },
     {
-      author: "Jane Smith",
+      author: "Ariful Islam",
       content: "Well-equipped and spacious. Highly recommend.",
       date: "2024-10-02",
     },

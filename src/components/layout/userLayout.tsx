@@ -20,6 +20,7 @@ const UserLayout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector((store) => store.auth.user);
+  console.log(user);
   const [menuVisible, setMenuVisible] = useState(false);
 
   const handleLogout = () => {
@@ -106,7 +107,7 @@ const UserLayout = () => {
                 <Avatar size={40} icon={<UserOutlined />} />
                 <div style={{ marginLeft: 10, color: "white" }}>
                   <Title level={5} style={{ margin: 0, color: "white" }}>
-                    {user.user.name || "User"}
+                    {user.user.name || "Use"}
                   </Title>
                 </div>
               </div>
@@ -136,10 +137,11 @@ const UserLayout = () => {
           <div style={{ padding: "20px", textAlign: "center" }}>
             <Avatar size={80} icon={<UserOutlined />} />
             <Title level={4} style={{ color: "white", marginTop: "10px" }}>
-              {user?.name || "User"}
+              {user?.user?.name || "User"}
             </Title>
             <p style={{ color: "white" }}>
-              {user?.email || "user@example.com"}
+              {user?.user.email || "user@example.com"}
+              {user?.user.role || ""}
             </p>
           </div>
 

@@ -12,7 +12,6 @@ import RoomData from "../../pages/LandingPage/Room/RoomData";
 import FitureItem from "../../pages/LandingPage/FitureItem";
 import Footers from "../../pages/LandingPage/Shared/Footer";
 import { RootState } from "../../redux/store";
-import Dashboard from "../../pages/LandingPage/Shared/Demon/Dashboard";
 
 const { Header, Content } = Layout;
 
@@ -114,7 +113,6 @@ const MainLayout = () => {
         <div style={{ minHeight: 280, padding: 24, color: "white" }}>
           <Hero />
           <ServiceAdvertisement />
-          <Dashboard />
           <FitureItem />
           <WhyChooseUs />
           <RoomData />

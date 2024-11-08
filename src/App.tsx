@@ -2,18 +2,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "./redux/hooks";
 import { setUser, setToken } from "./redux/features/authSlice";
 import MainLayout from "./components/layout/MainLayout";
-
-// Make sure this matches the structure of the User expected in Redux slice
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  password: string;
-  phone: string;
-  address: string;
-  role: string;
-  __v: number;
-}
+import { User } from "./styles"; // Import the User type from the appropriate file
 
 function App() {
   const dispatch = useAppDispatch();
@@ -26,16 +15,16 @@ function App() {
     if (storedUser && storedToken) {
       try {
         const parsedUser = JSON.parse(storedUser) as User;
-        // Ensure the user data is valid before dispatching
+        // Ensure the role is either 'admin' or 'user' before dispatching
         if (
           parsedUser &&
           parsedUser._id &&
           parsedUser.name &&
           parsedUser.email &&
-          parsedUser.password
+          parsedUser.password &&
+          (parsedUser.role === "admin" || parsedUser.role === "user")
         ) {
-          // Dispatch the user data and token to Redux store
-          dispatch(setUser(parsedUser)); // `parsedUser` should match the `User` type expected in the Redux state
+          dispatch(setUser(parsedUser));
           dispatch(setToken(storedToken));
         } else {
           console.error("Invalid user data found in localStorage");

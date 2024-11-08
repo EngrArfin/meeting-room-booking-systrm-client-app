@@ -6,6 +6,7 @@ import { RootState } from "../store"; // Assuming you have RootState defined in 
 
 // Define the structure for the state
 interface AuthState {
+  [x: string]: any;
   user: User | null;
   token: string | null;
   loading: boolean;

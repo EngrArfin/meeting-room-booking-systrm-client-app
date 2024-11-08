@@ -16,19 +16,12 @@ const Login = () => {
 
   const onFinish = async (values: { email: string; password: string }) => {
     try {
-      // Make the login request and retrieve response
       const result = await loginUser(values).unwrap();
       console.log("Login Successful:", result);
-
-      // Save token and user data to local storage
       localStorage.setItem("token", result.accessToken);
       localStorage.setItem("user", JSON.stringify(result.data));
-
-      // Decode the token to get user information
       const user = verifyToken(result.accessToken);
       console.log(user);
-
-      // Dispatch action to set user in Redux store
       dispatch(
         setUser({
           ...result,
@@ -39,9 +32,9 @@ const Login = () => {
 
       // Role-based redirection
       if (result.data.role === "admin") {
-        navigate("/admin"); // Redirect to admin page
+        navigate("/admin");
       } else {
-        navigate("/user"); // Redirect to user page
+        navigate("/");
       }
     } catch (err) {
       console.error("Login Failed:", err);
@@ -110,6 +103,22 @@ const Login = () => {
                 htmlType="submit"
                 block
                 loading={isLoading}
+                style={{
+                  background: "linear-gradient(135deg, #FF6F61, #FF8A00)",
+                  borderColor: "transparent",
+                  borderRadius: "8px",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                  transition: "all 0.3s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, #FF8A00, #FF6F61)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background =
+                    "linear-gradient(135deg, #FF6F61, #FF8A00)";
+                }}
               >
                 Login
               </Button>
@@ -119,7 +128,7 @@ const Login = () => {
                 </div>
               )}
               <div style={{ marginTop: "16px", textAlign: "center" }}>
-                Don't have an account? <NavLink to="/signup">Sign Up</NavLink>
+                I have no account? <NavLink to="/signup">Sign Up</NavLink>
               </div>
             </Form>
           </Card>

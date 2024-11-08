@@ -5,7 +5,6 @@ import { useAppDispatch } from "../../redux/hooks";
 import { signup } from "../../redux/features/authSlice";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { Card, Form, Input, Button, Typography, Alert } from "antd";
-import { FaGoogle, FaGithub } from "react-icons/fa";
 
 const { Title, Paragraph } = Typography;
 
@@ -112,7 +111,23 @@ const Signup = () => {
               type="primary"
               htmlType="submit"
               loading={isLoading}
-              style={{ width: "100%" }}
+              style={{
+                width: "100%",
+                background: "linear-gradient(135deg, #FF6F61, #FF8A00)",
+                borderColor: "transparent",
+                borderRadius: "8px",
+                fontSize: "16px",
+                fontWeight: "600",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, #FF8A00, #FF6F61)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background =
+                  "linear-gradient(135deg, #FF6F61, #FF8A00)";
+              }}
             >
               Sign Up
             </Button>
@@ -131,31 +146,6 @@ const Signup = () => {
             </Form.Item>
           )}
         </Form>
-
-        <div style={{ marginTop: "24px", textAlign: "center" }}>
-          <Paragraph>Or sign up with:</Paragraph>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "8px",
-              marginTop: "16px",
-            }}
-          >
-            <Button
-              style={{ display: "flex", alignItems: "center" }}
-              icon={<FaGoogle style={{ marginRight: "8px" }} />}
-            >
-              Google
-            </Button>
-            <Button
-              style={{ display: "flex", alignItems: "center" }}
-              icon={<FaGithub style={{ marginRight: "8px" }} />}
-            >
-              GitHub
-            </Button>
-          </div>
-        </div>
 
         <div style={{ marginTop: "16px", textAlign: "center" }}>
           <Paragraph>

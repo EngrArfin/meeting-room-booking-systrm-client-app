@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"; // Import useParams for accessing URL parameters
 import {
   DatePicker,
   Button,
@@ -19,6 +20,8 @@ const { Option } = Select;
 const { Title, Text } = Typography;
 
 const RoomBookingPage: React.FC = () => {
+  const { roomId } = useParams<{ roomId: string }>();
+
   const dispatch: AppDispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.auth);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -26,6 +29,7 @@ const RoomBookingPage: React.FC = () => {
 
   useEffect(() => {
     if (selectedDate) {
+      // Dummy data for available slots
       setAvailableSlots(["09:00 AM", "11:00 AM", "02:00 PM", "04:00 PM"]);
     }
   }, [selectedDate]);
@@ -43,13 +47,24 @@ const RoomBookingPage: React.FC = () => {
     phone: string;
     timeSlot: string;
   }) => {
+    if (!roomId) {
+      alert("Room ID is missing. Please provide a valid Room ID in the URL.");
+      return;
+    }
+
+    if (!selectedDate) {
+      // Handle the case where selectedDate is null
+      alert("Please select a date before proceeding with the booking.");
+      return;
+    }
+
     const bookingData = {
       ...values,
       date: selectedDate,
-      userId: user?._id, // Ensure userId is added
+      userId: user?._id,
+      roomId,
     };
 
-    // Dispatch the action to send data to Redux
     dispatch(submitBooking(bookingData));
   };
 
@@ -61,7 +76,7 @@ const RoomBookingPage: React.FC = () => {
       >
         <Space direction="vertical" size="large" style={{ width: "100%" }}>
           <Title level={3} style={{ textAlign: "center", color: "#1890ff" }}>
-            Book Your Room
+            Book Your Room (Room ID: {roomId})
           </Title>
           <Divider />
           <Form
@@ -84,48 +99,47 @@ const RoomBookingPage: React.FC = () => {
             <Form.Item
               label={<Text strong>Available Time Slots</Text>}
               name="timeSlot"
-              rules={[{ required: true, message: "Please select a time slot" }]}
+              rules={[{ required: true, message: "Please select a time" }]}
             >
               <Select
                 placeholder="Select a time slot"
                 style={{ width: "100%" }}
               >
-                {availableSlots.map((slot) => (
-                  <Option key={slot} value={slot}>
+                {availableSlots.map((slot, index) => (
+                  <Option key={index} value={slot}>
                     {slot}
                   </Option>
                 ))}
               </Select>
             </Form.Item>
 
-            <Divider orientation="left">User Information</Divider>
-
-            <Form.Item label={<Text strong>Full Name</Text>} name="name">
-              <Input
-                placeholder="Enter your full name"
-                defaultValue={user?.name}
-              />
-            </Form.Item>
-
-            <Form.Item label={<Text strong>Email</Text>} name="email">
-              <Input
-                placeholder="Enter your email"
-                defaultValue={user?.email}
-              />
-            </Form.Item>
-
-            <Form.Item label={<Text strong>Phone</Text>} name="phone">
-              <Input
-                placeholder="Enter your phone number"
-                defaultValue={user?.phone}
-              />
-            </Form.Item>
-
-            <Button
-              type="primary"
-              htmlType="submit"
-              style={{ width: "100%", marginTop: "20px" }}
+            <Form.Item
+              label={<Text strong>Your Name</Text>}
+              name="name"
+              initialValue={user?.name || ""}
+              rules={[{ required: true, message: "Please enter your name" }]}
             >
+              <Input placeholder="Enter your full name" />
+            </Form.Item>
+
+            <Form.Item
+              label={<Text strong>Your Email</Text>}
+              name="email"
+              initialValue={user?.email || ""}
+              rules={[{ required: true, message: "Please enter your email" }]}
+            >
+              <Input type="email" placeholder="Enter your email" />
+            </Form.Item>
+
+            <Form.Item
+              label={<Text strong>Your Phone</Text>}
+              name="phone"
+              rules={[{ required: true, message: "Please enter your phone" }]}
+            >
+              <Input type="phone" placeholder="Enter your phone number" />
+            </Form.Item>
+
+            <Button type="primary" htmlType="submit" block>
               Confirm Booking
             </Button>
           </Form>

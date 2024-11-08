@@ -6,15 +6,13 @@ import { RootState } from "../../../redux/store";
 
 const RoomBookingDetails: React.FC = () => {
   const navigate = useNavigate();
+  const room = useSelector((state: RootState) => state.room.selectedRoom); // Assuming room is stored here
 
-  const room = useSelector((state: RootState) => state.room.selectedRoom);
-
-  // Handle Book Now click
   const handleBookNow = () => {
     if (room) {
       navigate("/booking");
     } else {
-      navigate("/"); // If room is not available, redirect to home page
+      navigate("/"); // Redirect to home page if no room is selected
     }
   };
 
@@ -32,34 +30,25 @@ const RoomBookingDetails: React.FC = () => {
         <Col xs={24} md={12}>
           <Carousel autoplay>
             {room.image && room.image.length > 0 ? (
-              room.image.map(
-                (
-                  image: string | undefined,
-                  index: React.Key | null | undefined
-                ) => (
-                  <div key={index}>
-                    <img
-                      alt={`Room Image ${index + 1}`}
-                      src={image}
-                      style={{
-                        width: "100%",
-                        height: "400px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  </div>
-                )
-              )
+              room.image.map((image, index) => (
+                <div key={index}>
+                  <img
+                    alt={`Room Image ${index + 1}`}
+                    src={image}
+                    style={{
+                      width: "100%",
+                      height: "400px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))
             ) : (
               <div>
                 <img
                   alt="No Room Image"
                   src="https://via.placeholder.com/800x400.png?text=No+Image+Available"
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    objectFit: "cover",
-                  }}
+                  style={{ width: "100%", height: "400px", objectFit: "cover" }}
                 />
               </div>
             )}
@@ -90,7 +79,7 @@ const RoomBookingDetails: React.FC = () => {
             <div style={{ display: "flex", gap: "10px" }}>
               <Button
                 type="primary"
-                onClick={() => navigate(-1)} // Go back to the rooms page
+                onClick={() => navigate(-1)}
                 style={{
                   backgroundColor: "#007bff",
                   borderColor: "#007bff",
@@ -101,7 +90,7 @@ const RoomBookingDetails: React.FC = () => {
               </Button>
               <Button
                 type="primary"
-                onClick={handleBookNow} // Handle booking
+                onClick={handleBookNow}
                 style={{
                   backgroundColor: "#007bff",
                   borderColor: "#007bff",

@@ -22,6 +22,7 @@ import ProductManagemen from "../pages/AdminPage/RoomManagemen";
 import Report from "../pages/AdminPage/Report";
 import AdminLayout from "../components/layout/AdminLayout";
 import UserLayout from "../components/layout/UserLayout";
+import RoomBookingPage from "../pages/LandingPage/RoomDetails/RoomBookingPage";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
   {
     path: "/user/dashboard",
     element: <UserDashboard />,
+  },
+  {
+    path: "/rooms/:roomId",
+    element: <RoomBookingPage />,
   },
 
   /* Admin Dashboard */

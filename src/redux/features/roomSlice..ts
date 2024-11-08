@@ -1,9 +1,8 @@
-// roomSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // Define the shape of the Room type
 interface Room {
-  image: string;
+  image: string[]; // Change this to an array of strings
   roomName: string;
   roomNo: string;
   floorNo: string;

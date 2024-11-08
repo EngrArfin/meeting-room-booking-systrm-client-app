@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface User {
-  user: any;
+  user?: any;
   _id: string;
   name: string;
   email: string;
@@ -7,19 +8,19 @@ export interface User {
   phone: string;
   address: string;
   token?: string;
-  role: "admin" | "user"; // Include the role property here
+  role: string /*  "admin" | "user" */;
   __v: number;
 }
 
 export interface IRoom {
-  roomId: string;
+  _id: string;
   image: string[];
   roomName: string;
   roomNo: string;
-  floorNo: number;
+  floorNo: string;
   capacity: number;
   pricePerSlot: number;
-  amenities: string[]; // Ensure this is an array of strings
+  amenities: string[];
   booking: Array<{
     bookingId: string;
     userId: string;
