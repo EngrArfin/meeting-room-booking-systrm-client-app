@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSignupMutation } from "../../redux/api/api";
 import { useAppDispatch } from "../../redux/hooks";
 import { signup } from "../../redux/features/authSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import { Card, Form, Input, Button, Typography, Alert } from "antd";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 
@@ -12,6 +12,7 @@ const { Title, Paragraph } = Typography;
 const Signup = () => {
   const [signupUser, { isLoading, error }] = useSignupMutation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate(); // Initialize navigate hook
 
   const [formData, setFormData] = useState({
     name: "",
@@ -31,9 +32,9 @@ const Signup = () => {
 
   const handleSubmit = async () => {
     try {
-      const result = await signupUser(formData).unwrap(); // Use formData here
+      const result = await signupUser(formData).unwrap();
       dispatch(signup(result));
-      // Handle successful signup (e.g., navigate or show success message)
+      navigate("/login"); // Redirect to login page after successful signup
     } catch (err) {
       console.error("Signup failed", err);
     }

@@ -1,24 +1,16 @@
-/* export interface IRoom {
-  roomId: string;
-  image: string;
-  roomName: string;
-  roomNo: string;
-  floorNo: number;
-  capacity: number;
-  pricePerSlot: number;
-  amenities: string;
-  bookingId: string;
-  userId: string;
-  date: string;
-  timeSlot: {
-    start: string;
-    end: string;
-  };
-  status: string;
-  purpose: string;
-} */
+export interface User {
+  user: any;
+  _id: string;
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  address: string;
+  token?: string;
+  role: "admin" | "user"; // Include the role property here
+  __v: number;
+}
 
-// Example IRoom interface
 export interface IRoom {
   roomId: string;
   image: string[];
@@ -37,12 +29,3 @@ export interface IRoom {
     purpose: string;
   }>;
 }
-
-/* export interface IRoom {
-  _id: string;
-  image: string;
-  roomName: string;
-  capacity: number;
-  pricePerSlot: number;
-}
- */

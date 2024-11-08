@@ -1,98 +1,225 @@
-import { Layout, Menu, MenuProps } from "antd";
+import {
+  Avatar,
+  Layout,
+  Menu,
+  Dropdown,
+  Typography,
+  Button,
+  MenuProps,
+} from "antd";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { UserOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { logout } from "../../redux/features/authSlice";
 
-/* import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { createElement } from "react"; */
+const { Header, Content, Sider } = Layout;
+const { Title } = Typography;
 
-const { Header, Content, Footer, Sider } = Layout;
+const UserLayout = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const user = useAppSelector((store) => store.auth.user);
+  const [menuVisible, setMenuVisible] = useState(false);
 
-const items: MenuProps["items"] = [
-  /* {
-    key: "Dashboard",
-    label: <NavLink to="/admin/dashboard">User Dashboard</NavLink>,
-  }, */
-  {
-    key: "4",
-    label: "User Management",
-    children: [
-      {
-        key: "5",
-        label: "Dashboard",
-      },
-      {
-        key: "6",
-        label: "Profile",
-      },
-      {
-        key: "7",
-        label: "User",
-        children: [
-          {
-            key: "8",
-            label: "Dashboard",
-          },
-          {
-            key: "9",
-            label: "Profile",
-          },
-        ],
-      },
-    ],
-  },
-];
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
-const userLayout = () => {
+  const menuItems: MenuProps["items"] = [
+    {
+      key: "Dashboard",
+      label: "Dashboard",
+      children: [
+        { key: "Admin", label: <NavLink to="/admin">Admin</NavLink> },
+        { key: "User", label: <NavLink to="/user/profile">Profile</NavLink> }, // Linking directly to user profile
+      ],
+    },
+  ];
+
+  const userMenu = (
+    <Menu>
+      <Menu.Item key="Profile">
+        <NavLink to="/user/profile">Profile</NavLink>
+      </Menu.Item>
+      <Menu.Item key="Settings">
+        <NavLink to="/user/settings">Settings</NavLink>
+      </Menu.Item>
+      <Menu.Item key="Logout" onClick={handleLogout}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
-    <Layout style={{ height: "100vh" }}>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+    <Layout
+      style={{
+        borderRadius: "8px",
+        background:
+          "linear-gradient(90deg, #2e004f, #00bfae, #2e004f, #00bfae)",
+        color: "#ffffff",
+        boxShadow: "0px 4px 15px rgba(0.3, 1, 0, 0.3)",
+      }}
+    >
+      {/* Main Header */}
+      <Header
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "fixed",
+          width: "100%",
+          zIndex: 1000,
         }}
       >
-        <div
-          style={{
-            color: "white",
-            height: "4rem",
-            display: "flex",
-            justifyContent: "center",
-            justifyItems: "center",
-          }}
-        >
-          <h1 style={{ height: "100" }}> Admin Mechanical Keyboard </h1>
-        </div>
+        <Title level={3} style={{ color: "white", margin: 0 }}>
+          Mechanical Keyboard
+        </Title>
+
+        {/* Navbar */}
         <Menu
           theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["4"]}
-          items={items}
+          mode="horizontal"
+          defaultSelectedKeys={["Home"]}
+          items={menuItems}
+          style={{ flex: 1 }}
         />
-      </Sider>
+
+        {/* Cart and User Menu */}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          {user ? (
+            <Dropdown
+              overlay={userMenu}
+              trigger={["click"]}
+              onVisibleChange={(visible) => setMenuVisible(visible)}
+              visible={menuVisible}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                  marginLeft: 20,
+                }}
+              >
+                <Avatar size={40} icon={<UserOutlined />} />
+                <div style={{ marginLeft: 10, color: "white" }}>
+                  <Title level={5} style={{ margin: 0, color: "white" }}>
+                    {user.user.name || "User"}
+                  </Title>
+                </div>
+              </div>
+            </Dropdown>
+          ) : (
+            <Button
+              type="primary"
+              style={{ marginLeft: 20 }}
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </Button>
+          )}
+        </div>
+      </Header>
+
       <Layout>
-        <Header style={{ padding: 0 }} />
-        <Content style={{ margin: "24px 16px 0" }}>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 360,
-            }}
-          >
-            <h2>The Main Content Here </h2>
+        {/* Sidebar for Profile Navigation */}
+        <Sider
+          style={{
+            position: "fixed",
+            height: "100vh",
+            top: 64, // Adjust for main header
+            zIndex: 1,
+          }}
+        >
+          <div style={{ padding: "20px", textAlign: "center" }}>
+            <Avatar size={80} icon={<UserOutlined />} />
+            <Title level={4} style={{ color: "white", marginTop: "10px" }}>
+              {user?.name || "User"}
+            </Title>
+            <p style={{ color: "white" }}>
+              {user?.email || "user@example.com"}
+            </p>
           </div>
-        </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
-        </Footer>
+
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["Profile"]}
+            items={[
+              {
+                key: "Dahboard",
+                label: (
+                  <NavLink to="/user">
+                    <UserOutlined /> Dashboard
+                  </NavLink>
+                ),
+              },
+              {
+                key: "Profile",
+                label: (
+                  <NavLink to="/user/profile">
+                    <UserOutlined /> Profile
+                  </NavLink>
+                ),
+              },
+
+              {
+                key: "User Info",
+                label: (
+                  <NavLink to="/user/info">
+                    <UserOutlined /> User Info
+                  </NavLink>
+                ),
+              },
+              {
+                key: "Address",
+                label: (
+                  <NavLink to="/user/address">
+                    <UserOutlined /> Address
+                  </NavLink>
+                ),
+              },
+              {
+                key: "Order HIstory",
+                label: (
+                  <NavLink to="/user/history">
+                    <UserOutlined /> Order HIstory
+                  </NavLink>
+                ),
+              },
+              {
+                key: "Settings",
+                label: (
+                  <NavLink to="/user/settings">
+                    <UserOutlined /> Settings
+                  </NavLink>
+                ),
+              },
+              {
+                key: "Logout",
+                label: (
+                  <NavLink to="#" onClick={handleLogout}>
+                    <UserOutlined /> LogOut
+                  </NavLink>
+                ),
+              },
+            ]}
+          />
+        </Sider>
+
+        <Layout style={{ marginLeft: 200, paddingTop: 64 }}>
+          {/* Main Content */}
+          <Content style={{ margin: "64px 16px 0" }}>
+            <div style={{ padding: 24, minHeight: 360 }}>
+              <Outlet /> {/* Nested content will be rendered here */}
+            </div>
+          </Content>
+        </Layout>
       </Layout>
     </Layout>
   );
 };
 
-export default userLayout;
+export default UserLayout;

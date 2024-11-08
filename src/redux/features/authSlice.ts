@@ -1,16 +1,10 @@
-// redux/features/authSlice.ts
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "../store";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { User } from "../../styles"; // Assuming `User` type is defined in your styles file
+import { jwtDecode } from "jwt-decode"; // Corrected import statement, no braces for default export
+import { RootState } from "../store"; // Assuming you have RootState defined in your store file
 
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  phone: string;
-  address: string;
-  role: string;
-}
-
+// Define the structure for the state
 interface AuthState {
   user: User | null;
   token: string | null;
@@ -18,112 +12,138 @@ interface AuthState {
   error: string | null;
 }
 
+// Initial state for authentication slice
 const initialState: AuthState = {
   user: null,
-  token: localStorage.getItem("token") || null,
+  token: null,
   loading: false,
   error: null,
 };
 
-export const signup = createAsyncThunk<
-  { user: User; token: string | null },
-  {
-    name: string;
-    email: string;
-    password: string;
-    phone: string;
-    address: string;
-    role: string;
-  },
-  { rejectValue: string }
->("auth/signup", async (userData, { rejectWithValue }) => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/signup`,
-      {
+// Async thunk to handle login logic
+export const login = createAsyncThunk(
+  "auth/login",
+  async (
+    { email, password }: { email: string; password: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(userData),
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to login");
       }
-    );
 
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message);
-    return { user: data.user, token: data.token || null };
-  } catch (error) {
-    return rejectWithValue(
-      error instanceof Error ? error.message : "Signup failed"
-    );
+      // Decode JWT to extract user data
+      const decodedUser = jwtDecode<User>(data.token);
+
+      return { user: decodedUser, token: data.token };
+    } catch (error: any) {
+      return rejectWithValue(
+        error.message || "Something went wrong during login"
+      );
+    }
   }
-});
+);
 
-export const login = createAsyncThunk<
-  { user: User; token: string | null },
-  { email: string; password: string },
-  { rejectValue: string }
->("auth/login", async (credentials, { rejectWithValue }) => {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
-      {
+// Async thunk to handle signup logic
+export const signup = createAsyncThunk(
+  "auth/signup",
+  async (
+    {
+      name,
+      email,
+      password,
+    }: { name: string; email: string; password: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(credentials),
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to signup");
       }
-    );
 
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.message);
-    localStorage.setItem("token", data.token || "");
-    return { user: data.user, token: data.token || null };
-  } catch (error) {
-    return rejectWithValue(
-      error instanceof Error ? error.message : "Login failed"
-    );
+      // Decode JWT to extract user data
+      const decodedUser = jwtDecode<User>(data.token);
+
+      return { user: decodedUser, token: data.token };
+    } catch (error: any) {
+      return rejectWithValue(
+        error.message || "Something went wrong during signup"
+      );
+    }
   }
-});
+);
 
+// Creating the auth slice
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
     logout: (state) => {
       state.user = null;
       state.token = null;
-      localStorage.removeItem("token");
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(signup.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(signup.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-      })
-      .addCase(signup.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
+      // Handle login states
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(login.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-      })
+      .addCase(
+        login.fulfilled,
+        (state, action: PayloadAction<{ user: User; token: string }>) => {
+          state.loading = false;
+          state.user = action.payload.user;
+          state.token = action.payload.token;
+        }
+      )
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.error = action.payload as string;
+      })
+      // Handle signup states
+      .addCase(signup.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        signup.fulfilled,
+        (state, action: PayloadAction<{ user: User; token: string }>) => {
+          state.loading = false;
+          state.user = action.payload.user;
+          state.token = action.payload.token;
+        }
+      )
+      .addCase(signup.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
-export const { logout } = authSlice.actions;
+// Exporting actions and selectors
+export const { setUser, setToken, logout } = authSlice.actions;
 export const selectAuth = (state: RootState) => state.auth;
 export default authSlice.reducer;

@@ -1,170 +1,130 @@
-import { Layout, Menu, MenuProps, Button, Dropdown, Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import { useState } from "react";
-import FitureItem from "../../pages/LandingPage/FitureItem";
-import Footers from "../../pages/LandingPage/Shared/Footer";
-import UserDropdown from "../../pages/LandingPage/Shared/UserDropdown";
+import { Layout, Button, Menu } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/features/authSlice";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/icons/logo.png";
 import Hero from "../../pages/LandingPage/Shared/Hero";
 import ServiceAdvertisement from "../../pages/LandingPage/Shared/ServiceAdvertisement";
 import WhyChooseUs from "../../pages/LandingPage/Shared/WhyChooseUs";
 import HowItWorks from "../../pages/LandingPage/Shared/HowItWorks";
 import Testimonials from "../../pages/LandingPage/Shared/Testimonials";
-import { NavLink } from "react-router-dom";
 import RoomData from "../../pages/LandingPage/Room/RoomData";
+import FitureItem from "../../pages/LandingPage/FitureItem";
+import Footers from "../../pages/LandingPage/Shared/Footer";
+import { RootState } from "../../redux/store";
+import Dashboard from "../../pages/LandingPage/Shared/Demon/Dashboard";
 
 const { Header, Content } = Layout;
 
-const items: MenuProps["items"] = [
-  {
-    key: "Home",
-    label: <NavLink to="/">Home</NavLink>,
-  },
+const items = [
+  { key: "Home", label: <NavLink to="/">Home</NavLink> },
   {
     key: "Meeting Rooms",
     label: <NavLink to="/meeting-room">Meeting Rooms</NavLink>,
   },
-  {
-    key: "About",
-    label: <NavLink to="/about">About</NavLink>,
-  },
-  {
-    key: "Contract",
-    label: <NavLink to="/contract">Contract</NavLink>,
-  },
-  {
-    key: "Login",
-    label: <NavLink to="/login">Login</NavLink>,
-  },
+  { key: "About", label: <NavLink to="/about">About</NavLink> },
+  { key: "Contact", label: <NavLink to="/contact">Contact</NavLink> },
 ];
 
-// Dropdown menu for authenticated users
-const userMenu = (
-  <Menu>
-    <Menu.Item key="1">My Bookings</Menu.Item>
-    <Menu.Item key="2">Logout</Menu.Item>
-  </Menu>
-);
+const MainLayout = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, token } = useSelector((state: RootState) => state.auth); // Removed token since it's not used
+  console.log(user);
+  if (!token) {
+    navigate("/login");
+  }
+  const handleLogout = () => {
+    // Dispatch the logout action to clear Redux state
+    dispatch(logout());
 
-// Dropdown menu for admins
-const adminMenu = (
-  <Menu>
-    <Menu.Item key="1">Dashboard</Menu.Item>
-    <Menu.Item key="2">Logout</Menu.Item>
-  </Menu>
-);
+    // Clear data from localStorage
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
 
-const LandingPageLayout = () => {
-  const [isAuthenticated /* setIsAuthenticated */] = useState(false); // Change this based on actual authentication logic
-  const [isAdmin /* setIsAdmin */] = useState(false); // Set this if the user is an admin
+    // Optionally, redirect to login or home
+    navigate("/login");
+  };
 
   return (
-    <div className="mx-auto">
-      <Layout
+    <Layout
+      style={{
+        borderRadius: "8px",
+        background: "#000033",
+        color: "#ffffff",
+      }}
+    >
+      <Header
         style={{
-          borderRadius: "8px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
           background: "#000033",
           color: "#ffffff",
+          padding: "0 20px",
         }}
       >
-        <Header
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            background: "#000033",
-            color: "#ffffff",
-            padding: "0 20px",
-          }}
-        >
-          {/* Logo and System Name */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <img
-              style={{ height: 30, width: 30, marginRight: 10 }}
-              src={logo}
-              alt="Logo"
-            />
-            <h1 style={{ margin: 0, fontSize: "1.5rem" }}>
-              <a
-                href="/"
-                style={{
-                  color: "#ffffff",
-                  textDecoration: "none",
-                  whiteSpace: "nowrap", // Prevents text wrapping
-                }}
-              >
-                Meeting Room Book
-              </a>
-            </h1>
-          </div>
-
-          {/* Navigation Menu */}
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["1"]}
-            items={items}
-            style={{
-              flex: 1,
-              justifyContent: "center",
-              background: "#000033",
-              color: "#ffffff",
-            }}
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img
+            style={{ height: 30, width: 30, marginRight: 10 }}
+            src={logo}
+            alt="Logo"
           />
+          <h1 style={{ margin: 0, fontSize: "1.5rem" }}>
+            <NavLink
+              to="/"
+              style={{
+                color: "#ffffff",
+                textDecoration: "none",
+                whiteSpace: "nowrap",
+              }}
+            >
+              Meeting Room Book
+            </NavLink>
+          </h1>
+        </div>
 
-          {/* User Icon/Dropdown */}
-          <div>
-            {isAuthenticated ? (
-              <Dropdown
-                overlay={isAdmin ? adminMenu : userMenu}
-                trigger={["click"]}
-              >
-                <Avatar
-                  style={{ backgroundColor: "#87d068" }}
-                  icon={<UserOutlined />}
-                />
-              </Dropdown>
-            ) : (
-              <div>
-                <Button
-                  type="primary"
-                  href="/login"
-                  style={{ marginLeft: "1rem" }}
-                >
-                  Login
-                </Button>
-                <Button href="/login">
-                  <UserDropdown />
-                </Button>
-              </div>
-            )}
-          </div>
-        </Header>
-        <hr />
-        {/* Hero Section */}
-        <Content style={{ padding: "0 48px" }}>
-          <div style={{ minHeight: 280, padding: 24, color: "white" }}>
-            <Hero />
-            <ServiceAdvertisement />
-            <FitureItem />
-            <WhyChooseUs />
-            <RoomData />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          items={items}
+          style={{ flex: 1, justifyContent: "center", background: "#000033" }}
+        />
 
-            <HowItWorks />
-            <Testimonials />
-          </div>
-        </Content>
+        <div>
+          {user ? (
+            <>
+              <span>
+                {user?.user?.name} Welcome, {user?.user?.role}
+              </span>
 
-        {/* Footer */}
-        <Footers />
-      </Layout>
+              <span> {user?.email}</span>
+              <button onClick={handleLogout}>Logout</button>
+            </>
+          ) : (
+            <Button type="primary">
+              <NavLink to="/login">Login</NavLink>
+            </Button>
+          )}
+        </div>
+      </Header>
+      <hr />
 
-      {/* Responsive Styles */}
+      <Content style={{ padding: "0 48px" }}>
+        <div style={{ minHeight: 280, padding: 24, color: "white" }}>
+          <Hero />
+          <ServiceAdvertisement />
+          <Dashboard />
+          <FitureItem />
+          <WhyChooseUs />
+          <RoomData />
+          <HowItWorks />
+          <Testimonials />
+        </div>
+      </Content>
+
+      <Footers />
+
       <style>{`
         @media (max-width: 768px) {
           h1 {
@@ -177,7 +137,7 @@ const LandingPageLayout = () => {
           }
 
           .ant-menu-horizontal {
-            display: none; // Hide the navigation menu on mobile devices
+            display: none;
           }
 
           .ant-layout-header {
@@ -201,8 +161,8 @@ const LandingPageLayout = () => {
           }
         }
       `}</style>
-    </div>
+    </Layout>
   );
 };
 
-export default LandingPageLayout;
+export default MainLayout;
