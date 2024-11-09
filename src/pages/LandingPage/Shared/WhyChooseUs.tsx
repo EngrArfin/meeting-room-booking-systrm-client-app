@@ -19,8 +19,6 @@ const WhyChooseUs = () => {
         Why Choose Us?
       </Typography.Title>
       <div style={{ padding: "20px", textAlign: "center" }}>
-        {/* Why Choose Us Section */}
-
         <Row gutter={[16, 16]} justify="center">
           <Col xs={24} sm={12} md={8}>
             <Card

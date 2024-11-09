@@ -38,7 +38,6 @@ export const login = createAsyncThunk(
         throw new Error(data.message || "Failed to login");
       }
 
-      // Decode JWT to extract user data
       const decodedUser = jwtDecode<User>(data.token);
 
       return { user: decodedUser, token: data.token };
@@ -50,7 +49,6 @@ export const login = createAsyncThunk(
   }
 );
 
-// Async thunk to handle signup logic
 export const signup = createAsyncThunk(
   "auth/signup",
   async (
@@ -74,7 +72,6 @@ export const signup = createAsyncThunk(
         throw new Error(data.message || "Failed to signup");
       }
 
-      // Decode JWT to extract user data
       const decodedUser = jwtDecode<User>(data.token);
 
       return { user: decodedUser, token: data.token };
@@ -86,7 +83,6 @@ export const signup = createAsyncThunk(
   }
 );
 
-// Creating the auth slice
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -104,7 +100,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Handle login states
       .addCase(login.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -121,7 +116,6 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
-      // Handle signup states
       .addCase(signup.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -141,7 +135,6 @@ const authSlice = createSlice({
   },
 });
 
-// Exporting actions and selectors
 export const { setUser, setToken, logout } = authSlice.actions;
 export const selectAuth = (state: RootState) => state.auth;
 export default authSlice.reducer;

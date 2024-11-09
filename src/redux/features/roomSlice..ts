@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// Define the shape of the Room type
 interface Room {
-  image: string[]; // Change this to an array of strings
+  image: string[];
   roomName: string;
   roomNo: string;
   floorNo: string;
@@ -11,12 +10,10 @@ interface Room {
   amenities: string[];
 }
 
-// Define the initial state type
 interface RoomState {
   selectedRoom: Room | null;
 }
 
-// Initial state
 const initialState: RoomState = {
   selectedRoom: null,
 };

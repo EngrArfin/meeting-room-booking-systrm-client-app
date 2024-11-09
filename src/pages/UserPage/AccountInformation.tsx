@@ -13,7 +13,6 @@ type UserInfo = {
 };
 
 const AccountInformation: React.FC = () => {
-  // Initial state for user information
   const [userInfo, setUserInfo] = useState<UserInfo>({
     firstName: "Md Samsel",
     lastName: "Arfin",
@@ -23,7 +22,6 @@ const AccountInformation: React.FC = () => {
     fax: "",
   });
 
-  // Handle form submission
   const handleFinish = (values: UserInfo) => {
     console.log("Updated Information: ", values);
     setUserInfo(values);

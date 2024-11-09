@@ -2,7 +2,6 @@ import { Avatar, Dropdown, Menu, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 
-// Menu for authenticated users (non-admin)
 const userMenu = (
   <Menu>
     <Menu.Item key="1">
@@ -14,7 +13,6 @@ const userMenu = (
   </Menu>
 );
 
-// Menu for admins
 const adminMenu = (
   <Menu>
     <Menu.Item key="1">
@@ -27,12 +25,11 @@ const adminMenu = (
 );
 
 const UserDropdown = () => {
-  const [isAuthenticated /*  setIsAuthenticated */] = useState(true); // Simulate user authentication status
-  const [isAdmin /* setIsAdmin */] = useState(false); // Simulate admin status
+  const [isAuthenticated /*  setIsAuthenticated */] = useState(true);
+  const [isAdmin /* setIsAdmin */] = useState(false);
 
   return (
     <div>
-      {/* Display user avatar and dropdown if authenticated */}
       {isAuthenticated ? (
         <Dropdown overlay={isAdmin ? adminMenu : userMenu} trigger={["click"]}>
           <Avatar
@@ -41,9 +38,8 @@ const UserDropdown = () => {
           />
         </Dropdown>
       ) : (
-        // Display Login/Register button if not authenticated
         <Button type="primary" href="/login">
-          Login/Register
+          Login/Signup
         </Button>
       )}
     </div>

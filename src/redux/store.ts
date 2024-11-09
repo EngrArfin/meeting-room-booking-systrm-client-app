@@ -1,4 +1,3 @@
-// redux/store.ts
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./features/authSlice";
 import roomReducer from "./features/roomSlice.";

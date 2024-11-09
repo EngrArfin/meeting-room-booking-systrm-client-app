@@ -30,10 +30,8 @@ interface BookingFormValues {
 const RoomBooking: React.FC = () => {
   const [defaultBooking, setDefaultBooking] = useState(false);
 
-  // Handle form submission
   const handleFinish = (values: BookingFormValues) => {
     console.log("Form values: ", values);
-    // Handle form submission logic, e.g., sending data to backend
   };
 
   return (

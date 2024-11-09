@@ -13,7 +13,6 @@ type UserInfo = {
 };
 
 const UserProfile: React.FC = () => {
-  // Initial state for user information
   const [userInfo, setUserInfo] = useState<UserInfo>({
     firstName: "Md Samsel",
     lastName: "Arfin",
@@ -23,7 +22,6 @@ const UserProfile: React.FC = () => {
     fax: "",
   });
 
-  // Handle form submission with explicit type
   const handleFinish = (values: UserInfo) => {
     console.log("Form values: ", values);
     setUserInfo(values);

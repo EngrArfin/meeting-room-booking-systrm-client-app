@@ -54,7 +54,6 @@ export const baseApi = createApi({
       }),
     }),
 
-    // Users endpoints
     getUsers: builder.query({
       query: () => ({
         url: "/users",

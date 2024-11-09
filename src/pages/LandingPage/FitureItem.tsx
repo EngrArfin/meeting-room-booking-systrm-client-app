@@ -15,9 +15,6 @@ import photo12 from "../../assets/images/card12.jpg";
 const FitureItem = () => {
   return (
     <div>
-      {/* <Divider style={{ borderColor: "#7cb305", color: "yellow" }}>
-        Product Fiture
-      </Divider> */}
       <Typography.Title
         style={{
           color: "yellow",

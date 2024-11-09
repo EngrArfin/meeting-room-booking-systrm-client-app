@@ -16,7 +16,6 @@ interface Booking {
 const BookingHistory = () => {
   const [bookings, setBookings] = useState<Booking[]>([]);
 
-  // Mock data - in a real app, this would come from an API
   useEffect(() => {
     const mockBookings: Booking[] = [
       {

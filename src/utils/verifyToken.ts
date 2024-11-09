@@ -5,7 +5,6 @@ export const verifyToken = (token: string | undefined | null) => {
     throw new Error("Invalid token specified: must be a string");
   }
 
-  // Decoding the token payload
   const decodedToken = jwtDecode(token);
   return decodedToken;
 };

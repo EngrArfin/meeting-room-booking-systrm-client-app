@@ -1,7 +1,6 @@
 import { Row, Col, Card, Typography } from "antd";
 import aboutBacground from "../../assets/images/room1.jpg";
 
-// Background image URL (you can replace it with your own image URL)
 /* const backgroundImageUrl =
   "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=1400&q=80";
  */
@@ -22,10 +21,9 @@ const About = () => {
         padding: "20px",
       }}
     >
-      {/* About Us Section */}
       <div
         style={{
-          backgroundColor: "rgba(0, 0, 0, 0.6)", // Semi-transparent overlay
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
           padding: "40px",
           borderRadius: "8px",
           maxWidth: "800px",
@@ -42,7 +40,6 @@ const About = () => {
         </Typography.Paragraph>
       </div>
 
-      {/* Services Section */}
       <div
         style={{
           marginTop: "40px",

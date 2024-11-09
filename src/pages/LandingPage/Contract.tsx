@@ -5,7 +5,6 @@ import contractBacground from "../../assets/images/sider2.jpg";
 const Contract = () => {
   /*  const onFinish = (values) => {
     console.log("Form Submitted: ", values);
-    // Handle form submission (e.g., send to backend or email)
   }; */
 
   return (
@@ -24,14 +23,13 @@ const Contract = () => {
     >
       <div
         style={{
-          backgroundColor: "rgba(0, 0, 0, 0.7)", // Semi-transparent overlay
+          backgroundColor: "rgba(0, 0, 0, 0.7)",
           padding: "40px",
           borderRadius: "8px",
           maxWidth: "800px",
           width: "100%",
         }}
       >
-        {/* Contact Title */}
         <Typography.Title
           level={1}
           style={{ color: "#fff", fontSize: "36px", textAlign: "center" }}
@@ -45,7 +43,6 @@ const Contract = () => {
           here to help!
         </Typography.Paragraph>
 
-        {/* Contact Form */}
         <Form
           name="contact-form"
           layout="vertical"

@@ -30,7 +30,6 @@ const Login = () => {
         })
       );
 
-      // Role-based redirection
       if (result.data.role === "admin") {
         navigate("/admin");
       } else {
