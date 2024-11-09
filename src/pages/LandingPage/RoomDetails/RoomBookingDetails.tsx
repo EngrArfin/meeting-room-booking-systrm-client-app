@@ -6,13 +6,13 @@ import { RootState } from "../../../redux/store";
 
 const RoomBookingDetails: React.FC = () => {
   const navigate = useNavigate();
-  const room = useSelector((state: RootState) => state.room.selectedRoom); // Assuming room is stored here
+  const room = useSelector((state: RootState) => state.room.selectedRoom);
 
   const handleBookNow = () => {
     if (room) {
       navigate("/booking");
     } else {
-      navigate("/"); // Redirect to home page if no room is selected
+      navigate("/");
     }
   };
 

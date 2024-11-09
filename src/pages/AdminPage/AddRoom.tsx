@@ -18,14 +18,12 @@ const { Option } = Select;
 const AddRoomBooking: React.FC = () => {
   const [form] = Form.useForm();
 
-  // On form submit success
   const onFinish = () => {
     console.log("Received values from form: ");
     message.success("Room booking successfully added!");
-    form.resetFields(); // Reset form fields after submission
+    form.resetFields();
   };
 
-  // On form submit failure
   const onFinishFailed = () => {
     console.error("Failed:");
     message.error("Failed to add room booking. Please check your input.");
@@ -39,7 +37,6 @@ const AddRoomBooking: React.FC = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      {/* Meeting Room Name */}
       <Form.Item
         label="Meeting Room Name"
         name="roomName"
@@ -50,7 +47,6 @@ const AddRoomBooking: React.FC = () => {
         <Input placeholder="Enter meeting room name" />
       </Form.Item>
 
-      {/* Room Description */}
       <Form.Item
         label="Room Description"
         name="roomDescription"
@@ -59,7 +55,6 @@ const AddRoomBooking: React.FC = () => {
         <TextArea rows={4} placeholder="Enter room description" />
       </Form.Item>
 
-      {/* Price per Hour */}
       <Form.Item
         label="Price per Hour"
         name="pricePerHour"
@@ -73,7 +68,6 @@ const AddRoomBooking: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Room Capacity */}
       <Form.Item
         label="Room Capacity"
         name="capacity"
@@ -86,7 +80,6 @@ const AddRoomBooking: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Room Category */}
       <Form.Item
         label="Room Category"
         name="category"
@@ -99,7 +92,6 @@ const AddRoomBooking: React.FC = () => {
         </Select>
       </Form.Item>
 
-      {/* Booking Date */}
       <Form.Item
         label="Booking Date"
         name="bookingDate"
@@ -111,7 +103,6 @@ const AddRoomBooking: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Booking Time */}
       <Form.Item
         label="Booking Time"
         name="bookingTime"
@@ -123,7 +114,6 @@ const AddRoomBooking: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Room Image */}
       <Form.Item
         label="Room Image"
         name="image"
@@ -140,7 +130,6 @@ const AddRoomBooking: React.FC = () => {
         </Upload>
       </Form.Item>
 
-      {/* Submit Button */}
       <Form.Item>
         <Button type="primary" htmlType="submit" block>
           Add Room Booking

@@ -69,7 +69,7 @@ const router = createBrowserRouter([
     element: <RoomBookingPage />,
   },
 
-  /* Admin Dashboard */
+  /* Admin */
   {
     path: "/admin",
     element: <AdminLayout></AdminLayout>,
@@ -106,7 +106,7 @@ const router = createBrowserRouter([
     ],
   },
 
-  /* User Dashboard */
+  /* User */
   {
     path: "/user",
     element: <UserLayout></UserLayout>,

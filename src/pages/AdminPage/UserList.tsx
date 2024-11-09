@@ -7,7 +7,7 @@ interface DataType {
   name: string;
   email: string;
   role: string;
-  picture?: string; // Assuming there's a picture URL, modify as per your backend data
+  picture?: string;
 }
 
 const UserList = () => {
@@ -24,7 +24,7 @@ const UserList = () => {
     setInitLoading(true);
     fetch("http://localhost:5000/admin/users", {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`, // Include the token for authentication
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     })
       .then((res) => res.json())
@@ -41,7 +41,6 @@ const UserList = () => {
 
   const onLoadMore = () => {
     setLoading(true);
-    // Assuming pagination or more data fetching logic here
     setLoading(false);
   };
 

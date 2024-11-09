@@ -59,7 +59,6 @@ const Footers = () => {
               </Text>
             </Col>
 
-            {/* Column 2: Quick Links */}
             <Col xs={24} sm={12} md={8}>
               <Title level={4} style={{ color: "#fff", fontSize: "1.1rem" }}>
                 Quick Links
@@ -81,7 +80,6 @@ const Footers = () => {
               </Space>
             </Col>
 
-            {/* Column 3: Social Media Links */}
             <Col xs={24} sm={12} md={8}>
               <Title level={4} style={{ color: "#fff", fontSize: "1.1rem" }}>
                 Follow Us

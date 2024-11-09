@@ -28,20 +28,17 @@ const items = [
 const MainLayout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, token } = useSelector((state: RootState) => state.auth); // Removed token since it's not used
+  const { user, token } = useSelector((state: RootState) => state.auth);
   console.log(user);
   if (!token) {
     navigate("/login");
   }
   const handleLogout = () => {
-    // Dispatch the logout action to clear Redux state
     dispatch(logout());
 
-    // Clear data from localStorage
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 
-    // Optionally, redirect to login or home
     navigate("/login");
   };
 

@@ -2,7 +2,6 @@ import { Card, Col, Row, Table, Tag } from "antd";
 import { Footer } from "antd/es/layout/layout";
 
 const RoomManagement = () => {
-  // Sample data for room management table
   const roomColumns = [
     {
       title: "Room Name",
@@ -75,7 +74,6 @@ const RoomManagement = () => {
           </Card>
         </Col>
       </Row>
-      {/* Footer */}
       <Footer style={{ textAlign: "center" }}>
         Meeting Room Booking System Admin Dashboard ©2024 Created by Samsel
         Arfin

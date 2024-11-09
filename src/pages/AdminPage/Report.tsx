@@ -17,10 +17,8 @@ import moment from "moment";
 const { Header, Content } = Layout;
 
 const Report = () => {
-  // State for selected date
   const [selectedDate, setSelectedDate] = useState<moment.Moment | null>(null);
 
-  // Mock data for meeting room bookings and usage
   const summaryData = {
     totalRooms: 50,
     totalBookings: 120,
@@ -78,7 +76,6 @@ const Report = () => {
     },
   ];
 
-  // Chart configuration for bookings over time
   const bookingConfig = {
     data: bookingData,
     xField: "date",
@@ -91,7 +88,6 @@ const Report = () => {
     },
   };
 
-  // Column configuration for Room Tables
   const roomColumns = [
     { title: "Room Name", dataIndex: "roomName", key: "roomName" },
     { title: "Capacity", dataIndex: "capacity", key: "capacity" },
@@ -128,14 +124,12 @@ const Report = () => {
         <h2>Meeting Room Report</h2>
       </Header>
       <Content style={{ margin: "24px" }}>
-        {/* Date Picker */}
         <DatePicker
           style={{ marginBottom: "16px" }}
           onChange={(date) => setSelectedDate(date)}
           value={selectedDate}
         />
 
-        {/* Summary Cards */}
         <Row gutter={16}>
           <Col span={6}>
             <Card>
@@ -169,12 +163,10 @@ const Report = () => {
           </Col>
         </Row>
 
-        {/* Bookings Trend Chart */}
         <Card title="Bookings Over Time" style={{ marginTop: "24px" }}>
           <Line {...bookingConfig} />
         </Card>
 
-        {/* Room Usage and Revenue Table */}
         <Card title="Room Usage & Revenue" style={{ marginTop: "24px" }}>
           <Table
             columns={roomColumns}
@@ -183,7 +175,6 @@ const Report = () => {
           />
         </Card>
 
-        {/* Low Availability Rooms Table */}
         <Card title="Low Availability Rooms" style={{ marginTop: "24px" }}>
           <Table
             columns={availabilityColumns}
@@ -192,7 +183,6 @@ const Report = () => {
           />
         </Card>
 
-        {/* Customer Feedback */}
         <Card title="Customer Feedback" style={{ marginTop: "24px" }}>
           <List
             dataSource={reviews}

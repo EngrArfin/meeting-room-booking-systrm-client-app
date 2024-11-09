@@ -23,8 +23,6 @@ const HowItWorks = () => {
         How It Works
       </Typography.Title>
       <div style={{ padding: "20px", textAlign: "center" }}>
-        {/* How It Works Section */}
-
         <Row gutter={[16, 16]} justify="center">
           <Col xs={24} sm={8}>
             <Card

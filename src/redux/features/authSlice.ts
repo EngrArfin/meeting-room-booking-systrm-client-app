@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../styles"; // Assuming `User` type is defined in your styles file
-import { jwtDecode } from "jwt-decode"; // Corrected import statement, no braces for default export
-import { RootState } from "../store"; // Assuming you have RootState defined in your store file
+import { User } from "../../styles";
+import { jwtDecode } from "jwt-decode";
+import { RootState } from "../store";
 
-// Define the structure for the state
 interface AuthState {
   [x: string]: any;
   user: User | null;
@@ -13,7 +12,6 @@ interface AuthState {
   error: string | null;
 }
 
-// Initial state for authentication slice
 const initialState: AuthState = {
   user: null,
   token: null,
@@ -21,7 +19,6 @@ const initialState: AuthState = {
   error: null,
 };
 
-// Async thunk to handle login logic
 export const login = createAsyncThunk(
   "auth/login",
   async (

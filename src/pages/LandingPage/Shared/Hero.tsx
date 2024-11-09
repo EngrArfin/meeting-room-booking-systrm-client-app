@@ -20,7 +20,6 @@ const Hero = () => {
         textAlign: "center",
       }}
     >
-      {/* Carousel Wrapper */}
       <div
         style={{
           position: "absolute",
@@ -31,19 +30,18 @@ const Hero = () => {
           overflow: "hidden",
         }}
       >
-        {/* Carousel Images */}
         <div
           style={{
             display: "flex",
-            width: "500%", // 5 images, so 500% width
-            animation: "slide-left 20s linear infinite", // Animation applied
+            width: "500%",
+            animation: "slide-left 20s linear infinite",
           }}
         >
           <img
             src={img1}
             alt="Slide 1"
             style={{
-              width: "20%", // Each image takes up 20% of the width
+              width: "20%",
               height: "100%",
               objectFit: "cover",
             }}
@@ -87,14 +85,13 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Hero Content */}
       <div style={{ position: "relative", zIndex: 1, padding: "0 20px" }}>
         <h1
           style={{
             color: "yellow",
             fontSize: "3rem",
             marginBottom: "0.5rem",
-            whiteSpace: "nowrap", // Prevents text from wrapping on small screens
+            whiteSpace: "nowrap",
           }}
         >
           Book Your Ideal Meeting Room with Ease
@@ -124,7 +121,6 @@ const Hero = () => {
         </NavLink>
       </div>
 
-      {/* Inline Keyframes for Animation */}
       <style>{`
         @keyframes slide-left {
           0% {

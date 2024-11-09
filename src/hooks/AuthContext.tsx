@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setToken } from "../redux/features/authSlice"; // Import necessary actions
+import { setToken } from "../redux/features/authSlice";
 
 interface AuthContextProps {
   isAuthenticated: boolean;
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
-      dispatch(setToken(token)); // Properly dispatch actions based on your requirements
+      dispatch(setToken(token));
     }
   }, [dispatch]);
 

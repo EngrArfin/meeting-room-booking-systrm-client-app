@@ -34,7 +34,7 @@ const UserLayout = () => {
       label: "Dashboard",
       children: [
         { key: "Admin", label: <NavLink to="/admin">Admin</NavLink> },
-        { key: "User", label: <NavLink to="/user/profile">Profile</NavLink> }, // Linking directly to user profile
+        { key: "User", label: <NavLink to="/user/profile">Profile</NavLink> },
       ],
     },
   ];
@@ -63,7 +63,6 @@ const UserLayout = () => {
         boxShadow: "0px 4px 15px rgba(0.3, 1, 0, 0.3)",
       }}
     >
-      {/* Main Header */}
       <Header
         style={{
           display: "flex",
@@ -78,7 +77,6 @@ const UserLayout = () => {
           Mechanical Keyboard
         </Title>
 
-        {/* Navbar */}
         <Menu
           theme="dark"
           mode="horizontal"
@@ -86,8 +84,6 @@ const UserLayout = () => {
           items={menuItems}
           style={{ flex: 1 }}
         />
-
-        {/* Cart and User Menu */}
         <div style={{ display: "flex", alignItems: "center" }}>
           {user ? (
             <Dropdown
@@ -125,12 +121,11 @@ const UserLayout = () => {
       </Header>
 
       <Layout>
-        {/* Sidebar for Profile Navigation */}
         <Sider
           style={{
             position: "fixed",
             height: "100vh",
-            top: 64, // Adjust for main header
+            top: 64,
             zIndex: 1,
           }}
         >
@@ -212,10 +207,9 @@ const UserLayout = () => {
         </Sider>
 
         <Layout style={{ marginLeft: 200, paddingTop: 64 }}>
-          {/* Main Content */}
           <Content style={{ margin: "64px 16px 0" }}>
             <div style={{ padding: 24, minHeight: 360 }}>
-              <Outlet /> {/* Nested content will be rendered here */}
+              <Outlet />
             </div>
           </Content>
         </Layout>

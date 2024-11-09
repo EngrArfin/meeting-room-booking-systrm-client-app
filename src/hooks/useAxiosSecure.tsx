@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-/* import { clearToken } from "../redux/features/authSlice"; // Uncomment this if you're using clearToken action
+/* import { clearToken } from "../redux/features/authSlice";
  */ import { RootState } from "../redux/store";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000/api", // Change to your actual base URL
+  baseURL: "http://localhost:5000/api",
 });
 
 const useAxiosSecure = () => {

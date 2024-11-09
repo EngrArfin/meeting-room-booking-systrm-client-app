@@ -6,8 +6,8 @@ interface Room {
   id: number;
   name: string;
   capacity: number;
-  availability: string; // "Available", "Booked"
-  category: string; // Meeting, Conference, Event
+  availability: string;
+  category: string;
   description: string;
 }
 

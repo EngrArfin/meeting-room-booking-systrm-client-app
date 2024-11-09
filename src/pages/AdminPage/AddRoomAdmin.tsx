@@ -19,7 +19,6 @@ const { Option } = Select;
 const AddRoomAdmin: React.FC = () => {
   const [form] = Form.useForm();
 
-  // On form submit success
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onFinish = (values: any) => {
     console.log("Received values from form: ", values);
@@ -27,7 +26,6 @@ const AddRoomAdmin: React.FC = () => {
     form.resetFields(); // Reset form fields after submission
   };
 
-  // On form submit failure
   const onFinishFailed = (errorInfo: any) => {
     console.error("Failed:", errorInfo);
     message.error("Failed to add room. Please check your input.");
@@ -41,7 +39,6 @@ const AddRoomAdmin: React.FC = () => {
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      {/* Meeting Room Name */}
       <Form.Item
         label="Meeting Room Name"
         name="roomName"
@@ -50,7 +47,6 @@ const AddRoomAdmin: React.FC = () => {
         <Input placeholder="Enter meeting room name" />
       </Form.Item>
 
-      {/* Room Description */}
       <Form.Item
         label="Room Description"
         name="roomDescription"
@@ -59,7 +55,6 @@ const AddRoomAdmin: React.FC = () => {
         <TextArea rows={4} placeholder="Enter room description" />
       </Form.Item>
 
-      {/* Price per Hour */}
       <Form.Item
         label="Price per Hour"
         name="pricePerHour"
@@ -73,7 +68,6 @@ const AddRoomAdmin: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Room Capacity */}
       <Form.Item
         label="Room Capacity"
         name="capacity"
@@ -86,7 +80,6 @@ const AddRoomAdmin: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Room Category */}
       <Form.Item
         label="Room Category"
         name="category"
@@ -99,7 +92,6 @@ const AddRoomAdmin: React.FC = () => {
         </Select>
       </Form.Item>
 
-      {/* Available Booking Date */}
       <Form.Item
         label="Available Booking Date"
         name="availableDate"
@@ -116,7 +108,6 @@ const AddRoomAdmin: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Available Time Slot */}
       <Form.Item
         label="Available Time Slot"
         name="availableTime"
@@ -130,7 +121,6 @@ const AddRoomAdmin: React.FC = () => {
         />
       </Form.Item>
 
-      {/* Room Image */}
       <Form.Item
         label="Room Image"
         name="roomImage"
@@ -141,13 +131,12 @@ const AddRoomAdmin: React.FC = () => {
           name="roomImage"
           listType="picture"
           maxCount={1}
-          beforeUpload={() => false} // Prevent auto-uploading the file
+          beforeUpload={() => false}
         >
           <Button icon={<UploadOutlined />}>Upload Room Image</Button>
         </Upload>
       </Form.Item>
 
-      {/* Submit Button */}
       <Form.Item>
         <Button type="primary" htmlType="submit" block>
           Add Room

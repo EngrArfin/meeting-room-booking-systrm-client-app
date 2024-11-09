@@ -9,8 +9,8 @@ import {
   ProductOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useAppDispatch } from "../../redux/hooks"; // Import your custom dispatch hook
-import { logout } from "../../redux/features/authSlice"; // Import the logout action
+import { useAppDispatch } from "../../redux/hooks";
+import { logout } from "../../redux/features/authSlice";
 
 const { Header, Content, Sider } = Layout;
 
@@ -58,8 +58,8 @@ const AdminLayout = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout()); // Dispatch logout action
-    navigate("/login"); // Redirect to login page
+    dispatch(logout());
+    navigate("/login");
   };
 
   return (
@@ -73,7 +73,7 @@ const AdminLayout = () => {
         onCollapse={(collapsed, type) => {
           console.log(collapsed, type);
         }}
-        style={{ position: "fixed", height: "100vh", overflow: "auto" }} // Keep it fixed
+        style={{ position: "fixed", height: "100vh", overflow: "auto" }}
       >
         <div
           style={{
@@ -91,9 +91,8 @@ const AdminLayout = () => {
           mode="inline"
           defaultSelectedKeys={["4"]}
           items={items}
-          style={{ marginTop: "64px" }} // Adjust for the fixed header height
+          style={{ marginTop: "64px" }}
         />
-        {/* Add Logout Button Below Menu */}
         <div
           style={{
             padding: "10px",
@@ -113,13 +112,9 @@ const AdminLayout = () => {
         </div>
       </Sider>
       <Layout style={{ marginLeft: 200 }}>
-        {" "}
-        {/* Maintain margin for fixed sidebar */}
         <Header
           style={{ zIndex: 1, width: "100%", padding: 0, position: "fixed" }}
         >
-          {" "}
-          {/* Fixed header */}
           <div
             style={{
               padding: "0 24px",
@@ -128,15 +123,13 @@ const AdminLayout = () => {
               height: "64px",
               display: "flex",
               alignItems: "center",
-              justifyContent: "space-between", // To space out elements
+              justifyContent: "space-between",
             }}
           >
             <h1 style={{ margin: 0 }}>Admin </h1>
           </div>
         </Header>
         <Content style={{ margin: "64px 16px 0" }}>
-          {" "}
-          {/* Adjust content margin */}
           <div style={{ padding: 24, minHeight: 360 }}>
             <Outlet />
           </div>

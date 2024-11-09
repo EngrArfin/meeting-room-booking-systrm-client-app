@@ -3,7 +3,6 @@ import { Card, Typography } from "antd";
 const ServiceAdvertisement = () => {
   return (
     <div style={{ overflow: "hidden", whiteSpace: "nowrap", width: "100%" }}>
-      {/* Internal styles for right-to-left animation */}
       <style>{`
         @keyframes scroll {
           0% {

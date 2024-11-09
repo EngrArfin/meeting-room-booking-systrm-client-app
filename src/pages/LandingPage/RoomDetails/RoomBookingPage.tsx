@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // Import useParams for accessing URL parameters
+import { useParams } from "react-router-dom";
 import {
   DatePicker,
   Button,
@@ -29,7 +29,6 @@ const RoomBookingPage: React.FC = () => {
 
   useEffect(() => {
     if (selectedDate) {
-      // Dummy data for available slots
       setAvailableSlots(["09:00 AM", "11:00 AM", "02:00 PM", "04:00 PM"]);
     }
   }, [selectedDate]);
@@ -53,7 +52,6 @@ const RoomBookingPage: React.FC = () => {
     }
 
     if (!selectedDate) {
-      // Handle the case where selectedDate is null
       alert("Please select a date before proceeding with the booking.");
       return;
     }

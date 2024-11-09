@@ -1,4 +1,3 @@
-// src/hooks/useAuthState.ts
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { logout } from "../redux/features/authSlice";

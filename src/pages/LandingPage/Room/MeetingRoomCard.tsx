@@ -1,5 +1,5 @@
 import { Button, Card, Row, Col } from "antd";
-import { IRoom } from "../../../styles"; // Make sure this interface matches your room data
+import { IRoom } from "../../../styles";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setRoom } from "../../../redux/features/roomSlice.";
@@ -37,7 +37,7 @@ const MeetingRoomCard: React.FC<{ room: IRoom }> = ({ room }) => {
             cover={
               <img
                 alt="Room"
-                src={room.image[0]} // Accessing the first image from the array
+                src={room.image[0]}
                 style={{
                   height: "190px",
                   width: "100%",
