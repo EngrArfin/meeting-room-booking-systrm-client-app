@@ -64,7 +64,7 @@ In order for this project to work, make sure to define the following environment
   NEXTAUTH_SECRET=
 ```
 
-# run project
+5. **Run Project:**
 
 ```bash
    npm run dev
