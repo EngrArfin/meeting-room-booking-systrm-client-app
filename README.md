@@ -32,20 +32,37 @@ This platform provides a seamless and intuitive experience for users booking mee
 - **Axios**: For API requests to the backend.
 - **Tailwind CSS**: For styling the application.
 
-cd mechanical-keyboard-shop-client-app
+### Installation process
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone (https://github.com/EngrArfin/meeting-room-booking-systrm-client-app)
+   cd e-commerce-web-nextjs-client-app
+   ```
+
+   # install
+
+   ```bash
+   npm install
+   ```
+
+   # Create .env file and give your info...
+
+   In order for this project to work, make sure to define the following environment variables in your .env file:
 
 ```bash
-  npm i
+  NEXT_PUBLIC_MONGODB_URI=
+  NEXTAUTH_URL=${process.env.NEXT_PUBLIC_API_URL}
+  GITHUB_ID=
+  GITHUB_SECRET=
+  GOOGLE_ID=
+  GOOGLE_SECRET=
+  NEXTAUTH_SECRET=
 ```
 
-code .
+# run project
 
 ```bash
-  npm i react-router-dom react-hook-form antd
+   npm run dev
 ```
-
-```bash
-  npm run dev
-```
-
-## Run Project
