@@ -39,18 +39,18 @@ This platform provides a seamless and intuitive experience for users booking mee
    ```bash
     https://github.com/EngrArfin/meeting-room-booking-systrm-client-app
    ```
-   
+   2. **Copy past and enter :**
      ```bash
    cd e-commerce-web-nextjs-client-app
    ```
-
-    **install
+3. **install:**
+   
 
    ```bash
    npm install
    ```
 
-   **Create .env file and give your info...
+  4. **Create .env file and give your info...
 
 In order for this project to work, make sure to define the following environment variables in your .env file:
 
