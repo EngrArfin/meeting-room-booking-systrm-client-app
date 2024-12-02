@@ -1,8 +1,11 @@
+/* eslint-disable react-refresh/only-export-components */
+// src/hooks/AuthContext.ts
 import { createContext, useContext, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setToken } from "../redux/features/authSlice";
 
-interface AuthContextProps {
+// Export the AuthContextProps interface
+export interface AuthContextProps {
   isAuthenticated: boolean;
   login: (token: string) => void;
   logout: () => void;
@@ -43,6 +46,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+// Use the AuthContextProps type in the useAuth hook
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

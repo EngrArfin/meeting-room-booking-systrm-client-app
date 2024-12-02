@@ -1,16 +1,18 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Card, Carousel, Col, Row } from "antd";
 import { RootState } from "../../../redux/store";
+import { IRoom } from "../../../styles";
 
 const RoomBookingDetails: React.FC = () => {
   const navigate = useNavigate();
-  const room = useSelector((state: RootState) => state.room.selectedRoom);
+  const room = useSelector(
+    (state: RootState) => state.room.selectedRoom as IRoom
+  );
 
   const handleBookNow = () => {
-    if (room) {
-      navigate("/booking");
+    if (room?._id) {
+      navigate(`/booking/${room?._id}`);
     } else {
       navigate("/");
     }
@@ -29,7 +31,7 @@ const RoomBookingDetails: React.FC = () => {
       <Row gutter={16}>
         <Col xs={24} md={12}>
           <Carousel autoplay>
-            {room.image && room.image.length > 0 ? (
+            {room.image?.length > 0 ? (
               room.image.map((image, index) => (
                 <div key={index}>
                   <img

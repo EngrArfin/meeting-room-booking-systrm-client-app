@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
 import { Avatar, Button, List, Skeleton, message } from "antd";
+import { Link } from "react-router-dom";
+import { useGetUsersQuery } from "../../redux/api/api";
+import Item from "antd/es/list/Item";
 
 interface DataType {
   _id: string;
@@ -11,71 +12,42 @@ interface DataType {
 }
 
 const UserList = () => {
-  const [initLoading, setInitLoading] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [, setData] = useState<DataType[]>([]);
-  const [list, setList] = useState<DataType[]>([]);
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  const fetchUsers = () => {
-    setInitLoading(true);
-    fetch("http://localhost:5000/admin/users", {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setInitLoading(false);
-        setData(res.data);
-        setList(res.data);
-      })
-      .catch((_error) => {
-        message.error("Failed to load users");
-        setInitLoading(false);
-      });
-  };
-
-  const onLoadMore = () => {
-    setLoading(true);
-    setLoading(false);
-  };
-
-  const loadMore =
-    !initLoading && !loading ? (
-      <div
-        style={{
-          textAlign: "center",
-          marginTop: 12,
-          height: 32,
-          lineHeight: "32px",
-        }}
-      >
-        <Button onClick={onLoadMore}>See more..</Button>
-      </div>
-    ) : null;
+  const { data, error, isLoading, isFetching } = useGetUsersQuery(undefined);
+  const users: DataType[] = data?.data || [];
+  if (error) {
+    message.error("Failed to load users");
+  }
 
   return (
     <div>
+      <h1>Total User: {Item.length}</h1>
       <List
         className="demo-loadmore-list"
-        loading={initLoading}
+        loading={isLoading || isFetching}
         itemLayout="horizontal"
-        loadMore={loadMore}
-        dataSource={list}
-        renderItem={(item) => (
+        dataSource={users}
+        renderItem={(item: DataType) => (
           <List.Item
             actions={[
-              <a key="list-loadmore-edit">Edit</a>,
-              <a key="list-loadmore-delete">Delete</a>,
+              <Link to={`/admin/edit-user/${item._id}`} key="edit">
+                Edit
+              </Link>,
+              <Button
+                type="link"
+                key="delete"
+                onClick={() => message.success(`User ${item._id} deleted`)}
+              >
+                Delete
+              </Button>,
             ]}
           >
-            <Skeleton avatar title={false} loading={initLoading} active>
+            <Skeleton avatar title={false} loading={isLoading} active>
               <List.Item.Meta
-                avatar={<Avatar src={item.picture} />}
+                avatar={
+                  <Avatar
+                    src={item.picture || "https://via.placeholder.com/150"}
+                  />
+                }
                 title={<a href="#">{item.name}</a>}
                 description={item.email}
               />

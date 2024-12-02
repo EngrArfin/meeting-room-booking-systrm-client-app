@@ -1,4 +1,3 @@
-import React from "react";
 import { Divider, Layout, Menu, MenuProps, Button } from "antd";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
@@ -9,8 +8,9 @@ import {
   ProductOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks"; // Import the hook for state access
 import { logout } from "../../redux/features/authSlice";
+import { useEffect } from "react";
 
 const { Header, Content, Sider } = Layout;
 
@@ -23,7 +23,7 @@ const items: MenuProps["items"] = [
     key: "Products",
     label: (
       <NavLink to="/admin/listproduct-admin">
-        {<ProductOutlined />} Products
+        {<ProductOutlined />} Room Display
       </NavLink>
     ),
   },
@@ -35,7 +35,7 @@ const items: MenuProps["items"] = [
     key: "Add Product",
     label: (
       <NavLink to="/admin/addproduct-admin">
-        {<AppstoreAddOutlined />}Add Product
+        {<AppstoreAddOutlined />}Add Room
       </NavLink>
     ),
   },
@@ -43,24 +43,38 @@ const items: MenuProps["items"] = [
     key: "Product Management",
     label: (
       <NavLink to="/admin/management">
-        {<EditOutlined />}Product Management
+        {<EditOutlined />}Room Management
       </NavLink>
     ),
   },
   {
     key: "Report",
-    label: <NavLink to="/admin/report">{<BarChartOutlined />}Reports</NavLink>,
+    label: (
+      <NavLink to="/admin/report">
+        {<BarChartOutlined />}Business Reports
+      </NavLink>
+    ),
   },
 ];
 
 const AdminLayout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const user = useAppSelector((store) => store.auth.user);
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
   };
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      if (!user) {
+        dispatch({ type: "auth/setUser", payload: parsedUser });
+      }
+    }
+  }, [dispatch, user]);
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -84,7 +98,7 @@ const AdminLayout = () => {
             alignItems: "center",
           }}
         >
-          <h1 style={{ margin: 0 }}>Admin Dashboard </h1>
+          <h1 style={{ margin: 0 }}>Admin Dashboard: {user?.name}</h1>
         </div>
         <Menu
           theme="dark"
@@ -126,7 +140,7 @@ const AdminLayout = () => {
               justifyContent: "space-between",
             }}
           >
-            <h1 style={{ margin: 0 }}>Admin </h1>
+            <h1 style={{ margin: 0 }}>Admin</h1>
           </div>
         </Header>
         <Content style={{ margin: "64px 16px 0" }}>

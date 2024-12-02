@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "date": "2024-10-01",
+    "totalAmount": 200.5,
+    "status": "Completed",
+    "rooms": [
+      {
+        "name": "Conference Room A",
+        "date": "2024-10-02",
+        "time": "10:00 AM",
+        "duration": "2 hours"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "date": "2024-10-05",
+    "totalAmount": 150.75,
+    "status": "Pending",
+    "rooms": [
+      {
+        "name": "Meeting Room B",
+        "date": "2024-10-06",
+        "time": "02:00 PM",
+        "duration": "3 hours"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "date": "2024-10-10",
+    "totalAmount": 350.0,
+    "status": "Completed",
+    "rooms": [
+      {
+        "name": "Boardroom C",
+        "date": "2024-10-11",
+        "time": "09:00 AM",
+        "duration": "4 hours"
+      }
+    ]
+  },
+  {
+    "id": "4",
+    "date": "2024-10-12",
+    "totalAmount": 120.0,
+    "status": "Cancelled",
+    "rooms": [
+      {
+        "name": "Seminar Room D",
+        "date": "2024-10-14",
+        "time": "11:00 AM",
+        "duration": "1 hour"
+      }
+    ]
+  },
+  {
+    "id": "5",
+    "date": "2024-10-15",
+    "totalAmount": 500.0,
+    "status": "Completed",
+    "rooms": [
+      {
+        "name": "Training Room E",
+        "date": "2024-10-16",
+        "time": "08:30 AM",
+        "duration": "5 hours"
+      }
+    ]
+  }
+]

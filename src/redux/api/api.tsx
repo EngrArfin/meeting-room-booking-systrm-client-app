@@ -40,7 +40,7 @@ export const baseApi = createApi({
 
     signup: builder.mutation({
       query: (userData) => ({
-        url: "/auth/signup",
+        url: "/auth/signu",
         method: "POST",
         body: userData,
       }),
@@ -67,6 +67,13 @@ export const baseApi = createApi({
         method: "GET",
       }),
     }),
+
+    getUserBookings: builder.query({
+      query: () => ({
+        url: "/userbookings",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -78,4 +85,5 @@ export const {
   useLoginMutation,
   useGetUsersQuery,
   useGetUserByIdQuery,
+  useGetUserBookingsQuery,
 } = baseApi;

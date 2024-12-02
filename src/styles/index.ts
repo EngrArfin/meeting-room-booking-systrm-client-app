@@ -21,6 +21,7 @@ export interface IRoom {
   capacity: number;
   pricePerSlot: number;
   amenities: string[];
+  availability: string;
   booking: Array<{
     bookingId: string;
     userId: string;
@@ -29,4 +30,20 @@ export interface IRoom {
     status: string;
     purpose: string;
   }>;
+}
+
+export interface Room {
+  _id: string;
+  name: string;
+  date: string;
+  time: string;
+  duration: string;
+}
+
+export interface UserBooking {
+  id: string;
+  date: string;
+  totalAmount: number;
+  status: string;
+  rooms: Room[];
 }

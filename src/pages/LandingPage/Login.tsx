@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// src/pages/login/Login.tsx
 import { Form, Input, Button, Typography, Row, Col, Card } from "antd";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
@@ -22,18 +23,12 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(result.data));
       const user = verifyToken(result.accessToken);
       console.log(user);
-      dispatch(
-        setUser({
-          ...result,
-          user,
-          token: result.accessToken,
-        })
-      );
+      dispatch(setUser({ ...result, user, token: result.accessToken }));
 
       if (result.data.role === "admin") {
         navigate("/admin");
       } else {
-        navigate("/");
+        navigate("/user");
       }
     } catch (err) {
       console.error("Login Failed:", err);

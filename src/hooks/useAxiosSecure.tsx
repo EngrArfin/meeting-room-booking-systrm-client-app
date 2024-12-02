@@ -12,7 +12,7 @@ const axiosSecure = axios.create({
 const useAxiosSecure = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const token = useSelector((state: RootState) => state.auth.token);
+  const token = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const requestInterceptor = axiosSecure.interceptors.request.use(

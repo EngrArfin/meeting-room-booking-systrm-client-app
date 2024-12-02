@@ -10,7 +10,7 @@ import {
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { UserOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { logout } from "../../redux/features/authSlice";
 
 const { Header, Content, Sider } = Layout;
@@ -19,21 +19,41 @@ const { Title } = Typography;
 const UserLayout = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  // Accessing user data from Redux store
   const user = useAppSelector((store) => store.auth.user);
-  console.log(user);
+
   const [menuVisible, setMenuVisible] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    localStorage.removeItem("user");
+    navigate("/");
   };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      if (!user) {
+        dispatch({ type: "auth/setUser", payload: parsedUser });
+      }
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   const menuItems: MenuProps["items"] = [
     {
       key: "Dashboard",
       label: "Dashboard",
       children: [
-        { key: "Admin", label: <NavLink to="/admin">Admin</NavLink> },
+        {
+          key: "Admin",
+          label: <NavLink to="/admin">Admin {user?.phone}</NavLink>,
+        },
         { key: "User", label: <NavLink to="/user/profile">Profile</NavLink> },
       ],
     },
@@ -103,7 +123,7 @@ const UserLayout = () => {
                 <Avatar size={40} icon={<UserOutlined />} />
                 <div style={{ marginLeft: 10, color: "white" }}>
                   <Title level={5} style={{ margin: 0, color: "white" }}>
-                    {user.user.name || "Use"}
+                    {user?.name || "User"} {/* Display user's name */}
                   </Title>
                 </div>
               </div>
@@ -132,11 +152,10 @@ const UserLayout = () => {
           <div style={{ padding: "20px", textAlign: "center" }}>
             <Avatar size={80} icon={<UserOutlined />} />
             <Title level={4} style={{ color: "white", marginTop: "10px" }}>
-              {user?.user?.name || "User"}
+              {user?.name || "User"} {/* Display user's name */}
             </Title>
             <p style={{ color: "white" }}>
-              {user?.user.email || "user@example.com"}
-              {user?.user.role || ""}
+              {user?.email || "arfin@gmail.com"} {/* Display user's email */}
             </p>
           </div>
 
@@ -146,10 +165,18 @@ const UserLayout = () => {
             defaultSelectedKeys={["Profile"]}
             items={[
               {
-                key: "Dahboard",
+                key: "Dashboard",
                 label: (
                   <NavLink to="/user">
                     <UserOutlined /> Dashboard
+                  </NavLink>
+                ),
+              },
+              {
+                key: "Book Room",
+                label: (
+                  <NavLink to="/meeting-room">
+                    <UserOutlined /> Book Room
                   </NavLink>
                 ),
               },
@@ -161,7 +188,6 @@ const UserLayout = () => {
                   </NavLink>
                 ),
               },
-
               {
                 key: "User Info",
                 label: (
@@ -179,18 +205,10 @@ const UserLayout = () => {
                 ),
               },
               {
-                key: "Order HIstory",
+                key: "Order History",
                 label: (
                   <NavLink to="/user/history">
-                    <UserOutlined /> Order HIstory
-                  </NavLink>
-                ),
-              },
-              {
-                key: "Settings",
-                label: (
-                  <NavLink to="/user/settings">
-                    <UserOutlined /> Settings
+                    <UserOutlined /> Order History
                   </NavLink>
                 ),
               },

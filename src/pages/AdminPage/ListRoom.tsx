@@ -1,78 +1,46 @@
 import React from "react";
-import { Card, Col, Row, Button, Tag } from "antd";
+import { Card, Col, Row, Button, Tag, Spin } from "antd";
 import { Link } from "react-router-dom";
-
-interface Room {
-  id: number;
-  name: string;
-  capacity: number;
-  availability: string;
-  category: string;
-  description: string;
-}
-
-const rooms: Room[] = [
-  {
-    id: 1,
-    name: "Room A",
-    capacity: 10,
-    availability: "Available",
-    category: "Meeting",
-    description: "Ideal for small meetings and brainstorming sessions.",
-  },
-  {
-    id: 2,
-    name: "Room B",
-    capacity: 15,
-    availability: "Booked",
-    category: "Conference",
-    description: "Perfect for larger meetings and conferences.",
-  },
-  {
-    id: 3,
-    name: "Room C",
-    capacity: 20,
-    availability: "Available",
-    category: "Event",
-    description: "Spacious and suitable for events and workshops.",
-  },
-  {
-    id: 4,
-    name: "Room D",
-    capacity: 8,
-    availability: "Booked",
-    category: "Meeting",
-    description: "A cozy room for intimate discussions.",
-  },
-  {
-    id: 5,
-    name: "Room E",
-    capacity: 12,
-    availability: "Available",
-    category: "Event",
-    description: "Versatile room for events and seminars.",
-  },
-];
+import { IRoom } from "../../styles";
+import { useGetRoomsQuery } from "../../redux/api/api";
 
 const ListRoom: React.FC = () => {
+  const { data, isLoading } = useGetRoomsQuery(undefined);
+
+  // Show loading spinner while data is being fetched
+  if (isLoading) {
+    return (
+      <div style={{ textAlign: "center", padding: "50px" }}>
+        <Spin size="large" tip="Loading Rooms..." />
+      </div>
+    );
+  }
+
+  const rooms: IRoom[] = data?.data || []; // Fallback to empty array if data is undefined.
+
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Available Meeting Rooms</h1>
+      <h1>Admin - Meeting Room Management</h1>
       <Row gutter={16}>
-        {rooms.map((room) => (
-          <Col span={8} key={room.id}>
+        {rooms.map((room: IRoom) => (
+          <Col span={8} key={room._id}>
             <Card
-              title={room.name}
+              title={room.roomName}
               bordered={false}
               style={{
                 marginBottom: "16px",
                 backgroundColor:
-                  room.availability === "Available" ? "#e7f7f1" : "#fbe9e7",
+                  room.availability === "Available" ? "#e7f7f1" : "#fbe9e7", // Green if available, red if unavailable
               }}
               cover={
                 <img
-                  alt={room.name}
-                  src={`https://via.placeholder.com/500x300?text=${room.name}`}
+                  alt={room.roomName}
+                  height="200"
+                  src={
+                    Array.isArray(room.image) && room.image.length > 0
+                      ? room.image[0] // Use the first image in the array
+                      : "https://via.placeholder.com/300" // Fallback image
+                  }
                 />
               }
             >
@@ -80,10 +48,10 @@ const ListRoom: React.FC = () => {
                 <strong>Capacity:</strong> {room.capacity} people
               </p>
               <p>
-                <strong>Category:</strong> {room.category}
+                <strong>Category:</strong> Floor {room.floorNo}
               </p>
               <p>
-                <strong>Description:</strong> {room.description}
+                <strong>Price per Slot:</strong> ${room.pricePerSlot}
               </p>
               <p>
                 <strong>Status:</strong>{" "}
@@ -93,8 +61,10 @@ const ListRoom: React.FC = () => {
                   {room.availability}
                 </Tag>
               </p>
+
+              {/* Conditional button based on availability */}
               {room.availability === "Available" ? (
-                <Link to={`/book-room/${room.id}`}>
+                <Link to={`/book-room/${room._id}`}>
                   <Button type="primary">Book Room</Button>
                 </Link>
               ) : (
@@ -102,6 +72,13 @@ const ListRoom: React.FC = () => {
                   Room Booked
                 </Button>
               )}
+
+              {/* Edit button for admin to modify room details */}
+              <Link to={`/edit-room/${room._id}`}>
+                <Button type="default" style={{ marginTop: "10px" }}>
+                  Edit Room
+                </Button>
+              </Link>
             </Card>
           </Col>
         ))}

@@ -1,25 +1,53 @@
 import { Layout, Breadcrumb, Card, Row, Col, List, Typography } from "antd";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  useGetUserByIdQuery,
+  useGetUserBookingsQuery,
+} from "../../redux/api/api";
+import { setUser } from "../../redux/features/userSlice";
+import { RootState } from "../../redux/store";
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
 
+interface Booking {
+  bookingId: string;
+  date: string;
+  status: string;
+  total: string;
+  room: string;
+}
+
 const UserDashboard: React.FC = () => {
-  const bookingData = [
-    {
-      bookingId: "BOOK123456",
-      date: "2024-09-15",
-      status: "Confirmed",
-      total: "$120.00",
-      room: "Conference Room A",
-    },
-    {
-      bookingId: "BOOK123457",
-      date: "2024-09-12",
-      status: "Completed",
-      total: "$89.99",
-      room: "Meeting Room 1",
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const { user } = useSelector((state: RootState) => state.user);
+
+  const {
+    data: userData,
+    isLoading: userLoading,
+    error: userError,
+  } = useGetUserByIdQuery(user._id);
+  const {
+    data: bookingsData,
+    isLoading: bookingsLoading,
+    error: bookingsError,
+  } = useGetUserBookingsQuery(undefined);
+
+  useEffect(() => {
+    if (userData) {
+      dispatch(setUser(userData));
+    }
+  }, [userData, dispatch]);
+
+  if (userLoading || bookingsLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (userError || bookingsError) {
+    return <div>Error loading data</div>;
+  }
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -37,17 +65,19 @@ const UserDashboard: React.FC = () => {
               <Card title="Account Information" bordered={false}>
                 <List>
                   <List.Item>
-                    <Text strong>First Name:</Text> <Text>Md Samsel</Text>
+                    <Text strong>First Name:</Text>{" "}
+                    <Text>{userData?.firstName}</Text>
                   </List.Item>
                   <List.Item>
-                    <Text strong>Last Name:</Text> <Text>Arfin</Text>
+                    <Text strong>Last Name:</Text>{" "}
+                    <Text>{userData?.lastName}</Text>
                   </List.Item>
                   <List.Item>
-                    <Text strong>Email:</Text>{" "}
-                    <Text>arfin.cse.green.edu.bd@gmail.com</Text>
+                    <Text strong>Email:</Text> <Text>{userData?.email}</Text>
                   </List.Item>
                   <List.Item>
-                    <Text strong>Telephone:</Text> <Text>01952487468</Text>
+                    <Text strong>Telephone:</Text>{" "}
+                    <Text>{userData?.telephone}</Text>
                   </List.Item>
                 </List>
               </Card>
@@ -57,8 +87,8 @@ const UserDashboard: React.FC = () => {
               <Card title="Booking History" bordered={false}>
                 <List
                   itemLayout="horizontal"
-                  dataSource={bookingData}
-                  renderItem={(item) => (
+                  dataSource={bookingsData as Booking[]}
+                  renderItem={(item: Booking) => (
                     <List.Item>
                       <List.Item.Meta
                         title={`Booking ID: ${item.bookingId}`}

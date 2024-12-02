@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// src/pages/signup/Signup.tsx
 import { useState } from "react";
 import { useSignupMutation } from "../../redux/api/api";
 import { useAppDispatch } from "../../redux/hooks";
@@ -117,47 +117,22 @@ const Signup = () => {
                 borderColor: "transparent",
                 borderRadius: "8px",
                 fontSize: "16px",
-                fontWeight: "600",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background =
-                  "linear-gradient(135deg, #FF8A00, #FF6F61)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background =
-                  "linear-gradient(135deg, #FF6F61, #FF8A00)";
               }}
             >
               Sign Up
             </Button>
           </Form.Item>
-
-          {error && (
-            <Form.Item>
-              <Alert
-                message="Signup failed"
-                description={
-                  (error as any)?.data?.message || "An error occurred"
-                }
-                type="error"
-                showIcon
-              />
-            </Form.Item>
-          )}
         </Form>
-
-        <div style={{ marginTop: "16px", textAlign: "center" }}>
-          <Paragraph>
-            Already have an account?{" "}
-            <Link
-              to="/login"
-              style={{ color: "#1890ff", textDecoration: "underline" }}
-            >
-              Login
-            </Link>
-          </Paragraph>
-        </div>
+        {error && (
+          <Alert
+            message="Error!"
+            description="There was an error signing up!"
+            type="error"
+          />
+        )}
+        <Paragraph style={{ textAlign: "center", marginTop: "20px" }}>
+          Already have an account? <Link to="/login">Login</Link>
+        </Paragraph>
       </Card>
     </div>
   );

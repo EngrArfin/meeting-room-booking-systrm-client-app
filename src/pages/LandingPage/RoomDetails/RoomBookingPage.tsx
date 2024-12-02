@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -10,22 +11,47 @@ import {
   Card,
   Space,
   Divider,
+  message,
 } from "antd";
-import moment from "moment";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, AppDispatch } from "../../../redux/store";
-import { submitBooking } from "../../../redux/features/bookingSlice";
+import { Moment } from "moment";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
+import { useSendBookingMutation } from "../../../redux/api/api";
 
 const { Option } = Select;
 const { Title, Text } = Typography;
 
+interface BookingFormValues {
+  name: string;
+  email: string;
+  phone: string;
+  timeSlot: string;
+}
+
+interface User {
+  _id: string;
+  name: string;
+}
+
+interface Booking {
+  name: string;
+  email: string;
+  phone: string;
+  timeSlot: string;
+  date: string;
+  userId: string;
+  roomId: string;
+}
+
 const RoomBookingPage: React.FC = () => {
   const { roomId } = useParams<{ roomId: string }>();
-
-  const dispatch: AppDispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.auth) as {
+    user: User | null;
+  };
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [availableSlots, setAvailableSlots] = useState<string[]>([]);
+
+  const [sendBooking, { isLoading }] = useSendBookingMutation();
 
   useEffect(() => {
     if (selectedDate) {
@@ -34,36 +60,42 @@ const RoomBookingPage: React.FC = () => {
   }, [selectedDate]);
 
   const handleDateChange = (
-    _date: moment.Moment | null,
+    _date: Moment | null,
     dateString: string | string[]
   ) => {
-    setSelectedDate(Array.isArray(dateString) ? dateString[0] : dateString);
+    if (typeof dateString === "string") {
+      setSelectedDate(dateString || null);
+    } else {
+      setSelectedDate(null);
+    }
   };
 
-  const handleSubmit = (values: {
-    name: string;
-    email: string;
-    phone: string;
-    timeSlot: string;
-  }) => {
-    if (!roomId) {
-      alert("Room ID is missing. Please provide a valid Room ID in the URL.");
+  const handleSubmit = async (values: BookingFormValues) => {
+    if (!roomId || !selectedDate) {
+      message.error("Room or Date information is missing.");
       return;
     }
 
-    if (!selectedDate) {
-      alert("Please select a date before proceeding with the booking.");
+    if (!user) {
+      message.error("User is not authenticated.");
       return;
     }
 
-    const bookingData = {
+    const bookingData: Booking = {
       ...values,
       date: selectedDate,
-      userId: user?._id,
+      userId: user._id,
       roomId,
     };
 
-    dispatch(submitBooking(bookingData));
+    try {
+      await sendBooking(bookingData).unwrap();
+      message.success("Booking confirmed successfully!");
+    } catch (error: any) {
+      message.error(
+        error?.data?.message || "Failed to book the room. Try again later."
+      );
+    }
   };
 
   return (
@@ -74,18 +106,14 @@ const RoomBookingPage: React.FC = () => {
       >
         <Space direction="vertical" size="large" style={{ width: "100%" }}>
           <Title level={3} style={{ textAlign: "center", color: "#1890ff" }}>
-            Book Your Room (Room ID: {roomId})
+            Book Your Room
           </Title>
           <Divider />
-          <Form
-            layout="vertical"
-            onFinish={handleSubmit}
-            style={{ width: "100%" }}
-          >
+          <Form layout="vertical" onFinish={handleSubmit}>
             <Form.Item
               label={<Text strong>Select Date</Text>}
               name="date"
-              rules={[{ required: true, message: "Please select a date" }]}
+              rules={[{ required: true, message: "Please select a date!" }]}
             >
               <DatePicker
                 format="YYYY-MM-DD"
@@ -97,12 +125,11 @@ const RoomBookingPage: React.FC = () => {
             <Form.Item
               label={<Text strong>Available Time Slots</Text>}
               name="timeSlot"
-              rules={[{ required: true, message: "Please select a time" }]}
+              rules={[
+                { required: true, message: "Please select a time slot!" },
+              ]}
             >
-              <Select
-                placeholder="Select a time slot"
-                style={{ width: "100%" }}
-              >
+              <Select placeholder="Select a time slot">
                 {availableSlots.map((slot, index) => (
                   <Option key={index} value={slot}>
                     {slot}
@@ -114,31 +141,29 @@ const RoomBookingPage: React.FC = () => {
             <Form.Item
               label={<Text strong>Your Name</Text>}
               name="name"
-              initialValue={user?.name || ""}
-              rules={[{ required: true, message: "Please enter your name" }]}
+              rules={[{ required: true, message: "Please enter your name!" }]}
             >
-              <Input placeholder="Enter your full name" />
+              <Input />
             </Form.Item>
 
             <Form.Item
               label={<Text strong>Your Email</Text>}
               name="email"
-              initialValue={user?.email || ""}
-              rules={[{ required: true, message: "Please enter your email" }]}
+              rules={[{ required: true, message: "Please enter your email!" }]}
             >
-              <Input type="email" placeholder="Enter your email" />
+              <Input />
             </Form.Item>
 
             <Form.Item
               label={<Text strong>Your Phone</Text>}
               name="phone"
-              rules={[{ required: true, message: "Please enter your phone" }]}
+              rules={[{ required: true, message: "Please enter your phone!" }]}
             >
-              <Input type="phone" placeholder="Enter your phone number" />
+              <Input />
             </Form.Item>
 
-            <Button type="primary" htmlType="submit" block>
-              Confirm Booking
+            <Button type="primary" htmlType="submit" block loading={isLoading}>
+              {isLoading ? "Booking..." : "Confirm Booking"}
             </Button>
           </Form>
         </Space>

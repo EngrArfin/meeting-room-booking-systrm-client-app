@@ -15,7 +15,6 @@ import UserList from "../pages/AdminPage/UserList";
 import AddRoom from "../pages/AdminPage/AddRoom";
 import UserAddress from "../pages/UserPage/UserAddress";
 import AccountInformation from "../pages/UserPage/AccountInformation";
-import OrderHistory from "../pages/UserPage/BookingHistory";
 import ListProduct from "../pages/AdminPage/ListRoom";
 import AddProductAdmin from "../pages/AdminPage/AddRoomAdmin";
 import ProductManagemen from "../pages/AdminPage/RoomManagemen";
@@ -23,6 +22,8 @@ import Report from "../pages/AdminPage/Report";
 import AdminLayout from "../components/layout/AdminLayout";
 import UserLayout from "../components/layout/UserLayout";
 import RoomBookingPage from "../pages/LandingPage/RoomDetails/RoomBookingPage";
+
+import BookingHistoryData from "../pages/UserPage/BookingHistory/BookingHistoryData";
 
 const router = createBrowserRouter([
   {
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
     element: <UserDashboard />,
   },
   {
-    path: "/rooms/:roomId",
+    path: "booking/:roomId",
     element: <RoomBookingPage />,
   },
 
@@ -130,8 +131,12 @@ const router = createBrowserRouter([
       },
       {
         path: "history",
-        element: <OrderHistory />,
+        element: <BookingHistoryData />,
       },
+      /* {
+        path: "history",
+        element: <OrderHistory />,
+      }, */
     ],
   },
 ]);
