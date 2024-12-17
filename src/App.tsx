@@ -14,6 +14,8 @@ function App() {
     if (storedUser && storedToken) {
       try {
         const parsedUser = JSON.parse(storedUser) as User;
+
+        // Check for user data validity
         if (
           parsedUser &&
           parsedUser._id &&
@@ -25,10 +27,16 @@ function App() {
           dispatch(setUser(parsedUser));
           dispatch(setToken(storedToken));
         } else {
-          console.error("Invalid user data found in localStorage");
+          console.error(
+            "Invalid user data found in localStorage. Missing required properties."
+          );
+          localStorage.removeItem("user"); // Clean invalid data
+          localStorage.removeItem("token");
         }
       } catch (error) {
-        console.error("Failed to parse user data:", error);
+        console.error("Failed to parse user data from localStorage:", error);
+        localStorage.removeItem("user"); // Clean corrupted data
+        localStorage.removeItem("token");
       }
     }
   }, [dispatch]);

@@ -1,13 +1,15 @@
+# Meeting Room Booking System
 
-# Meeting Room Booking System 
+ound project “engrarfins-projects/meeting-room-booking-systrm-client-app”. Link to it? yes
+🔗 Linked to engrarfins-projects/meeting-room-booking-systrm-client-app (created .vercel and added it to .gitignore)
+🔍 Inspect: https://vercel.com/engrarfins-projects/meeting-room-booking-systrm-client-app/8r3oUycVGEX7EhCanAhK3qgEKL6E [9s]
+✅ Production: https://meeting-room-booking-systrm-client-momqgdsly.vercel.app [9s]
 
 ## Live Demo
 
 Live Link here: [Meeting Room Booking System](https://meetingroombooking.netlify.app)
 
-Backend Live Link: [Meeting Room Booking System]([https://meetingroombooking.netlify.app](https://meeting-room-booking-system-52iuvfxb6-engrarfins-projects.vercel.app/))
-
-
+Backend Live Link: [Meeting Room Booking System](<[https://meetingroombooking.netlify.app](https://meeting-room-booking-system-52iuvfxb6-engrarfins-projects.vercel.app/)>)
 
 ## Objective
 
@@ -27,6 +29,7 @@ This platform provides a seamless and intuitive experience for users booking mee
 ## Tech Stack
 
 ### Frontend:
+
 - **React**: Component-based user interface.
 - **Redux**: State management for handling user data and bookings.
 - **Axios**: For API requests to the backend.
@@ -39,18 +42,20 @@ This platform provides a seamless and intuitive experience for users booking mee
    ```bash
     https://github.com/EngrArfin/meeting-room-booking-systrm-client-app
    ```
+
    2. **Copy past and enter :**
-     ```bash
+
+   ```bash
    cd e-commerce-web-nextjs-client-app
    ```
-3. **install:**
-   
+
+2. **install:**
 
    ```bash
    npm install
    ```
 
-  4. **Create .env file and give your info...
+3. \*\*Create .env file and give your info...
 
 In order for this project to work, make sure to define the following environment variables in your .env file:
 

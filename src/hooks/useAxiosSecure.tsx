@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
  */ import { RootState } from "../redux/store";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://meeting-room-booking-system-peach.vercel.app/api",
 });
 
 const useAxiosSecure = () => {

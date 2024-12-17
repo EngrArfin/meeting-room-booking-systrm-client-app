@@ -1,12 +1,7 @@
 import { Layout, Breadcrumb, Card, Row, Col, List, Typography } from "antd";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  useGetUserByIdQuery,
-  useGetUserBookingsQuery,
-} from "../../redux/api/api";
-import { setUser } from "../../redux/features/userSlice";
-import { RootState } from "../../redux/store";
+/* import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/features/userSlice"; */
 
 const { Header, Content } = Layout;
 const { Text } = Typography;
@@ -20,64 +15,69 @@ interface Booking {
 }
 
 const UserDashboard: React.FC = () => {
-  const dispatch = useDispatch();
+  /* const dispatch = useDispatch(); */
 
-  const { user } = useSelector((state: RootState) => state.user);
+  // Static user data
+  const staticUserData = {
+    firstName: "Arfin",
+    lastName: "mia",
+    email: "arfin@gmail.com",
+    telephone: "123-456-7890",
+  };
 
-  const {
-    data: userData,
-    isLoading: userLoading,
-    error: userError,
-  } = useGetUserByIdQuery(user._id);
-  const {
-    data: bookingsData,
-    isLoading: bookingsLoading,
-    error: bookingsError,
-  } = useGetUserBookingsQuery(undefined);
+  // Static booking data
+  const staticBookingsData: Booking[] = [
+    {
+      bookingId: "B001",
+      date: "2024-12-01",
+      status: "Confirmed",
+      total: "$150",
+      room: "Deluxe Suite",
+    },
+    {
+      bookingId: "B002",
+      date: "2024-12-05",
+      status: "Pending",
+      total: "$200",
+      room: "Executive Room",
+    },
+  ];
 
-  useEffect(() => {
-    if (userData) {
-      dispatch(setUser(userData));
-    }
-  }, [userData, dispatch]);
-
-  if (userLoading || bookingsLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (userError || bookingsError) {
-    return <div>Error loading data</div>;
-  }
+  // Dispatch static data to Redux store
+  /*   useEffect(() => {
+    dispatch(setUser(staticUserData));
+  }, [dispatch]); */
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "50vh" }}>
       <Layout>
         <Header style={{ background: "#fff", padding: 0 }}>
-          <Breadcrumb style={{ padding: "16px 24px" }}>
+          <Breadcrumb style={{ padding: "5px 5px" }}>
             <Breadcrumb.Item>User</Breadcrumb.Item>
             <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
           </Breadcrumb>
         </Header>
 
-        <Content style={{ margin: "16px 24px", minHeight: 280 }}>
+        <Content style={{ margin: "5px 5px", minHeight: 100 }}>
           <Row gutter={16}>
             <Col span={8}>
               <Card title="Account Information" bordered={false}>
                 <List>
                   <List.Item>
                     <Text strong>First Name:</Text>{" "}
-                    <Text>{userData?.firstName}</Text>
+                    <Text>{staticUserData.firstName}</Text>
                   </List.Item>
                   <List.Item>
                     <Text strong>Last Name:</Text>{" "}
-                    <Text>{userData?.lastName}</Text>
+                    <Text>{staticUserData.lastName}</Text>
                   </List.Item>
                   <List.Item>
-                    <Text strong>Email:</Text> <Text>{userData?.email}</Text>
+                    <Text strong>Email:</Text>{" "}
+                    <Text>{staticUserData.email}</Text>
                   </List.Item>
                   <List.Item>
                     <Text strong>Telephone:</Text>{" "}
-                    <Text>{userData?.telephone}</Text>
+                    <Text>{staticUserData.telephone}</Text>
                   </List.Item>
                 </List>
               </Card>
@@ -87,7 +87,7 @@ const UserDashboard: React.FC = () => {
               <Card title="Booking History" bordered={false}>
                 <List
                   itemLayout="horizontal"
-                  dataSource={bookingsData as Booking[]}
+                  dataSource={staticBookingsData}
                   renderItem={(item: Booking) => (
                     <List.Item>
                       <List.Item.Meta

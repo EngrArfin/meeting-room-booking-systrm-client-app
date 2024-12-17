@@ -1,25 +1,48 @@
+import { useState, useEffect } from "react";
 import { Button } from "antd";
+
 import img1 from "../../../assets/images/header1.jpg";
 import img2 from "../../../assets/images/header2.jpg";
 import img3 from "../../../assets/images/header3.jpg";
 import img4 from "../../../assets/images/header4.jpg";
 import img5 from "../../../assets/images/header5.jpg";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+const images = [img1, img2, img3, img4, img5]; // Array of images
 
 const Hero = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate();
+
+  const handleBookNow = () => {
+    navigate("/meeting-room");
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length); // Cycle through images
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []);
+
   return (
     <div
       style={{
         position: "relative",
-        height: "60vh",
+        height: "80vh", // Increased height for better hero effect
         overflow: "hidden",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        color: "white",
         textAlign: "center",
+        backgroundImage: `url(${images[currentIndex]})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        transition: "background-image 1s ease-in-out", // Smooth transition
       }}
     >
+      {/* Gradient Overlay */}
       <div
         style={{
           position: "absolute",
@@ -27,71 +50,28 @@ const Hero = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          overflow: "hidden",
+          background:
+            "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8))",
+          zIndex: 1,
+        }}
+      ></div>
+
+      {/* Text Content */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 2,
+          color: "white",
+          padding: "0 20px",
+          maxWidth: "800px", // Restrict text width for better readability
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            width: "500%",
-            animation: "slide-left 20s linear infinite",
-          }}
-        >
-          <img
-            src={img1}
-            alt="Slide 1"
-            style={{
-              width: "20%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-          <img
-            src={img2}
-            alt="Slide 2"
-            style={{
-              width: "20%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-          <img
-            src={img3}
-            alt="Slide 3"
-            style={{
-              width: "20%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-          <img
-            src={img4}
-            alt="Slide 4"
-            style={{
-              width: "20%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-          <img
-            src={img5}
-            alt="Slide 5"
-            style={{
-              width: "20%",
-              height: "100%",
-              objectFit: "cover",
-            }}
-          />
-        </div>
-      </div>
-
-      <div style={{ position: "relative", zIndex: 1, padding: "0 20px" }}>
         <h1
           style={{
-            color: "yellow",
-            fontSize: "3rem",
-            marginBottom: "0.5rem",
-            whiteSpace: "nowrap",
+            fontSize: "3.5rem",
+            fontWeight: "bold",
+            marginBottom: "1rem",
+            textShadow: "2px 2px 8px rgba(0, 0, 0, 0.7)", // Enhance text visibility
           }}
         >
           Book Your Ideal Meeting Room with Ease
@@ -99,71 +79,68 @@ const Hero = () => {
         <p
           style={{
             fontSize: "1.5rem",
+            lineHeight: "1.8",
             marginBottom: "2rem",
-            whiteSpace: "nowrap",
+            textShadow: "2px 2px 8px rgba(0, 0, 0, 0.6)",
           }}
         >
           Efficient, hassle-free room booking for all your meeting needs.
         </p>
-        <NavLink to="/meeting-room">
-          <Button
-            type="primary"
-            size="large"
-            href="/booking-rooms"
-            style={{
-              backgroundColor: "yellow",
-              borderColor: "yellow",
-              color: "black",
-            }}
-          >
-            Book Now
-          </Button>
-        </NavLink>
+        <Button
+          onClick={handleBookNow}
+          type="primary"
+          size="large"
+          style={{
+            background: "#007BFF",
+            color: "#fff",
+            fontWeight: "bold",
+            padding: "0.8rem 2rem",
+            borderRadius: "8px",
+            backgroundColor: "#0077B6",
+            borderColor: "#0077B6",
+          }}
+        >
+          Book Now
+        </Button>
       </div>
 
+      {/* Styles for Responsiveness */}
       <style>{`
-        @keyframes slide-left {
-          0% {
-            transform: translateX(0);
+        @media (max-width: 1024px) {
+          h1 {
+            font-size: 2.5rem;
           }
-          100% {
-            transform: translateX(-50%);
+          p {
+            font-size: 1.2rem;
+          }
+          button {
+            font-size: 1rem;
           }
         }
 
         @media (max-width: 768px) {
-          div[style*="60vh"] {
-            height: 50vh;
-          }
-
           h1 {
             font-size: 2rem;
           }
-
           p {
-            font-size: 1.2rem;
-          }
-
-          button {
             font-size: 1rem;
+          }
+          button {
+            font-size: 0.9rem;
+            padding: 0.6rem 1.5rem;
           }
         }
 
         @media (max-width: 480px) {
-          div[style*="60vh"] {
-            height: 40vh;
-          }
-
           h1 {
-            font-size: 1rem;
+            font-size: 1.5rem;
           }
-
           p {
-            font-size: 0.8rem;
-          }
-
-          button {
             font-size: 0.9rem;
+          }
+          button {
+            font-size: 0.8rem;
+            padding: 0.5rem 1.2rem;
           }
         }
       `}</style>

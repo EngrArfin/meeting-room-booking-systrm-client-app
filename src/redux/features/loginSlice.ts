@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { User } from "../../styles";
 
+// Async thunk for login
 export const login = createAsyncThunk(
   "auth/login",
   async (
@@ -10,14 +12,15 @@ export const login = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await axios.post(
+        "https://meeting-room-booking-system-peach.vercel.app/api/auth/login",
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-      const data = await response.json();
-      if (!response.ok) {
+      // Axios automatically parses the response
+      const data = response.data;
+      if (response.status !== 200) {
         throw new Error(data.message || "Failed to login");
       }
 
@@ -45,15 +48,14 @@ const loginSlice = createSlice({
     builder
       .addCase(login.pending, (state) => {
         state.loading = true;
-        state.error = null; // Reset error when starting a new login attempt
+        state.error = null;
       })
       .addCase(login.fulfilled, (state) => {
         state.loading = false;
-        // You can store the user or token here if needed
       })
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload as string; // Ensures error is a string
+        state.error = action.payload as string;
       });
   },
 });

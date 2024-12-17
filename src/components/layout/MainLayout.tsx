@@ -1,4 +1,4 @@
-import { Layout, Button, Menu } from "antd";
+import { Layout, Button, Menu, Dropdown, Avatar } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../redux/features/authSlice";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -12,6 +12,11 @@ import RoomData from "../../pages/LandingPage/Room/RoomData";
 import FitureItem from "../../pages/LandingPage/FitureItem";
 import Footers from "../../pages/LandingPage/Shared/Footer";
 import { RootState } from "../../redux/store";
+import { MenuOutlined } from "@ant-design/icons";
+import BookableLand from "../../pages/LandingPage/Shared/BookableLand";
+import Landing from "../../pages/LandingPage/Shared/QualityPlan";
+import BlogPage from "../../pages/LandingPage/Blogs/BlogPage";
+import Sponcher from "../../pages/LandingPage/Shared/Sponcher";
 
 const { Header, Content } = Layout;
 
@@ -19,169 +24,192 @@ const items = [
   { key: "Home", label: <NavLink to="/">Home</NavLink> },
   {
     key: "Meeting Rooms",
-    label: <NavLink to="/meeting-room">Meeting Rooms</NavLink>,
+    label: <NavLink to="/meeting-room">Room Booking</NavLink>,
   },
   { key: "About", label: <NavLink to="/about">About</NavLink> },
-  { key: "Contact", label: <NavLink to="/contract">Contact</NavLink> },
+  { key: "Contact", label: <NavLink to="/contact">Contact</NavLink> },
+  { key: "Contact", label: <NavLink to="/contact">Blog</NavLink> },
 ];
 
 const MainLayout = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, token } = useSelector((state: RootState) => state.auth);
-  console.log(user);
-  if (!token) {
-    navigate("/login");
-  }
+  const navigate = useNavigate();
+  const { user } = useSelector((state: RootState) => state.auth);
+
   const handleLogout = () => {
     dispatch(logout());
-
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-
     navigate("/login");
   };
 
+  const menu = (
+    <Menu>
+      {items.map((item) => (
+        <Menu.Item key={item.key}>{item.label}</Menu.Item>
+      ))}
+    </Menu>
+  );
+
+  const userMenu = (
+    <Menu>
+      <Menu.Item key="profile">
+        <NavLink to="/user">Profile</NavLink>
+      </Menu.Item>
+      <Menu.Item key="logout" onClick={handleLogout}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
-    <Layout
-      style={{
-        borderRadius: "8px",
-        background: "#000033",
-        color: "#ffffff",
-      }}
-    >
+    <Layout>
       <Header
         style={{
           display: "flex",
-          alignItems: "center",
           justifyContent: "space-between",
+          alignItems: "center",
           background: "#000033",
-          color: "#ffffff",
-          padding: "0 20px",
+          padding: "10px 20px",
+          boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           <img
-            style={{ height: 30, width: 30, marginRight: 10 }}
             src={logo}
             alt="Logo"
+            style={{
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+            }}
           />
-          <h1 style={{ margin: 0, fontSize: "1.5rem" }}>
-            <NavLink
-              to="/"
-              style={{
-                color: "#ffffff",
-                textDecoration: "none",
-                whiteSpace: "nowrap",
-              }}
-            >
-              Meeting Room Book
-            </NavLink>
-          </h1>
+          <NavLink
+            to="/"
+            style={{
+              color: "#FFFFFF", // White
+              fontSize: "1.5rem",
+              textDecoration: "none",
+              fontWeight: "bold",
+            }}
+          >
+            Meeting Room Book
+          </NavLink>
         </div>
 
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          items={items}
-          style={{ flex: 1, justifyContent: "center", background: "#000033" }}
-        />
+        {/* Desktop Menu */}
+        <div className="desktop-menu">
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            items={items}
+            style={{
+              background: "transparent",
+              borderBottom: "none",
+              color: "#FFFFFF",
+            }}
+          />
+        </div>
 
-        <div>
+        {/* User Section */}
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
           {user ? (
-            <>
-              <span>
-                <span>
-                  <Button
-                    type="primary"
-                    style={{
-                      backgroundColor: "yellow",
-                      borderColor: "yellow",
-                      color: "black",
-                    }}
-                  >
-                    <NavLink to="/user">User Prodile</NavLink>
-                  </Button>
-                </span>
-                {user?.user?.role}
-              </span>
-
-              <span> {user?.email}</span>
-              <button
+            <Dropdown overlay={userMenu} trigger={["click"]}>
+              <Avatar
                 style={{
-                  backgroundColor: "yellow",
-                  borderColor: "yellow",
-                  color: "black",
+                  backgroundColor: "#007BFF",
+                  color: "#fff",
+                  border: "2px solid yellow",
+                  cursor: "pointer",
                 }}
-                onClick={handleLogout}
               >
-                Logout
-              </button>
-            </>
+                {user.name ? user.name[0] : "U"}{" "}
+                {/* Display first letter of user's name */}
+              </Avatar>
+            </Dropdown>
           ) : (
             <Button
               type="primary"
               style={{
-                backgroundColor: "yellow",
+                background: "#007BFF",
+                color: "#fff",
                 borderColor: "yellow",
-                color: "black",
               }}
             >
               <NavLink to="/login">Login</NavLink>
             </Button>
           )}
         </div>
-      </Header>
-      <hr />
 
-      <Content style={{ padding: "0 48px" }}>
-        <div style={{ minHeight: 280, padding: 24, color: "white" }}>
-          <Hero />
-          <ServiceAdvertisement />
-          <FitureItem />
-          <WhyChooseUs />
-          <RoomData />
-          <HowItWorks />
-          <Testimonials />
-        </div>
+        <Dropdown
+          overlay={menu}
+          trigger={["click"]}
+          className="mobile-menu"
+          placement="bottomRight"
+        >
+          <Button
+            icon={<MenuOutlined />}
+            style={{
+              background: "none",
+              border: "none",
+              color: "#FFFFFF",
+            }}
+          />
+        </Dropdown>
+      </Header>
+
+      <Content
+        style={{
+          padding: "20px",
+          background: "#F9FAFB", // Light gray
+          minHeight: "calc(100vh - 150px)",
+        }}
+      >
+        <Hero />
+        <ServiceAdvertisement />
+        <FitureItem />
+        <Landing />
+        <BookableLand />
+        <HowItWorks />
+        <RoomData />
+        <WhyChooseUs />
+        <BlogPage />
+        <Testimonials />
+        <Sponcher />
       </Content>
 
+      {/* Footer Section */}
       <Footers />
 
+      {/* Custom Styles */}
       <style>{`
+        .desktop-menu {
+          display: flex;
+        }
+        .mobile-menu {
+          display: none;
+        }
+
         @media (max-width: 768px) {
-          h1 {
-            font-size: 1.2rem;
-          }
-
-          img {
-            height: 30px;
-            width: 30px;
-          }
-
-          .ant-menu-horizontal {
+          .desktop-menu {
             display: none;
           }
-
-          .ant-layout-header {
-            flex-direction: column;
-            padding: 0 10px;
-          }
-
-          .ant-avatar {
-            margin-left: 0.5rem;
+          .mobile-menu {
+            display: block;
           }
         }
 
-        @media (max-width: 480px) {
-          .ant-btn {
-            font-size: 0.8rem;
-            padding: 0.5rem 1rem;
-          }
+        .ant-menu-item:hover {
+          background-color: #3B82F6; /* Subtle blue hover */
+        }
 
-          .ant-avatar {
-            margin-left: 0.25rem;
-          }
+        .ant-btn-primary {
+          background: #3B82F6; /* Primary button blue */
+          border: none;
+        }
+
+        .ant-btn-primary:hover {
+          background: #2563EB; /* Darker blue on hover */
         }
       `}</style>
     </Layout>

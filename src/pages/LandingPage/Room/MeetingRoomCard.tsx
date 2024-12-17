@@ -1,8 +1,9 @@
+// MeetingRoomCard.tsx
 import { Button, Card, Row, Col } from "antd";
-import { IRoom } from "../../../styles";
+import { IRoom } from "../../../styles"; // Ensure IRoom is properly typed
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setRoom } from "../../../redux/features/roomSlice.";
+import { setRoom } from "../../../redux/features/roomSlice";
 
 const { Meta } = Card;
 
@@ -18,7 +19,6 @@ const MeetingRoomCard: React.FC<{ room: IRoom }> = ({ room }) => {
   return (
     <div
       style={{
-        background: "#000033",
         color: "#ffffff",
         borderRadius: "8px",
         padding: "10px",
@@ -50,7 +50,7 @@ const MeetingRoomCard: React.FC<{ room: IRoom }> = ({ room }) => {
               title={room.roomName}
               style={{ fontWeight: "bold", color: "#444" }}
             />
-            <div style={{ marginTop: "10px", color: "#666" }}>
+            <div style={{ marginTop: "10px", color: "#000000" }}>
               <p style={{ margin: "5px 0" }}>Capacity: {room.capacity}</p>
               <p style={{ margin: "5px 0" }}>
                 Price: {room.pricePerSlot} TK (1-Slot)
@@ -61,15 +61,11 @@ const MeetingRoomCard: React.FC<{ room: IRoom }> = ({ room }) => {
               type="primary"
               style={{
                 width: "100%",
-                background: "#ffd700",
-                color: "#000033",
-                border: "none",
-                marginTop: "15px",
-                borderRadius: "5px",
-                fontWeight: "bold",
+                backgroundColor: "#0077B6",
+                borderColor: "#0077B6",
               }}
             >
-              Details
+              Room Details
             </Button>
           </Card>
         </Col>

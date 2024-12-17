@@ -7,7 +7,6 @@ import { RootState } from "../store";
 interface Booking {
   name: string;
   email: string;
-  phone: string;
   timeSlot: string;
   date: string;
   roomId: string;
@@ -21,14 +20,14 @@ interface BookingState {
   error: string | null;
 }
 
-// Define the initial state for the slice
+// Initial state
 const initialState: BookingState = {
   bookingDetails: null,
   loading: false,
   error: null,
 };
 
-// Define the async thunk for submitting booking
+// Async thunk for submitting booking
 export const submitBooking = createAsyncThunk<
   Booking,
   Booking,
@@ -36,13 +35,11 @@ export const submitBooking = createAsyncThunk<
 >("bookings/submitBooking", async (bookingData, { rejectWithValue }) => {
   try {
     const response = await axios.post(
-      "http://localhost:5000/api/bookings",
+      "https://meeting-room-booking-system-peach.vercel.app/api/bookings",
       bookingData,
-      {
-        headers: { "Content-Type": "application/json" },
-      }
+      { headers: { "Content-Type": "application/json" } }
     );
-    return response.data; // Returning data directly as Booking type
+    return response.data;
   } catch (error: any) {
     return rejectWithValue(
       error.response?.data?.message || "Booking failed. Something went wrong."
@@ -50,12 +47,11 @@ export const submitBooking = createAsyncThunk<
   }
 });
 
-// Create the slice for bookings
+// Slice
 const bookingSlice = createSlice({
   name: "bookings",
   initialState,
   reducers: {
-    // Action to reset the booking state
     resetBookingState: (state) => {
       state.bookingDetails = null;
       state.loading = false;
@@ -64,21 +60,18 @@ const bookingSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Handle pending state for submitBooking
       .addCase(submitBooking.pending, (state) => {
         state.loading = true;
-        state.error = null; // Clear error on new request
+        state.error = null;
       })
-      // Handle fulfilled state for submitBooking
       .addCase(
         submitBooking.fulfilled,
         (state, action: PayloadAction<Booking>) => {
           state.loading = false;
-          state.bookingDetails = action.payload; // Save the booking details
-          state.error = null; // Clear any errors
+          state.bookingDetails = action.payload;
+          state.error = null;
         }
       )
-      // Handle rejected state for submitBooking
       .addCase(submitBooking.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || "An unknown error occurred.";
@@ -86,14 +79,6 @@ const bookingSlice = createSlice({
   },
 });
 
-// Export actions
 export const { resetBookingState } = bookingSlice.actions;
-
-// Selector to get the booking state from the store
 export const selectBooking = (state: RootState) => state.bookings;
-
-// Export the reducer for the slice
 export default bookingSlice.reducer;
-
-// Exporting the BookingState type
-export type { BookingState };

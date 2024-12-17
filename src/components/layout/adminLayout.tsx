@@ -1,57 +1,133 @@
 import { Divider, Layout, Menu, MenuProps, Button } from "antd";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import {
-  AppstoreAddOutlined,
-  BarChartOutlined,
-  DashboardOutlined,
-  EditOutlined,
-  ProductOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"; // Import the hook for state access
 import { logout } from "../../redux/features/authSlice";
 import { useEffect } from "react";
+import {
+  MdDashboardCustomize,
+  MdDomainAdd,
+  MdOutlineManageHistory,
+} from "react-icons/md";
+import { CgDisplayGrid } from "react-icons/cg";
+import { HiDocumentReport } from "react-icons/hi";
 
 const { Header, Content, Sider } = Layout;
 
 const items: MenuProps["items"] = [
   {
     key: "Dashboard",
-    label: <NavLink to="/admin">{<DashboardOutlined />}Dashboard</NavLink>,
+    label: (
+      <NavLink
+        to="/admin"
+        style={{
+          fontSize: 18,
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "8px 12px",
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+        }}
+      >
+        <MdDashboardCustomize style={{ fontSize: "20px" }} />
+        Dashboard
+      </NavLink>
+    ),
   },
   {
     key: "Products",
     label: (
-      <NavLink to="/admin/listproduct-admin">
-        {<ProductOutlined />} Room Display
+      <NavLink
+        to="/admin/listproduct-admin"
+        style={{
+          fontSize: 18,
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "8px 12px",
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+        }}
+      >
+        <CgDisplayGrid /> Room Display
       </NavLink>
     ),
   },
   {
     key: "Users",
-    label: <NavLink to="/admin/users">{<UserOutlined />}Users</NavLink>,
+    label: (
+      <NavLink
+        to="/admin/users"
+        style={{
+          fontSize: 18,
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "8px 12px",
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+        }}
+      >
+        {<UserOutlined />}Users
+      </NavLink>
+    ),
   },
   {
     key: "Add Product",
     label: (
-      <NavLink to="/admin/addproduct-admin">
-        {<AppstoreAddOutlined />}Add Room
+      <NavLink
+        to="/admin/addproduct-admin"
+        style={{
+          fontSize: 18,
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "8px 12px",
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+        }}
+      >
+        <MdDomainAdd />
+        Add Room
       </NavLink>
     ),
   },
   {
     key: "Product Management",
     label: (
-      <NavLink to="/admin/management">
-        {<EditOutlined />}Room Management
+      <NavLink
+        to="/admin/management"
+        style={{
+          fontSize: 18,
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "8px 12px",
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+        }}
+      >
+        <MdOutlineManageHistory /> Room Management
       </NavLink>
     ),
   },
   {
     key: "Report",
     label: (
-      <NavLink to="/admin/report">
-        {<BarChartOutlined />}Business Reports
+      <NavLink
+        to="/admin/report"
+        style={{
+          fontSize: 18,
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "8px 12px",
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+        }}
+      >
+        <HiDocumentReport /> Business Reports
       </NavLink>
     ),
   },
@@ -66,6 +142,7 @@ const AdminLayout = () => {
     dispatch(logout());
     navigate("/");
   };
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -79,14 +156,9 @@ const AdminLayout = () => {
   return (
     <Layout style={{ height: "100vh" }}>
       <Sider
+        width={260} // Increased the width of the sidebar
         breakpoint="lg"
         collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
         style={{ position: "fixed", height: "100vh", overflow: "auto" }}
       >
         <div
@@ -96,14 +168,15 @@ const AdminLayout = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            fontSize: "1.2rem",
           }}
         >
-          <h1 style={{ margin: 0 }}>Admin Dashboard: {user?.name}</h1>
+          <h1 style={{ margin: 0 }}>Admin {user?.name}</h1>
         </div>
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["4"]}
+          defaultSelectedKeys={["Dashboard"]}
           items={items}
           style={{ marginTop: "64px" }}
         />
@@ -119,13 +192,20 @@ const AdminLayout = () => {
             type="primary"
             danger
             onClick={handleLogout}
-            style={{ width: "100%" }}
+            style={{
+              width: "100%",
+              height: "48px", // Increased height
+              fontSize: "16px", // Industry-standard text size
+              fontWeight: "bold", // Ensuring better emphasis
+            }}
           >
             Logout
           </Button>
         </div>
       </Sider>
-      <Layout style={{ marginLeft: 200 }}>
+      <Layout style={{ marginLeft: 260 }}>
+        {" "}
+        {/* Sidebar width matches here */}
         <Header
           style={{ zIndex: 1, width: "100%", padding: 0, position: "fixed" }}
         >

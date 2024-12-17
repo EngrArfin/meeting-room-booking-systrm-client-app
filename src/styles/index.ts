@@ -13,6 +13,8 @@ export interface User {
 }
 
 export interface IRoom {
+  timeSlot: any;
+  date: any;
   _id: string;
   image: string[];
   roomName: string;

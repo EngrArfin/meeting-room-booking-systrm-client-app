@@ -1,0 +1,42 @@
+.carousel-page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  gap: 2rem;
+}
+
+.carousel-slider {
+  flex: 1;
+  max-width: 60%;
+}
+
+.carousel-text {
+  flex: 1;
+  max-width: 40%;
+  text-align: left;
+}
+
+.carousel-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.carousel-text p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+}
+
+.carousel-slide {
+  position: relative;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}

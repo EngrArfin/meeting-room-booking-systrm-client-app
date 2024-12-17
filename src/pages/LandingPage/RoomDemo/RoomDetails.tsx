@@ -1,0 +1,136 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Button, Card, Carousel, Col, Row } from "antd";
+import { RootState } from "../../../redux/store";
+import { IRoom } from "../../../styles";
+
+import { setRoom } from "../../../redux/features/roomSlice";
+
+const RoomDetails: React.FC = () => {
+  const navigate = useNavigate();
+  const room = useSelector(
+    (state: RootState) => state.room.selectedRoom as IRoom
+  );
+
+  /*  const handleBookNow = () => {
+    if (room?._id) {
+      navigate(`/booking/${room?._id}`);
+    } else {
+      navigate("/");
+    }
+  }; */
+
+  const dispatch = useDispatch();
+
+  const handleDetailsClick = () => {
+    dispatch(setRoom(room));
+    navigate("/room-confirm");
+  };
+
+  if (!room) {
+    return (
+      <div style={{ textAlign: "center", marginTop: "50px" }}>
+        <h2>Room details not found. Redirecting to home page...</h2>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "20px" }}>
+      <Row gutter={16}>
+        <Col xs={24} md={12}>
+          <Carousel autoplay>
+            {room.image?.length > 0 ? (
+              room.image.map((image, index) => (
+                <div key={index}>
+                  <img
+                    alt={`Room Image ${index + 1}`}
+                    src={image}
+                    style={{
+                      width: "100%",
+                      height: "400px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+              ))
+            ) : (
+              <div>
+                <img
+                  alt="No Room Image"
+                  src="https://via.placeholder.com/800x400.png?text=No+Image+Available"
+                  style={{ width: "100%", height: "400px", objectFit: "cover" }}
+                />
+              </div>
+            )}
+          </Carousel>
+        </Col>
+
+        <Col xs={24} md={12}>
+          <Card
+            style={{ height: "100%", borderRadius: "10px", padding: "20px" }}
+          >
+            <h1>{room.roomName}</h1>
+            <p>
+              <strong>Room No:</strong> {room.roomNo}
+            </p>
+            <p>
+              <strong>Floor No:</strong> {room.floorNo}
+            </p>
+            <p>
+              <strong>Capacity:</strong> {room.capacity} persons
+            </p>
+            <p>
+              <strong>Price per Slot:</strong> {room.pricePerSlot} TK
+            </p>
+            <p>
+              <strong>Amenities:</strong> {room.amenities.join(", ")}
+            </p>
+
+            <div style={{ display: "flex", gap: "10px" }}>
+              <Button
+                type="primary"
+                onClick={() => navigate(-1)}
+                style={{
+                  backgroundColor: "#007bff",
+                  borderColor: "#007bff",
+                  marginTop: "20px",
+                }}
+              >
+                Back to Rooms
+              </Button>
+              {/* <Button
+                type="primary"
+                onClick={handleBookNow}
+                style={{
+                  backgroundColor: "#007bff",
+                  borderColor: "#007bff",
+                  marginTop: "20px",
+                }}
+              >
+                Book Now
+              </Button> */}
+              <Button
+                onClick={handleDetailsClick}
+                type="primary"
+                style={{
+                  width: "100%",
+                  background: "#007BFF",
+                  color: "#fff",
+                  border: "none",
+                  marginTop: "15px",
+                  borderRadius: "5px",
+                  fontWeight: "bold",
+                }}
+              >
+                Room Confirm
+              </Button>
+            </div>
+          </Card>
+        </Col>
+      </Row>
+    </div>
+  );
+};
+
+export default RoomDetails;

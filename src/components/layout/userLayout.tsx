@@ -12,6 +12,10 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { UserOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 import { logout } from "../../redux/features/authSlice";
+import { FaHistory, FaInfoCircle, FaRegAddressCard } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
+import { TbBrandBooking } from "react-icons/tb";
+import { MdDashboard } from "react-icons/md";
 
 const { Header, Content, Sider } = Layout;
 const { Title } = Typography;
@@ -45,28 +49,20 @@ const UserLayout = () => {
     console.log(user);
   }, [user]);
 
-  const menuItems: MenuProps["items"] = [
-    {
-      key: "Dashboard",
-      label: "Dashboard",
-      children: [
-        {
-          key: "Admin",
-          label: <NavLink to="/admin">Admin {user?.phone}</NavLink>,
-        },
-        { key: "User", label: <NavLink to="/user/profile">Profile</NavLink> },
-      ],
-    },
-  ];
+  const menuItems: MenuProps["items"] = [];
 
   const userMenu = (
     <Menu>
       <Menu.Item key="Profile">
         <NavLink to="/user/profile">Profile</NavLink>
       </Menu.Item>
-      <Menu.Item key="Settings">
-        <NavLink to="/user/settings">Settings</NavLink>
+      <Menu.Item key="Profile">
+        <NavLink to="/user/profile">{user?.name || "Name"}</NavLink>
       </Menu.Item>
+      <Menu.Item key="Profile">
+        <NavLink to="/user/profile">{user?.email || "arfin@gmail.com"}</NavLink>
+      </Menu.Item>
+
       <Menu.Item key="Logout" onClick={handleLogout}>
         Logout
       </Menu.Item>
@@ -94,7 +90,7 @@ const UserLayout = () => {
         }}
       >
         <Title level={3} style={{ color: "white", margin: 0 }}>
-          Mechanical Keyboard
+          Meeting Room
         </Title>
 
         <Menu
@@ -149,16 +145,6 @@ const UserLayout = () => {
             zIndex: 1,
           }}
         >
-          <div style={{ padding: "20px", textAlign: "center" }}>
-            <Avatar size={80} icon={<UserOutlined />} />
-            <Title level={4} style={{ color: "white", marginTop: "10px" }}>
-              {user?.name || "User"} {/* Display user's name */}
-            </Title>
-            <p style={{ color: "white" }}>
-              {user?.email || "arfin@gmail.com"} {/* Display user's email */}
-            </p>
-          </div>
-
           <Menu
             theme="dark"
             mode="inline"
@@ -168,7 +154,7 @@ const UserLayout = () => {
                 key: "Dashboard",
                 label: (
                   <NavLink to="/user">
-                    <UserOutlined /> Dashboard
+                    <MdDashboard /> Dashboard
                   </NavLink>
                 ),
               },
@@ -176,7 +162,7 @@ const UserLayout = () => {
                 key: "Book Room",
                 label: (
                   <NavLink to="/meeting-room">
-                    <UserOutlined /> Book Room
+                    <TbBrandBooking /> Book Room
                   </NavLink>
                 ),
               },
@@ -184,7 +170,7 @@ const UserLayout = () => {
                 key: "Profile",
                 label: (
                   <NavLink to="/user/profile">
-                    <UserOutlined /> Profile
+                    <CgProfile /> Profile
                   </NavLink>
                 ),
               },
@@ -192,7 +178,7 @@ const UserLayout = () => {
                 key: "User Info",
                 label: (
                   <NavLink to="/user/info">
-                    <UserOutlined /> User Info
+                    <FaInfoCircle /> User Info
                   </NavLink>
                 ),
               },
@@ -200,7 +186,7 @@ const UserLayout = () => {
                 key: "Address",
                 label: (
                   <NavLink to="/user/address">
-                    <UserOutlined /> Address
+                    <FaRegAddressCard /> Address
                   </NavLink>
                 ),
               },
@@ -208,15 +194,7 @@ const UserLayout = () => {
                 key: "Order History",
                 label: (
                   <NavLink to="/user/history">
-                    <UserOutlined /> Order History
-                  </NavLink>
-                ),
-              },
-              {
-                key: "Logout",
-                label: (
-                  <NavLink to="#" onClick={handleLogout}>
-                    <UserOutlined /> LogOut
+                    <FaHistory /> Order History
                   </NavLink>
                 ),
               },
@@ -224,8 +202,8 @@ const UserLayout = () => {
           />
         </Sider>
 
-        <Layout style={{ marginLeft: 200, paddingTop: 64 }}>
-          <Content style={{ margin: "64px 16px 0" }}>
+        <Layout style={{ marginLeft: 200, paddingTop: 34 }}>
+          <Content style={{ margin: "2px 5px 0" }}>
             <div style={{ padding: 24, minHeight: 360 }}>
               <Outlet />
             </div>

@@ -7,25 +7,23 @@ import photo5 from "../../assets/images/card5.jpg";
 import photo6 from "../../assets/images/card6.jpg";
 import photo7 from "../../assets/images/card7.jpg";
 import photo8 from "../../assets/images/card8.jpg";
-import photo9 from "../../assets/images/card9.jpg";
-import photo10 from "../../assets/images/card10.jpg";
-import photo11 from "../../assets/images/card11.jpg";
-import photo12 from "../../assets/images/card12.jpg";
 
 const FitureItem = () => {
   return (
     <div>
       <Typography.Title
+        level={2}
         style={{
-          color: "yellow",
-          fontStyle: "italic",
-          fontSize: "24px",
-          paddingLeft: "10px",
-          marginTop: "10px",
-          margin: "20px",
+          color: "#333333",
+          fontStyle: "normal",
+          fontWeight: "600",
+          marginBottom: "24px",
+          marginTop: "24px",
+          letterSpacing: "0.5px",
+          textAlign: "center",
         }}
       >
-        Service Room Fiture
+        Feature Room
       </Typography.Title>
       <Row gutter={[16, 16]} justify="center">
         <Col xs={24} sm={12} md={8} lg={6}>
@@ -66,26 +64,6 @@ const FitureItem = () => {
         <Col xs={24} sm={12} md={8} lg={6}>
           <Card>
             <img style={{ height: 190, width: "100%" }} src={photo8} alt="" />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={8} lg={6}>
-          <Card>
-            <img style={{ height: 190, width: "100%" }} src={photo9} alt="" />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={8} lg={6}>
-          <Card>
-            <img style={{ height: 190, width: "100%" }} src={photo10} alt="" />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={8} lg={6}>
-          <Card>
-            <img style={{ height: 190, width: "100%" }} src={photo11} alt="" />
-          </Card>
-        </Col>
-        <Col xs={24} sm={12} md={8} lg={6}>
-          <Card>
-            <img style={{ height: 190, width: "100%" }} src={photo12} alt="" />
           </Card>
         </Col>
       </Row>

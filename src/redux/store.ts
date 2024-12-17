@@ -5,10 +5,12 @@ import { baseApi } from "./api/api";
 import authReducer from "./features/authSlice";
 import loginReducer from "./features/loginSlice";
 import signupReducer from "./features/signupSlice";
-import roomReducer from "./features/roomSlice.";
+import roomReducer from "./features/roomSlice";
 import bookingReducer from "./features/bookingSlice";
 import userReducer from "./features/userSlice";
 import userBookingReducer from "./features/userBookingSlice";
+import contractReducer from "./features/contractSlice";
+import addBookingReducer from "./features/addBookingSlice";
 
 // Persist configuration for user reducer
 const userPersistConfig = {
@@ -40,6 +42,8 @@ export const store = configureStore({
     bookings: bookingReducer,
     user: persistedUserReducer, // Persisted user reducer
     userBookings: persistedUserBookingReducer, // Persisted userBookings reducer
+    contract: contractReducer,
+    addBookings: addBookingReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

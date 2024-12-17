@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import axios from "axios";
 import { User } from "../../styles"; // Adjust the import path based on your project structure
 
 // Define initial state for auth
@@ -27,14 +28,16 @@ export const login = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await response.json();
+      const response = await axios.post(
+        "https://meeting-room-booking-system-peach.vercel.app/api/auth/login",
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-      if (!response.ok) {
+      // Axios automatically parses the response as JSON
+      const data = response.data;
+
+      if (response.status !== 200) {
         throw new Error(data.message || "Failed to login");
       }
 
@@ -69,14 +72,16 @@ export const signup = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, phone, address, role }),
-      });
-      const data = await response.json();
+      const response = await axios.post(
+        "https://meeting-room-booking-system-peach.vercel.app/api/auth/signup",
+        { name, email, password, phone, address, role },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
-      if (!response.ok) {
+      // Axios automatically parses the response as JSON
+      const data = response.data;
+
+      if (response.status !== 200) {
         throw new Error(data.message || "Failed to sign up");
       }
 

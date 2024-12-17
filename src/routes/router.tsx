@@ -7,7 +7,6 @@ import Signup from "../pages/LandingPage/Signup";
 import UserDashboard from "../pages/UserPage/UserDashboard";
 import RoomData from "../pages/LandingPage/Room/RoomData";
 import RoomDetails from "../pages/LandingPage/RoomDetails/RoomBookingDetails";
-import BookingPage from "../pages/LandingPage/RoomDetails/RoomBookingPage";
 import AdminDashboard from "../pages/AdminPage/AdminDashboard";
 
 import UserProfile from "../pages/UserPage/UserProfile";
@@ -21,9 +20,10 @@ import ProductManagemen from "../pages/AdminPage/RoomManagemen";
 import Report from "../pages/AdminPage/Report";
 import AdminLayout from "../components/layout/AdminLayout";
 import UserLayout from "../components/layout/UserLayout";
-import RoomBookingPage from "../pages/LandingPage/RoomDetails/RoomBookingPage";
-
+/* import RoomBookingPage from "../pages/LandingPage/RoomDetails/RoomBookingPage";
+ */
 import BookingHistoryData from "../pages/UserPage/BookingHistory/BookingHistoryData";
+import ConfirmBooking from "../pages/LandingPage/RoomDetails/ConfirmBooking";
 
 const router = createBrowserRouter([
   {
@@ -39,10 +39,7 @@ const router = createBrowserRouter([
     path: "/room-details",
     element: <RoomDetails />,
   },
-  {
-    path: "/booking",
-    element: <BookingPage />,
-  },
+
   {
     path: "/about",
     element: <About></About>,
@@ -65,9 +62,13 @@ const router = createBrowserRouter([
     path: "/user/dashboard",
     element: <UserDashboard />,
   },
-  {
+  /*  {
     path: "booking/:roomId",
     element: <RoomBookingPage />,
+  }, */
+  {
+    path: "booking/:roomId",
+    element: <ConfirmBooking />,
   },
 
   /* Admin */

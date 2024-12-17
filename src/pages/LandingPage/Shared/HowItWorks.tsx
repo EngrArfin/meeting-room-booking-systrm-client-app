@@ -11,23 +11,24 @@ const HowItWorks = () => {
       <Typography.Title
         level={2}
         style={{
-          color: "yellow",
-          fontStyle: "italic",
-          fontSize: "24px",
-          paddingLeft: "10px",
-          marginTop: "10px",
-          marginBottom: "20px",
-          display: "block",
+          color: "#333333",
+          fontStyle: "normal",
+          fontWeight: "600",
+          marginBottom: "24px",
+          marginTop: "24px",
+          letterSpacing: "0.5px",
+          textAlign: "center",
         }}
       >
         How It Works
       </Typography.Title>
+
       <div style={{ padding: "20px", textAlign: "center" }}>
         <Row gutter={[16, 16]} justify="center">
           <Col xs={24} sm={8}>
             <Card
               bordered={false}
-              style={{ background: "#fff3e0", height: "100%" }}
+              style={{ background: "#FFFFFF", height: "100%" }}
             >
               <CalendarOutlined
                 style={{ fontSize: "40px", color: "#ff9800" }}
@@ -42,7 +43,7 @@ const HowItWorks = () => {
           <Col xs={24} sm={8}>
             <Card
               bordered={false}
-              style={{ background: "#e0f7fa", height: "100%" }}
+              style={{ background: "#FFFFFF", height: "100%" }}
             >
               <ClockCircleOutlined
                 style={{ fontSize: "40px", color: "#00acc1" }}
@@ -56,7 +57,7 @@ const HowItWorks = () => {
           <Col xs={24} sm={8}>
             <Card
               bordered={false}
-              style={{ background: "#f1f8e9", height: "100%" }}
+              style={{ background: "#FFFFFF", height: "100%" }}
             >
               <CheckCircleOutlined
                 style={{ fontSize: "40px", color: "#66bb6a" }}

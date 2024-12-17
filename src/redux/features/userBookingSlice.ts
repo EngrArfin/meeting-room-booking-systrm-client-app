@@ -32,7 +32,9 @@ const initialState: UserBookingState = {
 export const fetchUserBookings = createAsyncThunk(
   "userBookings/fetchUserBookings",
   async () => {
-    const response = await axios.get("/api/userBookings");
+    const response = await axios.get(
+      "https://meeting-room-booking-system-peach.vercel.app/api/userBookings"
+    );
     return response.data;
   }
 );
