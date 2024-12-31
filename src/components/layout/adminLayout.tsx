@@ -1,9 +1,11 @@
-import { Divider, Layout, Menu, MenuProps, Button } from "antd";
+import { Divider, Layout, Menu, MenuProps, Button, Typography } from "antd";
+import { Avatar, Dropdown } from "antd";
+
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks"; // Import the hook for state access
 import { logout } from "../../redux/features/authSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   MdDashboardCustomize,
   MdDomainAdd,
@@ -11,6 +13,7 @@ import {
 } from "react-icons/md";
 import { CgDisplayGrid } from "react-icons/cg";
 import { HiDocumentReport } from "react-icons/hi";
+const { Title } = Typography;
 
 const { Header, Content, Sider } = Layout;
 
@@ -21,11 +24,11 @@ const items: MenuProps["items"] = [
       <NavLink
         to="/admin"
         style={{
-          fontSize: 18,
+          fontSize: 16,
           display: "flex",
           alignItems: "center",
-          gap: "8px",
-          padding: "8px 12px",
+          gap: "6px",
+          padding: "6px 10px",
           borderRadius: "6px",
           transition: "all 0.3s ease",
         }}
@@ -41,11 +44,11 @@ const items: MenuProps["items"] = [
       <NavLink
         to="/admin/listproduct-admin"
         style={{
-          fontSize: 18,
+          fontSize: 16,
           display: "flex",
           alignItems: "center",
-          gap: "8px",
-          padding: "8px 12px",
+          gap: "6px",
+          padding: "6px 10px",
           borderRadius: "6px",
           transition: "all 0.3s ease",
         }}
@@ -55,35 +58,16 @@ const items: MenuProps["items"] = [
     ),
   },
   {
-    key: "Users",
-    label: (
-      <NavLink
-        to="/admin/users"
-        style={{
-          fontSize: 18,
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-          padding: "8px 12px",
-          borderRadius: "6px",
-          transition: "all 0.3s ease",
-        }}
-      >
-        {<UserOutlined />}Users
-      </NavLink>
-    ),
-  },
-  {
     key: "Add Product",
     label: (
       <NavLink
         to="/admin/addproduct-admin"
         style={{
-          fontSize: 18,
+          fontSize: 16,
           display: "flex",
           alignItems: "center",
-          gap: "8px",
-          padding: "8px 12px",
+          gap: "6px",
+          padding: "6px 10px",
           borderRadius: "6px",
           transition: "all 0.3s ease",
         }}
@@ -93,17 +77,57 @@ const items: MenuProps["items"] = [
       </NavLink>
     ),
   },
+
+  {
+    key: "Users",
+    label: (
+      <NavLink
+        to="/admin/users"
+        style={{
+          fontSize: 16,
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "6px 10px",
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+        }}
+      >
+        {<UserOutlined />}Users
+      </NavLink>
+    ),
+  },
+  {
+    key: "Admin Confirm",
+    label: (
+      <NavLink
+        to="/admin/adminstatus"
+        style={{
+          fontSize: 16,
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "6px 10px",
+          borderRadius: "6px",
+          transition: "all 0.3s ease",
+        }}
+      >
+        {<UserOutlined />}Booking Confirm
+      </NavLink>
+    ),
+  },
+
   {
     key: "Product Management",
     label: (
       <NavLink
         to="/admin/management"
         style={{
-          fontSize: 18,
+          fontSize: 16,
           display: "flex",
           alignItems: "center",
-          gap: "8px",
-          padding: "8px 12px",
+          gap: "6px",
+          padding: "6px 10px",
           borderRadius: "6px",
           transition: "all 0.3s ease",
         }}
@@ -118,11 +142,11 @@ const items: MenuProps["items"] = [
       <NavLink
         to="/admin/report"
         style={{
-          fontSize: 18,
+          fontSize: 16,
           display: "flex",
           alignItems: "center",
-          gap: "8px",
-          padding: "8px 12px",
+          gap: "6px",
+          padding: "6px 10px",
           borderRadius: "6px",
           transition: "all 0.3s ease",
         }}
@@ -152,9 +176,30 @@ const AdminLayout = () => {
       }
     }
   }, [dispatch, user]);
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const menuItems: MenuProps["items"] = [];
+
+  const userMenu = (
+    <Menu>
+      <Menu.Item key="Profile">
+        <NavLink to="/user/profile">Profile</NavLink>
+      </Menu.Item>
+      <Menu.Item key="Profile">
+        <NavLink to="/user/profile">{user?.name || "Name"}</NavLink>
+      </Menu.Item>
+      <Menu.Item key="Profile">
+        <NavLink to="/user/profile">{user?.email || "arfin@gmail.com"}</NavLink>
+      </Menu.Item>
+
+      <Menu.Item key="Logout" onClick={handleLogout}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "90vh" }}>
       <Sider
         width={260} // Increased the width of the sidebar
         breakpoint="lg"
@@ -168,23 +213,23 @@ const AdminLayout = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            fontSize: "1.2rem",
+            fontSize: "1rem",
           }}
         >
-          <h1 style={{ margin: 0 }}>Admin {user?.name}</h1>
+          <h1 style={{ margin: 0 }}>Admin side {user?.name}</h1>
         </div>
         <Menu
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["Dashboard"]}
           items={items}
-          style={{ marginTop: "64px" }}
+          style={{ marginTop: "10px" }}
         />
         <div
           style={{
-            padding: "10px",
+            padding: "8px",
             position: "absolute",
-            bottom: "20px",
+            bottom: "10px",
             width: "100%",
           }}
         >
@@ -194,9 +239,8 @@ const AdminLayout = () => {
             onClick={handleLogout}
             style={{
               width: "100%",
-              height: "48px", // Increased height
-              fontSize: "16px", // Industry-standard text size
-              fontWeight: "bold", // Ensuring better emphasis
+              height: "38px",
+              fontSize: "14px",
             }}
           >
             Logout
@@ -207,20 +251,59 @@ const AdminLayout = () => {
         {" "}
         {/* Sidebar width matches here */}
         <Header
-          style={{ zIndex: 1, width: "100%", padding: 0, position: "fixed" }}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            position: "fixed",
+            width: "100%",
+            zIndex: 1000,
+          }}
         >
-          <div
-            style={{
-              padding: "0 24px",
-              background: "#001529",
-              color: "white",
-              height: "64px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <h1 style={{ margin: 0 }}>Admin</h1>
+          <Title level={3} style={{ color: "white", margin: 0 }}>
+            Meeting Room
+          </Title>
+
+          <Menu
+            theme="dark"
+            mode="horizontal"
+            defaultSelectedKeys={["Home"]}
+            items={menuItems}
+            style={{ flex: 1 }}
+          />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {user ? (
+              <Dropdown
+                overlay={userMenu}
+                trigger={["click"]}
+                onVisibleChange={(visible) => setMenuVisible(visible)}
+                visible={menuVisible}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    marginLeft: 20,
+                  }}
+                >
+                  <Avatar size={40} icon={<UserOutlined />} />
+                  <div style={{ marginLeft: 10, color: "white" }}>
+                    <Title level={5} style={{ margin: 0, color: "white" }}>
+                      {user?.name || "User"} {/* Display user's name */}
+                    </Title>
+                  </div>
+                </div>
+              </Dropdown>
+            ) : (
+              <Button
+                type="primary"
+                style={{ marginLeft: 20 }}
+                onClick={() => navigate("/login")}
+              >
+                Login
+              </Button>
+            )}
           </div>
         </Header>
         <Content style={{ margin: "64px 16px 0" }}>

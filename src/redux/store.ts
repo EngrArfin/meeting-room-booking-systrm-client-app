@@ -11,6 +11,7 @@ import userReducer from "./features/userSlice";
 import userBookingReducer from "./features/userBookingSlice";
 import contractReducer from "./features/contractSlice";
 import addBookingReducer from "./features/addBookingSlice";
+import todoReducer from "./features/todoSlice";
 
 // Persist configuration for user reducer
 const userPersistConfig = {
@@ -44,6 +45,7 @@ export const store = configureStore({
     userBookings: persistedUserBookingReducer, // Persisted userBookings reducer
     contract: contractReducer,
     addBookings: addBookingReducer,
+    todos: todoReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

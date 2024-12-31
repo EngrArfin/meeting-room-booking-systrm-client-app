@@ -20,10 +20,10 @@ import ProductManagemen from "../pages/AdminPage/RoomManagemen";
 import Report from "../pages/AdminPage/Report";
 import AdminLayout from "../components/layout/AdminLayout";
 import UserLayout from "../components/layout/UserLayout";
-/* import RoomBookingPage from "../pages/LandingPage/RoomDetails/RoomBookingPage";
- */
 import BookingHistoryData from "../pages/UserPage/BookingHistory/BookingHistoryData";
 import ConfirmBooking from "../pages/LandingPage/RoomDetails/ConfirmBooking";
+import BlogPage from "../pages/LandingPage/Blogs/BlogPage";
+import TodoData from "../pages/AdminPage/todo/TodoData";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +47,10 @@ const router = createBrowserRouter([
   {
     path: "/contract",
     element: <Contract></Contract>,
+  },
+  {
+    path: "/blog",
+    element: <BlogPage></BlogPage>,
   },
 
   {
@@ -98,12 +102,16 @@ const router = createBrowserRouter([
         element: <ProductManagemen></ProductManagemen>,
       },
       {
-        path: "report",
-        element: <Report></Report>,
+        path: "adminstatus",
+        element: <TodoData />,
       },
       {
         path: "listproduct-admin",
         element: <AddRoom />,
+      },
+      {
+        path: "report",
+        element: <Report></Report>,
       },
     ],
   },
@@ -134,6 +142,11 @@ const router = createBrowserRouter([
         path: "history",
         element: <BookingHistoryData />,
       },
+      {
+        path: "userstatus",
+        element: <TodoData />,
+      },
+
       /* {
         path: "history",
         element: <OrderHistory />,

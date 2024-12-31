@@ -198,6 +198,14 @@ const UserLayout = () => {
                   </NavLink>
                 ),
               },
+              {
+                key: "Booking Status",
+                label: (
+                  <NavLink to="/user/userstatus">
+                    <FaHistory /> Booking Status
+                  </NavLink>
+                ),
+              },
             ]}
           />
         </Sider>

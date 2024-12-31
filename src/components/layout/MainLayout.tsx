@@ -17,6 +17,7 @@ import BookableLand from "../../pages/LandingPage/Shared/BookableLand";
 import Landing from "../../pages/LandingPage/Shared/QualityPlan";
 import BlogPage from "../../pages/LandingPage/Blogs/BlogPage";
 import Sponcher from "../../pages/LandingPage/Shared/Sponcher";
+import TodoData from "../../pages/AdminPage/todo/TodoData";
 
 const { Header, Content } = Layout;
 
@@ -27,8 +28,8 @@ const items = [
     label: <NavLink to="/meeting-room">Room Booking</NavLink>,
   },
   { key: "About", label: <NavLink to="/about">About</NavLink> },
-  { key: "Contact", label: <NavLink to="/contact">Contact</NavLink> },
-  { key: "Contact", label: <NavLink to="/contact">Blog</NavLink> },
+  { key: "Contact", label: <NavLink to="/contract">Contact</NavLink> },
+  { key: "Blog", label: <NavLink to="/blog">Blog</NavLink> },
 ];
 
 const MainLayout = () => {
@@ -166,6 +167,7 @@ const MainLayout = () => {
         }}
       >
         <Hero />
+        <TodoData />
         <ServiceAdvertisement />
         <FitureItem />
         <Landing />

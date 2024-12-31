@@ -4,7 +4,8 @@ export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
     baseUrl:
-      "https://meeting-room-booking-system-peach.vercel.app/api" /* https://meeting-room-booking-system-peach.vercel.app/api */,
+      "http://localhost:5000/api" /* https://meeting-room-booking-system-peach.vercel.app/api */,
+
     credentials: "include",
     prepareHeaders: (headers) => {
       const token = localStorage.getItem("token");
@@ -12,10 +13,10 @@ export const baseApi = createApi({
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
-
       return headers;
     },
   }),
+  tagTypes: ["todo"],
   endpoints: (builder) => ({
     getRooms: builder.query({
       query: () => ({
@@ -75,6 +76,45 @@ export const baseApi = createApi({
         method: "GET",
       }),
     }),
+    /* User Add  */
+    getTodos: builder.query({
+      query: () => ({
+        url: "/todos",
+        method: "GET",
+      }),
+      providesTags: ["todo"],
+    }),
+
+    addTodo: builder.mutation({
+      query: (sendData) => ({
+        url: "/todos",
+        method: "POST",
+        body: sendData,
+      }),
+      invalidatesTags: ["todo"],
+    }),
+
+    deleteTodo: builder.mutation({
+      query: (id: string) => ({
+        url: `/todos/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["todo"],
+    }),
+
+    editTodo: builder.mutation({
+      query: (sendData) => ({
+        url: `/todos/${sendData.id}`,
+        method: "PUT",
+        body: sendData,
+      }),
+    }),
+    toggleTodoCompletion: builder.mutation({
+      query: (id: string) => ({
+        url: `/todos/${id}/toggle`,
+        method: "PATCH",
+      }),
+    }),
   }),
 });
 
@@ -87,4 +127,9 @@ export const {
   useGetUsersQuery,
   useGetUserByIdQuery,
   useGetUserBookingsQuery,
+  useGetTodosQuery,
+  useAddTodoMutation,
+  useDeleteTodoMutation,
+  useEditTodoMutation,
+  useToggleTodoCompletionMutation,
 } = baseApi;

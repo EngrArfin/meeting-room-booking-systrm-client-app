@@ -12,7 +12,7 @@ const BlogPage = () => {
   const blogPosts = [
     {
       id: 1,
-      title: "How to Choose the Perfect Meeting Room for Your Business",
+      title: "How to Choose the Perfect Meeting  Business",
       date: "2024-12-16",
       author: "John Doe",
       description:
@@ -21,7 +21,7 @@ const BlogPage = () => {
     },
     {
       id: 2,
-      title: "Maximizing Your Meeting Space: Tips for Effective Use",
+      title: "Maximizing Meeting Space: Tips Effective Use",
       date: "2024-12-10",
       author: "Jane Smith",
       description:
@@ -30,7 +30,7 @@ const BlogPage = () => {
     },
     {
       id: 3,
-      title: "The Benefits of Remote Meetings and Virtual Rooms",
+      title: "Benefits Remote Meetings and Virtual Rooms",
       date: "2024-12-05",
       author: "Alice Johnson",
       description:
@@ -39,7 +39,7 @@ const BlogPage = () => {
     },
     {
       id: 4, // New blog post added
-      title: "The Future of Hybrid Meetings in the Post-Pandemic World",
+      title: "Future of Hybrid Meetings in Post-Pandemic World",
       date: "2024-12-01",
       author: "Robert Lee",
       description:
